@@ -14,11 +14,11 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/util/gconv"
 	"github.com/gogf/gf/v2/util/gmode"
-	"github.com/tiger1103/gfast/v3/api/v1/system"
-	commonService "github.com/tiger1103/gfast/v3/internal/app/common/service"
-	"github.com/tiger1103/gfast/v3/internal/app/system/model"
-	"github.com/tiger1103/gfast/v3/internal/app/system/service"
-	"github.com/tiger1103/gfast/v3/library/libUtils"
+	"ugodubai-server/api/v1/system"
+	commonService "ugodubai-server/internal/app/common/service"
+	"ugodubai-server/internal/app/system/model"
+	"ugodubai-server/internal/app/system/service"
+	"ugodubai-server/library/libUtils"
 )
 
 var (

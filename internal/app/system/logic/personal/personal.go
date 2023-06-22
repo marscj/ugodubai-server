@@ -12,14 +12,14 @@ import (
 	"github.com/gogf/gf/v2/database/gdb"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/util/grand"
-	"github.com/tiger1103/gfast/v3/api/v1/system"
-	"github.com/tiger1103/gfast/v3/internal/app/system/dao"
-	"github.com/tiger1103/gfast/v3/internal/app/system/model"
-	"github.com/tiger1103/gfast/v3/internal/app/system/model/do"
-	"github.com/tiger1103/gfast/v3/internal/app/system/model/entity"
-	service "github.com/tiger1103/gfast/v3/internal/app/system/service"
-	"github.com/tiger1103/gfast/v3/library/libUtils"
-	"github.com/tiger1103/gfast/v3/library/liberr"
+	"ugodubai-server/api/v1/system"
+	"ugodubai-server/internal/app/system/dao"
+	"ugodubai-server/internal/app/system/model"
+	"ugodubai-server/internal/app/system/model/do"
+	"ugodubai-server/internal/app/system/model/entity"
+	service "ugodubai-server/internal/app/system/service"
+	"ugodubai-server/library/libUtils"
+	"ugodubai-server/library/liberr"
 )
 
 func init() {

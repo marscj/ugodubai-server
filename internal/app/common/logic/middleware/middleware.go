@@ -9,7 +9,7 @@ package middleware
 
 import (
 	"github.com/gogf/gf/v2/net/ghttp"
-	"github.com/tiger1103/gfast/v3/internal/app/common/service"
+	"ugodubai-server/internal/app/common/service"
 )
 
 func init() {

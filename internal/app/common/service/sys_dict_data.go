@@ -8,7 +8,7 @@ package service
 import (
 	"context"
 
-	"github.com/tiger1103/gfast/v3/api/v1/system"
+	"ugodubai-server/api/v1/system"
 )
 
 type ISysDictData interface {

@@ -18,7 +18,7 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/text/gstr"
-	"github.com/tiger1103/gfast/v3/internal/app/common/consts"
+	"ugodubai-server/internal/app/common/consts"
 	"net"
 	"net/http"
 	"os"

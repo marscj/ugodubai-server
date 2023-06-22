@@ -5,10 +5,10 @@
 package logic
 
 import (
-	_ "github.com/tiger1103/gfast/v3/internal/app/common/logic/cache"
-	_ "github.com/tiger1103/gfast/v3/internal/app/common/logic/captcha"
-	_ "github.com/tiger1103/gfast/v3/internal/app/common/logic/middleware"
-	_ "github.com/tiger1103/gfast/v3/internal/app/common/logic/sysConfig"
-	_ "github.com/tiger1103/gfast/v3/internal/app/common/logic/sysDictData"
-	_ "github.com/tiger1103/gfast/v3/internal/app/common/logic/sysDictType"
+	_ "ugodubai-server/internal/app/common/logic/cache"
+	_ "ugodubai-server/internal/app/common/logic/captcha"
+	_ "ugodubai-server/internal/app/common/logic/middleware"
+	_ "ugodubai-server/internal/app/common/logic/sysConfig"
+	_ "ugodubai-server/internal/app/common/logic/sysDictData"
+	_ "ugodubai-server/internal/app/common/logic/sysDictType"
 )

@@ -9,9 +9,9 @@ package system
 
 import (
 	"github.com/gogf/gf/v2/frame/g"
-	commonApi "github.com/tiger1103/gfast/v3/api/v1/common"
-	"github.com/tiger1103/gfast/v3/internal/app/system/model"
-	"github.com/tiger1103/gfast/v3/internal/app/system/model/entity"
+	commonApi "ugodubai-server/api/v1/common"
+	"ugodubai-server/internal/app/system/model"
+	"ugodubai-server/internal/app/system/model/entity"
 )
 
 type RuleSearchReq struct {

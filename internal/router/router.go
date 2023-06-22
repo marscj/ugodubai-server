@@ -10,10 +10,10 @@ package router
 import (
 	"context"
 	"github.com/gogf/gf/v2/net/ghttp"
-	commonRouter "github.com/tiger1103/gfast/v3/internal/app/common/router"
-	commonService "github.com/tiger1103/gfast/v3/internal/app/common/service"
-	systemRouter "github.com/tiger1103/gfast/v3/internal/app/system/router"
-	"github.com/tiger1103/gfast/v3/library/libRouter"
+	commonRouter "ugodubai-server/internal/app/common/router"
+	commonService "ugodubai-server/internal/app/common/service"
+	systemRouter "ugodubai-server/internal/app/system/router"
+	"ugodubai-server/library/libRouter"
 )
 
 var R = new(Router)

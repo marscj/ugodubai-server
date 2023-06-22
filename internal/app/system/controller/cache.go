@@ -12,10 +12,10 @@ import (
 	"github.com/gogf/gf/v2/container/gvar"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/util/gconv"
-	"github.com/tiger1103/gfast/v3/api/v1/system"
-	commonConsts "github.com/tiger1103/gfast/v3/internal/app/common/consts"
-	"github.com/tiger1103/gfast/v3/internal/app/common/service"
-	"github.com/tiger1103/gfast/v3/internal/app/system/consts"
+	"ugodubai-server/api/v1/system"
+	commonConsts "ugodubai-server/internal/app/common/consts"
+	"ugodubai-server/internal/app/common/service"
+	"ugodubai-server/internal/app/system/consts"
 )
 
 var Cache = new(cacheController)

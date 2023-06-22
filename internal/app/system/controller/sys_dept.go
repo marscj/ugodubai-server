@@ -9,9 +9,9 @@ package controller
 
 import (
 	"context"
-	"github.com/tiger1103/gfast/v3/api/v1/system"
-	"github.com/tiger1103/gfast/v3/internal/app/system/model/entity"
-	"github.com/tiger1103/gfast/v3/internal/app/system/service"
+	"ugodubai-server/api/v1/system"
+	"ugodubai-server/internal/app/system/model/entity"
+	"ugodubai-server/internal/app/system/service"
 )
 
 var Dept = sysDeptController{}

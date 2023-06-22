@@ -9,8 +9,8 @@ package controller
 
 import (
 	"context"
-	"github.com/tiger1103/gfast/v3/api/v1/common"
-	"github.com/tiger1103/gfast/v3/internal/app/common/service"
+	"ugodubai-server/api/v1/common"
+	"ugodubai-server/internal/app/common/service"
 )
 
 var Captcha = captchaController{}

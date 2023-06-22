@@ -5,7 +5,7 @@
 package dao
 
 import (
-	"github.com/tiger1103/gfast/v3/internal/app/system/dao/internal"
+	"ugodubai-server/internal/app/system/dao/internal"
 )
 
 // internalSysDeptDao is internal type for wrapping internal DAO implements.

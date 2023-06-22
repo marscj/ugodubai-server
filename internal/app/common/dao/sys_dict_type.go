@@ -5,7 +5,7 @@
 package dao
 
 import (
-	"github.com/tiger1103/gfast/v3/internal/app/common/dao/internal"
+	"ugodubai-server/internal/app/common/dao/internal"
 )
 
 // sysDictTypeDao is the data access object for table sys_dict_type.

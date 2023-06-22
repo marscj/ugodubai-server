@@ -11,10 +11,10 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/os/gctx"
 	"github.com/tiger1103/gfast-token/gftoken"
-	"github.com/tiger1103/gfast/v3/internal/app/common/consts"
-	commonModel "github.com/tiger1103/gfast/v3/internal/app/common/model"
-	"github.com/tiger1103/gfast/v3/internal/app/system/service"
-	"github.com/tiger1103/gfast/v3/library/liberr"
+	"ugodubai-server/internal/app/common/consts"
+	commonModel "ugodubai-server/internal/app/common/model"
+	"ugodubai-server/internal/app/system/service"
+	"ugodubai-server/library/liberr"
 )
 
 type sToken struct {

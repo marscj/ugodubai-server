@@ -9,9 +9,9 @@ package system
 
 import (
 	"github.com/gogf/gf/v2/frame/g"
-	commonApi "github.com/tiger1103/gfast/v3/api/v1/common"
-	commonModel "github.com/tiger1103/gfast/v3/internal/app/common/model"
-	commonEntity "github.com/tiger1103/gfast/v3/internal/app/common/model/entity"
+	commonApi "ugodubai-server/api/v1/common"
+	commonModel "ugodubai-server/internal/app/common/model"
+	commonEntity "ugodubai-server/internal/app/common/model/entity"
 )
 
 // GetDictReq 获取字典信息请求参数

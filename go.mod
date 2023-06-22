@@ -1,4 +1,4 @@
-module github.com/tiger1103/gfast/v3
+module ugodubai-server
 
 go 1.16
 

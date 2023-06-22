@@ -7,8 +7,8 @@ import (
 	"github.com/gogf/gf/v2/net/goai"
 	"github.com/gogf/gf/v2/os/gcmd"
 	"github.com/gogf/gf/v2/os/glog"
-	"github.com/tiger1103/gfast/v3/internal/consts"
-	"github.com/tiger1103/gfast/v3/internal/router"
+	"ugodubai-server/internal/consts"
+	"ugodubai-server/internal/router"
 )
 
 var (

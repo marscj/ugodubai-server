@@ -5,7 +5,7 @@
 package dao
 
 import (
-	"github.com/tiger1103/gfast/v3/internal/app/system/dao/internal"
+	"ugodubai-server/internal/app/system/dao/internal"
 )
 
 // sysRoleDao is the data access object for table sys_role.
