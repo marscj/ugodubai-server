@@ -2,7 +2,7 @@
 gfcli:
   gen:
     dao:
-      - link:            "mysql:gfast3:gfast333@tcp(127.0.0.1:3306)/gfast-v32"
+      - link:            "mysql:root:123456@tcp(192.168.70.3:49168)/ugo"
         tables:          "sys_role_dept"
         removePrefix:    "gf_"
         descriptionTag:  true
