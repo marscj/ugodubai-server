@@ -1,0 +1,2 @@
+2023-06-21 11:23:12 [INFO] {7877b27bb09b6a17f2ca47752289715e} /Users/mars/Desktop/mars/ugodubai/ugodubai-server/internal/cmd/cmd.go:21: GFast version: 3.2.3
+2023-06-21 11:45:36 [INFO] {8825be68e99c6a17f9ca4775eeff8358} /Users/mars/go/pkg/mod/github.com/tiger1103/gfast-token@v1.0.3/gftoken/gftoken.go:118: decrypt Token empty
