@@ -3,7 +3,8 @@ gfcli:
   gen:
     dao:
       - link:            "mysql:root:123456@tcp(192.168.70.3:49168)/ugo"
-        tables:          "sys_role_dept"
+        tables:          ""
+        tablesEx:        ""
         removePrefix:    "gf_"
         descriptionTag:  true
         noModelComment:  true
