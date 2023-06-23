@@ -41,7 +41,7 @@ database:
 
 gfToken:
   cacheKey: "gfToken:"
-  timeOut: 10800
+  timeOut: 86400
   maxRefresh: 5400
   multiLogin: true
   encryptKey: "49c54195e750b04e74a8429b17896586"
@@ -65,7 +65,7 @@ redis:
     maxActive: 100
 
 system:
-  notCheckAuthAdminIds: [1]  #无需验证后台权限的用户id
+  notCheckAuthAdminIds: []  #无需验证后台权限的用户id
   dataDir: "./resource/data"
   cache:
     model: "redis"  #缓存模式 memory OR redis

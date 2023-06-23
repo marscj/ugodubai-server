@@ -1,3 +1,0 @@
-2023-06-21 11:23:12.706 [INFO] pid[64249]: http server started listening on [:8808]
-2023-06-21 11:23:12.706 [INFO] swagger ui is serving at address: http://127.0.0.1:8808/swagger/
-2023-06-21 11:23:12.707 [INFO] openapi specification is serving at address: http://127.0.0.1:8808/api.json
