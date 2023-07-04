@@ -2,13 +2,14 @@ package cmd
 
 import (
 	"context"
+	"ugodubai-server/internal/consts"
+	"ugodubai-server/internal/router"
+
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/net/goai"
 	"github.com/gogf/gf/v2/os/gcmd"
 	"github.com/gogf/gf/v2/os/glog"
-	"ugodubai-server/internal/consts"
-	"ugodubai-server/internal/router"
 )
 
 var (
