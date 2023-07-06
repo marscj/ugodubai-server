@@ -37,6 +37,7 @@ func (c *userController) List(ctx context.Context, req *system.UserSearchReq) (r
 		total    interface{}
 		userList []*entity.SysUser
 	)
+
 	res = new(system.UserSearchRes)
 	total, userList, err = service.SysUser().List(ctx, req)
 	if err != nil || total == 0 {
