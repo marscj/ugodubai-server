@@ -1,16 +1,10 @@
-/*
-* @desc:岗位相关参数
-* @company:云南奇讯科技有限公司
-* @Author: yixiaohu
-* @Date:   2022/4/7 23:09
- */
-
 package system
 
 import (
-	"github.com/gogf/gf/v2/frame/g"
 	commonApi "ugodubai-server/api/v1/common"
 	"ugodubai-server/internal/app/system/model/entity"
+
+	"github.com/gogf/gf/v2/frame/g"
 )
 
 type PostSearchReq struct {

@@ -1,19 +1,13 @@
-/*
-* @desc:路由绑定
-* @company:云南奇讯科技有限公司
-* @Author: yixiaohu
-* @Date:   2022/2/18 16:23
- */
-
 package router
 
 import (
 	"context"
-	"github.com/gogf/gf/v2/net/ghttp"
 	commonRouter "ugodubai-server/internal/app/common/router"
 	commonService "ugodubai-server/internal/app/common/service"
 	systemRouter "ugodubai-server/internal/app/system/router"
 	"ugodubai-server/library/libRouter"
+
+	"github.com/gogf/gf/v2/net/ghttp"
 )
 
 var R = new(Router)

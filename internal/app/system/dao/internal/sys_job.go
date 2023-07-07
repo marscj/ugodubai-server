@@ -1,16 +1,8 @@
-// ==========================================================================
-// GFast自动生成dao internal操作代码。
-// 生成日期：2023-01-12 17:43:50
-// 生成路径: internal/app/system/dao/internal/sys_job.go
-// 生成人：gfast
-// desc:定时任务
-// company:云南奇讯科技有限公司
-// ==========================================================================
-
 package internal
 
 import (
 	"context"
+
 	"github.com/gogf/gf/v2/database/gdb"
 	"github.com/gogf/gf/v2/frame/g"
 )

@@ -1,15 +1,9 @@
-/*
-* @desc:用户模型对象
-* @company:云南奇讯科技有限公司
-* @Author: yixiaohu
-* @Date:   2022/3/7 11:47
- */
-
 package model
 
 import (
-	"github.com/gogf/gf/v2/util/gmeta"
 	"ugodubai-server/internal/app/system/model/entity"
+
+	"github.com/gogf/gf/v2/util/gmeta"
 )
 
 // LoginUserRes 登录返回

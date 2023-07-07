@@ -1,18 +1,12 @@
-/*
-* @desc:路由处理
-* @company:云南奇讯科技有限公司
-* @Author: yixiaohu<yxh669@qq.com>
-* @Date:   2022/11/16 11:09
- */
-
 package libRouter
 
 import (
 	"context"
+	"reflect"
+
 	"github.com/gogf/gf/v2/errors/gerror"
 	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/text/gregex"
-	"reflect"
 )
 
 // RouterAutoBind 收集需要被绑定的控制器,自动绑定

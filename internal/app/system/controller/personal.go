@@ -1,20 +1,14 @@
-/*
-* @desc:xxxx功能描述
-* @company:云南奇讯科技有限公司
-* @Author: yixiaohu<yxh669@qq.com>
-* @Date:   2022/11/3 10:32
- */
-
 package controller
 
 import (
 	"context"
-	"github.com/gogf/gf/v2/crypto/gmd5"
-	"github.com/gogf/gf/v2/frame/g"
-	"github.com/gogf/gf/v2/util/gconv"
 	"ugodubai-server/api/v1/system"
 	"ugodubai-server/internal/app/system/service"
 	"ugodubai-server/library/libUtils"
+
+	"github.com/gogf/gf/v2/crypto/gmd5"
+	"github.com/gogf/gf/v2/frame/g"
+	"github.com/gogf/gf/v2/util/gconv"
 )
 
 var Personal = new(personalController)

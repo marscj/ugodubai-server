@@ -1,24 +1,8 @@
-/*
-* @desc:用户处理
-* @company:云南奇讯科技有限公司
-* @Author: yixiaohu<yxh669@qq.com>
-* @Date:   2022/9/23 15:08
- */
-
 package sysUser
 
 import (
 	"context"
 	"fmt"
-	"github.com/gogf/gf/v2/container/gset"
-	"github.com/gogf/gf/v2/database/gdb"
-	"github.com/gogf/gf/v2/errors/gerror"
-	"github.com/gogf/gf/v2/frame/g"
-	"github.com/gogf/gf/v2/os/gtime"
-	"github.com/gogf/gf/v2/text/gstr"
-	"github.com/gogf/gf/v2/util/gconv"
-	"github.com/gogf/gf/v2/util/grand"
-	"github.com/mssola/user_agent"
 	"ugodubai-server/api/v1/system"
 	commonService "ugodubai-server/internal/app/common/service"
 	"ugodubai-server/internal/app/system/consts"
@@ -29,6 +13,16 @@ import (
 	"ugodubai-server/internal/app/system/service"
 	"ugodubai-server/library/libUtils"
 	"ugodubai-server/library/liberr"
+
+	"github.com/gogf/gf/v2/container/gset"
+	"github.com/gogf/gf/v2/database/gdb"
+	"github.com/gogf/gf/v2/errors/gerror"
+	"github.com/gogf/gf/v2/frame/g"
+	"github.com/gogf/gf/v2/os/gtime"
+	"github.com/gogf/gf/v2/text/gstr"
+	"github.com/gogf/gf/v2/util/gconv"
+	"github.com/gogf/gf/v2/util/grand"
+	"github.com/mssola/user_agent"
 )
 
 func init() {

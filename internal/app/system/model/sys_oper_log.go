@@ -1,17 +1,11 @@
-/*
-* @desc:操作日志模型对象
-* @company:云南奇讯科技有限公司
-* @Author: yixiaohu<yxh669@qq.com>
-* @Date:   2022/9/21 16:34
- */
-
 package model
 
 import (
+	"net/url"
+
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/os/gtime"
 	"github.com/gogf/gf/v2/util/gmeta"
-	"net/url"
 )
 
 // SysOperLogAdd 添加操作日志参数

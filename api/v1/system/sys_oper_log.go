@@ -1,16 +1,10 @@
-/*
-* @desc:操作日志
-* @company:云南奇讯科技有限公司
-* @Author: yixiaohu<yxh669@qq.com>
-* @Date:   2022/12/21 14:37
- */
-
 package system
 
 import (
-	"github.com/gogf/gf/v2/frame/g"
 	commonApi "ugodubai-server/api/v1/common"
 	"ugodubai-server/internal/app/system/model"
+
+	"github.com/gogf/gf/v2/frame/g"
 )
 
 // SysOperLogSearchReq 分页请求参数

@@ -1,10 +1,3 @@
-/*
-* @desc:岗位管理
-* @company:云南奇讯科技有限公司
-* @Author: yixiaohu
-* @Date:   2022/4/7 23:12
- */
-
 package controller
 
 import (

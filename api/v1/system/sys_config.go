@@ -1,16 +1,10 @@
-/*
-* @desc:系统参数配置
-* @company:云南奇讯科技有限公司
-* @Author: yixiaohu
-* @Date:   2022/4/18 21:11
- */
-
 package system
 
 import (
-	"github.com/gogf/gf/v2/frame/g"
 	commonApi "ugodubai-server/api/v1/common"
 	commonEntity "ugodubai-server/internal/app/common/model/entity"
+
+	"github.com/gogf/gf/v2/frame/g"
 )
 
 type ConfigSearchReq struct {

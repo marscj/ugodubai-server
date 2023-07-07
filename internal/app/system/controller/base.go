@@ -1,15 +1,9 @@
-/*
-* @desc:system base controller
-* @company:云南奇讯科技有限公司
-* @Author: yixiaohu
-* @Date:   2022/3/4 18:12
- */
-
 package controller
 
 import (
-	"github.com/gogf/gf/v2/net/ghttp"
 	commonController "ugodubai-server/internal/app/common/controller"
+
+	"github.com/gogf/gf/v2/net/ghttp"
 )
 
 type BaseController struct {

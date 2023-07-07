@@ -23,6 +23,7 @@ type SysAgent struct {
 	AvailableLimit interface{} // 可用额度
 	CreditLimit    interface{} // 信用额度
 	UsedLimit      interface{} // 已使用额度
+	Status         interface{} // 状态
 	AdminId        interface{} // 管理员ID
 	LicenseUrl     interface{} // 许可证URL
 	CreatedAt      *gtime.Time // 创建时间

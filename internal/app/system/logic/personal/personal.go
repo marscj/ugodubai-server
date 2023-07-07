@@ -1,17 +1,7 @@
-/*
-* @desc:xxxx功能描述
-* @company:云南奇讯科技有限公司
-* @Author: yixiaohu<yxh669@qq.com>
-* @Date:   2022/11/3 9:55
- */
-
 package personal
 
 import (
 	"context"
-	"github.com/gogf/gf/v2/database/gdb"
-	"github.com/gogf/gf/v2/frame/g"
-	"github.com/gogf/gf/v2/util/grand"
 	"ugodubai-server/api/v1/system"
 	"ugodubai-server/internal/app/system/dao"
 	"ugodubai-server/internal/app/system/model"
@@ -20,6 +10,10 @@ import (
 	service "ugodubai-server/internal/app/system/service"
 	"ugodubai-server/library/libUtils"
 	"ugodubai-server/library/liberr"
+
+	"github.com/gogf/gf/v2/database/gdb"
+	"github.com/gogf/gf/v2/frame/g"
+	"github.com/gogf/gf/v2/util/grand"
 )
 
 func init() {

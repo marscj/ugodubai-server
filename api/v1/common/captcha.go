@@ -1,10 +1,3 @@
-/*
-* @desc:验证码参数
-* @company:云南奇讯科技有限公司
-* @Author: yixiaohu
-* @Date:   2022/3/2 17:47
- */
-
 package common
 
 import "github.com/gogf/gf/v2/frame/g"

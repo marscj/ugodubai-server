@@ -1,15 +1,9 @@
-/*
-* @desc:缓存处理
-* @company:云南奇讯科技有限公司
-* @Author: yixiaohu<yxh669@qq.com>
-* @Date:   2023/2/1 18:12
- */
-
 package system
 
 import (
-	"github.com/gogf/gf/v2/frame/g"
 	commonApi "ugodubai-server/api/v1/common"
+
+	"github.com/gogf/gf/v2/frame/g"
 )
 
 type CacheRemoveReq struct {

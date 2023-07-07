@@ -665,7 +665,7 @@ DROP TABLE IF EXISTS sys_agent;
 
 -- 创建sys_agent表并设置自增ID从10开始，并添加COMMENT和ROW_FORMAT
 CREATE TABLE sys_agent (
-    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT COMMENT '代理商ID',
+    id INT PRIMARY KEY AUTO_INCREMENT COMMENT '代理商ID',
     name VARCHAR(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '名称',
     email VARCHAR(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '邮箱',
     contact_name VARCHAR(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '联系人姓名',
@@ -673,14 +673,15 @@ CREATE TABLE sys_agent (
     address VARCHAR(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '地址',
     nationality VARCHAR(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '国籍',
     agent_code VARCHAR(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '代理商代码',
-    available_limit DECIMAL(10, 2) DEFAULT NULL COMMENT '可用额度',
-    credit_limit DECIMAL(10, 2) DEFAULT NULL COMMENT '信用额度',
-    used_limit DECIMAL(10, 2) DEFAULT NULL COMMENT '已使用额度',
+    available_limit DECIMAL(10, 2) DEFAULT 0.0 COMMENT '可用额度',
+    credit_limit DECIMAL(10, 2) DEFAULT 0.0 COMMENT '信用额度',
+    used_limit DECIMAL(10, 2) DEFAULT 0.0 COMMENT '已使用额度',
+    status TINYINT DEFAULT 1 COMMENT '状态',
     admin_id INT DEFAULT NULL COMMENT '管理员ID',
     license_url VARCHAR(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '许可证URL',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='代理商表' ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='代理商表' ROW_FORMAT=COMPACT;
 
 INSERT INTO sys_agent (name, email, contact_name, contact_phone, address, nationality, agent_code, available_limit, credit_limit, used_limit, admin_id, license_url)
 VALUES 

@@ -1,18 +1,12 @@
-/*
-* @desc:缓存处理
-* @company:云南奇讯科技有限公司
-* @Author: yixiaohu<yxh669@qq.com>
-* @Date:   2022/9/27 16:33
- */
-
 package cache
 
 import (
+	"ugodubai-server/internal/app/common/consts"
+	"ugodubai-server/internal/app/common/service"
+
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/os/gctx"
 	"github.com/tiger1103/gfast-cache/cache"
-	"ugodubai-server/internal/app/common/consts"
-	"ugodubai-server/internal/app/common/service"
 )
 
 func init() {

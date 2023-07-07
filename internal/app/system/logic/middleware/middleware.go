@@ -1,22 +1,16 @@
-/*
-* @desc:中间件
-* @company:云南奇讯科技有限公司
-* @Author: yixiaohu<yxh669@qq.com>
-* @Date:   2022/9/23 15:05
- */
-
 package middleware
 
 import (
 	"fmt"
-	"github.com/gogf/gf/v2/frame/g"
-	"github.com/gogf/gf/v2/net/ghttp"
-	"github.com/gogf/gf/v2/text/gstr"
-	"github.com/gogf/gf/v2/util/gconv"
 	commonService "ugodubai-server/internal/app/common/service"
 	"ugodubai-server/internal/app/system/model"
 	"ugodubai-server/internal/app/system/service"
 	"ugodubai-server/library/libResponse"
+
+	"github.com/gogf/gf/v2/frame/g"
+	"github.com/gogf/gf/v2/net/ghttp"
+	"github.com/gogf/gf/v2/text/gstr"
+	"github.com/gogf/gf/v2/util/gconv"
 )
 
 func init() {

@@ -1,18 +1,12 @@
-/*
-* @desc:xxxx功能描述
-* @company:云南奇讯科技有限公司
-* @Author: yixiaohu<yxh669@qq.com>
-* @Date:   2022/12/8 17:48
- */
-
 package test
 
 import (
 	"fmt"
-	"github.com/gogf/gf/v2/os/gfile"
-	"github.com/gogf/gf/v2/text/gstr"
 	"strings"
 	"testing"
+
+	"github.com/gogf/gf/v2/os/gfile"
+	"github.com/gogf/gf/v2/text/gstr"
 )
 
 func TestContainer(t *testing.T) {

@@ -1,17 +1,11 @@
-/*
-* @desc:字典类型
-* @company:云南奇讯科技有限公司
-* @Author: yixiaohu
-* @Date:   2022/4/14 21:30
- */
-
 package system
 
 import (
-	"github.com/gogf/gf/v2/frame/g"
 	commonApi "ugodubai-server/api/v1/common"
 	commonModel "ugodubai-server/internal/app/common/model"
 	commonEntity "ugodubai-server/internal/app/common/model/entity"
+
+	"github.com/gogf/gf/v2/frame/g"
 )
 
 type DictTypeSearchReq struct {

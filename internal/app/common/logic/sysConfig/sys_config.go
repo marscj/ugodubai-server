@@ -1,18 +1,8 @@
-/*
-* @desc:配置参数管理
-* @company:云南奇讯科技有限公司
-* @Author: yixiaohu<yxh669@qq.com>
-* @Date:   2022/9/28 9:13
- */
-
 package sysConfig
 
 import (
 	"context"
 	"errors"
-	"github.com/gogf/gf/v2/errors/gerror"
-	"github.com/gogf/gf/v2/frame/g"
-	"github.com/gogf/gf/v2/util/gconv"
 	"ugodubai-server/api/v1/system"
 	"ugodubai-server/internal/app/common/consts"
 	"ugodubai-server/internal/app/common/dao"
@@ -21,6 +11,10 @@ import (
 	"ugodubai-server/internal/app/common/service"
 	systemConsts "ugodubai-server/internal/app/system/consts"
 	"ugodubai-server/library/liberr"
+
+	"github.com/gogf/gf/v2/errors/gerror"
+	"github.com/gogf/gf/v2/frame/g"
+	"github.com/gogf/gf/v2/util/gconv"
 )
 
 func init() {

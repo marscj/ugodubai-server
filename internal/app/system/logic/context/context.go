@@ -1,18 +1,12 @@
-/*
-* @desc:context-service
-* @company:云南奇讯科技有限公司
-* @Author: yixiaohu<yxh669@qq.com>
-* @Date:   2022/9/23 14:51
- */
-
 package context
 
 import (
 	"context"
-	"github.com/gogf/gf/v2/net/ghttp"
 	"ugodubai-server/internal/app/system/consts"
 	"ugodubai-server/internal/app/system/model"
 	"ugodubai-server/internal/app/system/service"
+
+	"github.com/gogf/gf/v2/net/ghttp"
 )
 
 func init() {

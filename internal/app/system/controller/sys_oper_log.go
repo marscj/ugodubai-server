@@ -1,10 +1,3 @@
-/*
-* @desc:系统后台操作日志
-* @company:云南奇讯科技有限公司
-* @Author: yixiaohu<yxh669@qq.com>
-* @Date:   2022/9/21 16:10
- */
-
 package controller
 
 import (

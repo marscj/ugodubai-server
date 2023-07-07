@@ -1,18 +1,7 @@
-/*
-* @desc:用户在线状态处理
-* @company:云南奇讯科技有限公司
-* @Author: yixiaohu<yxh669@qq.com>
-* @Date:   2023/1/10 14:50
- */
-
 package sysUserOnline
 
 import (
 	"context"
-	"github.com/gogf/gf/v2/frame/g"
-	"github.com/gogf/gf/v2/os/grpool"
-	"github.com/gogf/gf/v2/os/gtime"
-	"github.com/mssola/user_agent"
 	"ugodubai-server/api/v1/common"
 	"ugodubai-server/api/v1/system"
 	"ugodubai-server/internal/app/system/consts"
@@ -22,6 +11,11 @@ import (
 	"ugodubai-server/internal/app/system/model/entity"
 	"ugodubai-server/internal/app/system/service"
 	"ugodubai-server/library/liberr"
+
+	"github.com/gogf/gf/v2/frame/g"
+	"github.com/gogf/gf/v2/os/grpool"
+	"github.com/gogf/gf/v2/os/gtime"
+	"github.com/mssola/user_agent"
 )
 
 func init() {

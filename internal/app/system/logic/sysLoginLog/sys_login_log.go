@@ -1,23 +1,17 @@
-/*
-* @desc:登录日志
-* @company:云南奇讯科技有限公司
-* @Author: yixiaohu<yxh669@qq.com>
-* @Date:   2022/9/26 15:20
- */
-
 package sysLoginLog
 
 import (
 	"context"
-	"github.com/gogf/gf/v2/frame/g"
-	"github.com/gogf/gf/v2/os/grpool"
-	"github.com/gogf/gf/v2/util/gconv"
 	"ugodubai-server/api/v1/system"
 	"ugodubai-server/internal/app/system/consts"
 	"ugodubai-server/internal/app/system/dao"
 	"ugodubai-server/internal/app/system/model"
 	"ugodubai-server/internal/app/system/service"
 	"ugodubai-server/library/liberr"
+
+	"github.com/gogf/gf/v2/frame/g"
+	"github.com/gogf/gf/v2/os/grpool"
+	"github.com/gogf/gf/v2/util/gconv"
 )
 
 func init() {

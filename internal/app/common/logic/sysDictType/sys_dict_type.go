@@ -1,19 +1,7 @@
-/*
-* @desc:字典类型管理
-* @company:云南奇讯科技有限公司
-* @Author: yixiaohu<yxh669@qq.com>
-* @Date:   2022/9/28 9:26
- */
-
 package sysDictType
 
 import (
 	"context"
-	"github.com/gogf/gf/v2/container/garray"
-	"github.com/gogf/gf/v2/database/gdb"
-	"github.com/gogf/gf/v2/errors/gerror"
-	"github.com/gogf/gf/v2/frame/g"
-	"github.com/gogf/gf/v2/util/gconv"
 	"ugodubai-server/api/v1/system"
 	"ugodubai-server/internal/app/common/consts"
 	"ugodubai-server/internal/app/common/dao"
@@ -23,6 +11,12 @@ import (
 	"ugodubai-server/internal/app/common/service"
 	systemConsts "ugodubai-server/internal/app/system/consts"
 	"ugodubai-server/library/liberr"
+
+	"github.com/gogf/gf/v2/container/garray"
+	"github.com/gogf/gf/v2/database/gdb"
+	"github.com/gogf/gf/v2/errors/gerror"
+	"github.com/gogf/gf/v2/frame/g"
+	"github.com/gogf/gf/v2/util/gconv"
 )
 
 func init() {

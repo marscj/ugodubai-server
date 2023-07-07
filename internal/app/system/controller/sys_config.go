@@ -1,10 +1,3 @@
-/*
-* @desc:系统参数配置
-* @company:云南奇讯科技有限公司
-* @Author: yixiaohu
-* @Date:   2022/4/18 21:17
- */
-
 package controller
 
 import (

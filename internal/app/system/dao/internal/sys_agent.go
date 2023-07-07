@@ -31,6 +31,7 @@ type SysAgentColumns struct {
 	AvailableLimit string // 可用额度
 	CreditLimit    string // 信用额度
 	UsedLimit      string // 已使用额度
+	Status         string // 状态
 	AdminId        string // 管理员ID
 	LicenseUrl     string // 许可证URL
 	CreatedAt      string // 创建时间
@@ -50,6 +51,7 @@ var sysAgentColumns = SysAgentColumns{
 	AvailableLimit: "available_limit",
 	CreditLimit:    "credit_limit",
 	UsedLimit:      "used_limit",
+	Status:         "status",
 	AdminId:        "admin_id",
 	LicenseUrl:     "license_url",
 	CreatedAt:      "created_at",

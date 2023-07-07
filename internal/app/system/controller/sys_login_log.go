@@ -1,10 +1,3 @@
-/*
-* @desc:登录日志管理
-* @company:云南奇讯科技有限公司
-* @Author: yixiaohu
-* @Date:   2022/4/24 22:14
- */
-
 package controller
 
 import (

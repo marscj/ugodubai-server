@@ -1,21 +1,15 @@
-/*
-* @desc:缓存处理
-* @company:云南奇讯科技有限公司
-* @Author: yixiaohu<yxh669@qq.com>
-* @Date:   2023/2/1 18:14
- */
-
 package controller
 
 import (
 	"context"
-	"github.com/gogf/gf/v2/container/gvar"
-	"github.com/gogf/gf/v2/frame/g"
-	"github.com/gogf/gf/v2/util/gconv"
 	"ugodubai-server/api/v1/system"
 	commonConsts "ugodubai-server/internal/app/common/consts"
 	"ugodubai-server/internal/app/common/service"
 	"ugodubai-server/internal/app/system/consts"
+
+	"github.com/gogf/gf/v2/container/gvar"
+	"github.com/gogf/gf/v2/frame/g"
+	"github.com/gogf/gf/v2/util/gconv"
 )
 
 var Cache = new(cacheController)

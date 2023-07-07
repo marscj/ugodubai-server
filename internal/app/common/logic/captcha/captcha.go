@@ -1,17 +1,11 @@
-/*
-* @desc:验证码处理
-* @company:云南奇讯科技有限公司
-* @Author: yixiaohu<yxh669@qq.com>
-* @Date:   2022/9/28 9:01
- */
-
 package captcha
 
 import (
 	"context"
+	"ugodubai-server/internal/app/common/service"
+
 	"github.com/gogf/gf/v2/text/gstr"
 	"github.com/mojocn/base64Captcha"
-	"ugodubai-server/internal/app/common/service"
 )
 
 func init() {

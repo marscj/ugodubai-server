@@ -10,7 +10,7 @@ import (
 
 // SysAgent is the golang structure for table sys_agent.
 type SysAgent struct {
-	Id             uint        `json:"id"             description:"代理商ID"`
+	Id             int         `json:"id"             description:"代理商ID"`
 	Name           string      `json:"name"           description:"名称"`
 	Email          string      `json:"email"          description:"邮箱"`
 	ContactName    string      `json:"contactName"    description:"联系人姓名"`
@@ -21,6 +21,7 @@ type SysAgent struct {
 	AvailableLimit float64     `json:"availableLimit" description:"可用额度"`
 	CreditLimit    float64     `json:"creditLimit"    description:"信用额度"`
 	UsedLimit      float64     `json:"usedLimit"      description:"已使用额度"`
+	Status         int         `json:"status"         description:"状态"`
 	AdminId        int         `json:"adminId"        description:"管理员ID"`
 	LicenseUrl     string      `json:"licenseUrl"     description:"许可证URL"`
 	CreatedAt      *gtime.Time `json:"createdAt"      description:"创建时间"`

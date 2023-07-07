@@ -1,17 +1,11 @@
-/*
-* @desc:字典数据api
-* @company:云南奇讯科技有限公司
-* @Author: yixiaohu<yxh669@qq.com>
-* @Date:   2022/3/18 11:59
- */
-
 package system
 
 import (
-	"github.com/gogf/gf/v2/frame/g"
 	commonApi "ugodubai-server/api/v1/common"
 	commonModel "ugodubai-server/internal/app/common/model"
 	commonEntity "ugodubai-server/internal/app/common/model/entity"
+
+	"github.com/gogf/gf/v2/frame/g"
 )
 
 // GetDictReq 获取字典信息请求参数

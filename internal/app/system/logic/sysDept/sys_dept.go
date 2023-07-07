@@ -1,17 +1,7 @@
-/*
-* @desc:部门管理
-* @company:云南奇讯科技有限公司
-* @Author: yixiaohu<yxh669@qq.com>
-* @Date:   2022/9/26 15:14
- */
-
 package sysDept
 
 import (
 	"context"
-	"github.com/gogf/gf/v2/frame/g"
-	"github.com/gogf/gf/v2/text/gstr"
-	"github.com/gogf/gf/v2/util/gconv"
 	"ugodubai-server/api/v1/system"
 	commonService "ugodubai-server/internal/app/common/service"
 	"ugodubai-server/internal/app/system/consts"
@@ -21,6 +11,10 @@ import (
 	"ugodubai-server/internal/app/system/model/entity"
 	"ugodubai-server/internal/app/system/service"
 	"ugodubai-server/library/liberr"
+
+	"github.com/gogf/gf/v2/frame/g"
+	"github.com/gogf/gf/v2/text/gstr"
+	"github.com/gogf/gf/v2/util/gconv"
 )
 
 func init() {
