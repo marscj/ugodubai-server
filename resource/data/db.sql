@@ -657,4 +657,41 @@ INSERT INTO `sys_user_post` VALUES (38, 3);
 INSERT INTO `sys_user_post` VALUES (42, 2);
 INSERT INTO `sys_user_post` VALUES (42, 3);
 
+-- ----------------------------
+-- Table structure for sys_agent
+-- ----------------------------
+-- 删除现有的sys_agent表
+DROP TABLE IF EXISTS sys_agent;
+
+-- 创建sys_agent表并设置自增ID从10开始，并添加COMMENT和ROW_FORMAT
+CREATE TABLE sys_agent (
+    id INT PRIMARY KEY AUTO_INCREMENT COMMENT '代理商ID',
+    name VARCHAR(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '名称',
+    email VARCHAR(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '邮箱',
+    contact_name VARCHAR(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '联系人姓名',
+    contact_phone VARCHAR(24) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '联系人电话',
+    address VARCHAR(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '地址',
+    nationality VARCHAR(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '国籍',
+    agent_code VARCHAR(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '代理商代码',
+    available_limit DECIMAL(10, 2) DEFAULT NULL COMMENT '可用额度',
+    credit_limit DECIMAL(10, 2) DEFAULT NULL COMMENT '信用额度',
+    used_limit DECIMAL(10, 2) DEFAULT NULL COMMENT '已使用额度',
+    admin_id INT DEFAULT NULL COMMENT '管理员ID',
+    license_url VARCHAR(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '许可证URL',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='代理商表' ROW_FORMAT=COMPACT;
+
+INSERT INTO sys_agent (name, email, contact_name, contact_phone, address, nationality, agent_code, available_limit, credit_limit, used_limit, admin_id, license_url)
+VALUES 
+('第五季', 'agent1@example.com', 'Contact Name 1', '1234567890', 'Address 1', 'China', 'AGT001', 10000.00, 20000.00, 5000.00, 1, 'https://example.com/license1'),
+('京鱼', 'agent2@example.com', 'Contact Name 2', '2345678901', 'Address 2', 'Japan', 'AGT002', 15000.00, 25000.00, 7500.00, 2, 'https://example.com/license2'),
+('程品', 'agent3@example.com', 'Contact Name 3', '3456789012', 'Address 3', 'USA', 'AGT003', 20000.00, 30000.00, 10000.00, 3, 'https://example.com/license3'),
+('Sun Light', 'agent4@example.com', 'Contact Name 4', '4567890123', 'Address 4', 'Germany', 'AGT004', 25000.00, 35000.00, 12500.00, 4, 'https://example.com/license4'),
+('任我行', 'agent5@example.com', 'Contact Name 5', '5678901234', 'Address 5', 'France', 'AGT005', 30000.00, 40000.00, 15000.00, 5, 'https://example.com/license5'),
+('深圳自由行', 'agent6@example.com', 'Contact Name 6', '6789012345', 'Address 6', 'China', 'AGT006', 35000.00, 45000.00, 17500.00, 6, 'https://example.com/license6'),
+('野图', 'agent7@example.com', 'Contact Name 7', '7890123456', 'Address 7', 'Australia', 'AGT007', 40000.00, 50000.00, 20000.00, 7, 'https://example.com/license7'),
+('Silk Way', 'agent8@example.com', 'Contact Name 8', '8901234567', 'Address 8', 'China', 'AGT008', 45000.00, 55000.00, 22500.00, 8, 'https://example.com/license8'),
+('皇家旅途', 'agent9@example.com', 'Contact Name 9', '9012345678', 'Address 9', 'UK', 'AGT009', 50000.00, 60000.00, 25000.00, 9, 'https://example.com/license9'),
+('Starking', 'agent10@example.com', 'Contact Name 10', '0123456789', 'Address 10', 'China', 'AGT010', 55000.00, 65000.00, 27500.00, 10, 'https://example.com/license10');
 SET FOREIGN_KEY_CHECKS = 1;
