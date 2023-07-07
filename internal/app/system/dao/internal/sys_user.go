@@ -41,7 +41,6 @@ type SysUserColumns struct {
 	CreatedAt     string // 创建时间
 	UpdatedAt     string // 更新时间
 	DeletedAt     string // 删除时间
-	Primay        string // 是否是主账号
 }
 
 // sysUserColumns holds the columns for table sys_user.
@@ -67,7 +66,6 @@ var sysUserColumns = SysUserColumns{
 	CreatedAt:     "created_at",
 	UpdatedAt:     "updated_at",
 	DeletedAt:     "deleted_at",
-	Primay:        "primay",
 }
 
 // NewSysUserDao creates and returns a new DAO object for table data access.
