@@ -14,6 +14,6 @@ type AgentSearchReq struct {
 
 type AgentSearchRes struct {
 	g.Meta `mime:"application/json"`
-	Agents []*model.SysAgentRes `json:"agents"`
+	Agents []*model.SysAgentRes `json:"agent"`
 	commonApi.ListRes
 }

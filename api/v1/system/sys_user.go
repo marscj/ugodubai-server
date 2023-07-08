@@ -1,10 +1,11 @@
 package system
 
 import (
-	"github.com/gogf/gf/v2/frame/g"
 	commonApi "ugodubai-server/api/v1/common"
 	"ugodubai-server/internal/app/system/model"
 	"ugodubai-server/internal/app/system/model/entity"
+
+	"github.com/gogf/gf/v2/frame/g"
 )
 
 type UserMenusReq struct {
@@ -31,7 +32,7 @@ type UserSearchReq struct {
 
 type UserSearchRes struct {
 	g.Meta   `mime:"application/json"`
-	UserList []*model.SysUserRoleDeptRes `json:"userList"`
+	UserList []*model.SysUserRoleDeptRes `json:"user"`
 	commonApi.ListRes
 }
 
