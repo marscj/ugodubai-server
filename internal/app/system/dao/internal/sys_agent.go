@@ -20,42 +20,44 @@ type SysAgentDao struct {
 
 // SysAgentColumns defines and stores column names for table sys_agent.
 type SysAgentColumns struct {
-	Id             string // 代理商ID
-	Name           string // 名称
-	Email          string // 邮箱
-	ContactName    string // 联系人姓名
-	ContactPhone   string // 联系人电话
-	Address        string // 地址
-	Nationality    string // 国籍
-	AgentCode      string // 代理商代码
-	AvailableLimit string // 可用额度
-	CreditLimit    string // 信用额度
-	UsedLimit      string // 已使用额度
-	Status         string // 状态
-	AdminId        string // 管理员ID
-	LicenseUrl     string // 许可证URL
-	CreatedAt      string // 创建时间
-	UpdatedAt      string // 更新时间
+	Id                 string // 代理商ID
+	Name               string // 名称
+	Email              string // 邮箱
+	ContactName        string // 联系人姓名
+	ContactPhone       string // 联系人电话
+	Address            string // 地址
+	Nationality        string // 国籍
+	AgentCode          string // 代理商代码
+	AvailableLimit     string // 可用额度
+	CreditLimit        string // 信用额度
+	OutstandingBalance string // 未结算额度
+	AccountBlance      string // 账户余额
+	Status             string // 状态
+	AdminId            string // 管理员ID
+	LicenseUrl         string // 许可证URL
+	CreatedAt          string // 创建时间
+	UpdatedAt          string // 更新时间
 }
 
 // sysAgentColumns holds the columns for table sys_agent.
 var sysAgentColumns = SysAgentColumns{
-	Id:             "id",
-	Name:           "name",
-	Email:          "email",
-	ContactName:    "contact_name",
-	ContactPhone:   "contact_phone",
-	Address:        "address",
-	Nationality:    "nationality",
-	AgentCode:      "agent_code",
-	AvailableLimit: "available_limit",
-	CreditLimit:    "credit_limit",
-	UsedLimit:      "used_limit",
-	Status:         "status",
-	AdminId:        "admin_id",
-	LicenseUrl:     "license_url",
-	CreatedAt:      "created_at",
-	UpdatedAt:      "updated_at",
+	Id:                 "id",
+	Name:               "name",
+	Email:              "email",
+	ContactName:        "contact_name",
+	ContactPhone:       "contact_phone",
+	Address:            "address",
+	Nationality:        "nationality",
+	AgentCode:          "agent_code",
+	AvailableLimit:     "available_limit",
+	CreditLimit:        "credit_limit",
+	OutstandingBalance: "outstanding_balance",
+	AccountBlance:      "account_blance",
+	Status:             "status",
+	AdminId:            "admin_id",
+	LicenseUrl:         "license_url",
+	CreatedAt:          "created_at",
+	UpdatedAt:          "updated_at",
 }
 
 // NewSysAgentDao creates and returns a new DAO object for table data access.
