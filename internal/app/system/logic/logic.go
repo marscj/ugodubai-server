@@ -1,14 +1,28 @@
 package logic
 
-import _ "ugodubai-server/internal/app/system/logic/context"
-import _ "ugodubai-server/internal/app/system/logic/middleware"
-import _ "ugodubai-server/internal/app/system/logic/personal"
-import _ "ugodubai-server/internal/app/system/logic/sysAuthRule"
-import _ "ugodubai-server/internal/app/system/logic/sysDept"
-import _ "ugodubai-server/internal/app/system/logic/sysLoginLog"
-import _ "ugodubai-server/internal/app/system/logic/sysOperLog"
-import _ "ugodubai-server/internal/app/system/logic/sysPost"
-import _ "ugodubai-server/internal/app/system/logic/sysRole"
-import _ "ugodubai-server/internal/app/system/logic/sysUser"
-import _ "ugodubai-server/internal/app/system/logic/sysUserOnline"
-import _ "ugodubai-server/internal/app/system/logic/token"
+import (
+	_ "ugodubai-server/internal/app/system/logic/context"
+	_ "ugodubai-server/internal/app/system/logic/middleware"
+
+	_ "ugodubai-server/internal/app/system/logic/personal"
+
+	_ "ugodubai-server/internal/app/system/logic/sysAuthRule"
+
+	_ "ugodubai-server/internal/app/system/logic/sysDept"
+
+	_ "ugodubai-server/internal/app/system/logic/sysLoginLog"
+
+	_ "ugodubai-server/internal/app/system/logic/sysOperLog"
+
+	_ "ugodubai-server/internal/app/system/logic/sysPost"
+
+	_ "ugodubai-server/internal/app/system/logic/sysRole"
+
+	_ "ugodubai-server/internal/app/system/logic/sysUser"
+
+	_ "ugodubai-server/internal/app/system/logic/sysUserOnline"
+
+	_ "ugodubai-server/internal/app/system/logic/token"
+
+	_ "ugodubai-server/internal/app/system/logic/sysAgent"
+)
