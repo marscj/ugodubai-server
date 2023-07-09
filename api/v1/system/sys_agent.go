@@ -2,7 +2,6 @@ package system
 
 import (
 	commonApi "ugodubai-server/api/v1/common"
-	"ugodubai-server/internal/app/system/model"
 	"ugodubai-server/internal/app/system/model/entity"
 
 	"github.com/gogf/gf/v2/frame/g"
@@ -15,7 +14,7 @@ type AgentSearchReq struct {
 
 type AgentSearchRes struct {
 	g.Meta `mime:"application/json"`
-	Agents []*model.SysAgentRes `json:"agent"`
+	Agents []*entity.SysAgent `json:"agent"`
 	commonApi.ListRes
 }
 
