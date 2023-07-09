@@ -49,7 +49,7 @@ func (s *sSysAgent) List(ctx context.Context, req *system.AgentListReq) (res *sy
 func (s *sSysAgent) Get(ctx context.Context, req *system.AgentGetReq) (res *system.AgentGetRes, err error) {
 	res = new(system.AgentGetRes)
 	err = g.Try(ctx, func(ctx context.Context) {
-		err = dao.SysAgent.Ctx(ctx).WherePri(1).Scan(&res.Agent)
+		err = dao.SysAgent.Ctx(ctx).WherePri(req.Id).Scan(&res.Agent)
 		liberr.ErrIsNil(ctx, err, "获取角色信息失败")
 	})
 	return
