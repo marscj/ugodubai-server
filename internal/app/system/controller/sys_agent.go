@@ -12,7 +12,7 @@ type agentController struct {
 	BaseController
 }
 
-//List 代理商列u表
+// List 代理商列u表
 func (c *agentController) List(ctx context.Context, req *system.AgentSearchReq) (res *system.AgentSearchRes, err error) {
 	res, err = service.SysAgent().List(ctx, req)
 	return

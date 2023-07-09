@@ -8,7 +8,7 @@ import (
 	"ugodubai-server/internal/app/system/service"
 	"ugodubai-server/library/liberr"
 
-	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/v2/frame/g"
 )
 
 func init() {
@@ -23,10 +23,9 @@ type sSysAgent struct {
 }
 
 // List 代理商列表
-
 func (s *sSysAgent) List(ctx context.Context, req *system.AgentSearchReq) (res *system.AgentSearchRes, err error) {
 	res = new(system.AgentSearchRes)
-	err = g.Try(func() {
+	err = g.Try(ctx, func(ctx context.Context) {
 		m := dao.SysAgent.Ctx(ctx)
 
 		res.Total, err = m.Count()
@@ -45,3 +44,13 @@ func (s *sSysAgent) List(ctx context.Context, req *system.AgentSearchReq) (res *
 	})
 	return
 }
+
+//  通过Id获取代理商信息
+// func (s *sSysAgent) GetAgentById(ctx context.Context, id uint64) (user *model.LoginUserRes, err error) {
+// 	err = g.Try(ctx, func(ctx context.Context) {
+// 		user = &model.LoginUserRes{}
+// 		err = dao.SysUser.Ctx(ctx).Fields(user).WherePri(id).Scan(user)
+// 		liberr.ErrIsNil(ctx, err, "获取用户信息失败")
+// 	})
+// 	return
+// }

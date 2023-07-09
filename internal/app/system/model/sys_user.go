@@ -25,6 +25,7 @@ type SysUserRoleDeptRes struct {
 	Dept     *entity.SysDept       `json:"dept"`
 	RoleInfo []*SysUserRoleInfoRes `json:"roleInfo"`
 	Post     []*SysUserPostInfoRes `json:"post"`
+	Agent    []*SysAgentInfoRes    `json:"agent"`
 }
 
 type SysUserRoleInfoRes struct {
@@ -35,6 +36,10 @@ type SysUserRoleInfoRes struct {
 type SysUserPostInfoRes struct {
 	PostId   int64  `json:"postId"`
 	PostName string `json:"postName"`
+}
+
+type SysAgentInfoRes struct {
+	Name string `json:"name"`
 }
 
 type SysUserSimpleRes struct {
