@@ -50,7 +50,16 @@ func (s *sSysAgent) Get(ctx context.Context, req *system.AgentGetReq) (res *syst
 	res = new(system.AgentGetRes)
 	err = g.Try(ctx, func(ctx context.Context) {
 		err = dao.SysAgent.Ctx(ctx).WherePri(req.Id).Scan(&res.Agent)
-		liberr.ErrIsNil(ctx, err, "获取角色信息失败")
+
+		if err != nil {
+			liberr.ErrIsNil(ctx, err, "代理商信息获取失败")
+		}
+
+		err = dao.SysUser.Ctx(ctx).Where("agent_id", req.Id).Scan(&res.Users)
+
+		if err != nil {
+			liberr.ErrIsNil(ctx, err, "代理商关联用户获取失败")
+		}
 	})
 	return
 }
