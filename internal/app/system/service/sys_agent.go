@@ -4,12 +4,11 @@ import (
 	"context"
 
 	"ugodubai-server/api/v1/system"
-	"ugodubai-server/internal/app/system/model/entity"
 )
 
 type ISysAgent interface {
 	List(ctx context.Context, req *system.AgentSearchReq) (res *system.AgentSearchRes, err error)
-	Get(ctx context.Context, id uint) (res *entity.SysAgent, err error)
+	Get(ctx context.Context, req *system.AgentGetReq) (res *system.AgentGetRes, err error)
 }
 
 var localSysAgent ISysAgent

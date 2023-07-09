@@ -20,7 +20,6 @@ func (c *agentController) List(ctx context.Context, req *system.AgentSearchReq) 
 
 // Get 获取角色信息
 func (c *agentController) Get(ctx context.Context, req *system.AgentGetReq) (res *system.AgentGetRes, err error) {
-	res = new(system.AgentGetRes)
-	res.Agent, err = service.SysAgent().Get(ctx, req.Id)
+	res, err = service.SysAgent().Get(ctx, req)
 	return
 }
