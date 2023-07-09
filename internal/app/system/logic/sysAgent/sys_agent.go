@@ -23,8 +23,8 @@ type sSysAgent struct {
 }
 
 // List 代理商列表
-func (s *sSysAgent) List(ctx context.Context, req *system.AgentSearchReq) (res *system.AgentSearchRes, err error) {
-	res = new(system.AgentSearchRes)
+func (s *sSysAgent) List(ctx context.Context, req *system.AgentListReq) (res *system.AgentListRes, err error) {
+	res = new(system.AgentListRes)
 	err = g.Try(ctx, func(ctx context.Context) {
 		m := dao.SysAgent.Ctx(ctx)
 
@@ -49,7 +49,7 @@ func (s *sSysAgent) List(ctx context.Context, req *system.AgentSearchReq) (res *
 func (s *sSysAgent) Get(ctx context.Context, req *system.AgentGetReq) (res *system.AgentGetRes, err error) {
 	res = new(system.AgentGetRes)
 	err = g.Try(ctx, func(ctx context.Context) {
-		err = dao.SysAgent.Ctx(ctx).WherePri(req.Id).Scan(&res.Agent)
+		err = dao.SysAgent.Ctx(ctx).WherePri(1).Scan(&res.Agent)
 		liberr.ErrIsNil(ctx, err, "获取角色信息失败")
 	})
 	return

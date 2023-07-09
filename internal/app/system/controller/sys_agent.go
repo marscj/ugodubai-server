@@ -13,7 +13,7 @@ type agentController struct {
 }
 
 // List 代理商列u表
-func (c *agentController) List(ctx context.Context, req *system.AgentSearchReq) (res *system.AgentSearchRes, err error) {
+func (c *agentController) List(ctx context.Context, req *system.AgentListReq) (res *system.AgentListRes, err error) {
 	res, err = service.SysAgent().List(ctx, req)
 	return
 }

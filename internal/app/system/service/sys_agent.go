@@ -7,7 +7,7 @@ import (
 )
 
 type ISysAgent interface {
-	List(ctx context.Context, req *system.AgentSearchReq) (res *system.AgentSearchRes, err error)
+	List(ctx context.Context, req *system.AgentListReq) (res *system.AgentListRes, err error)
 	Get(ctx context.Context, req *system.AgentGetReq) (res *system.AgentGetRes, err error)
 }
 
