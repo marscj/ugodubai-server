@@ -24,12 +24,11 @@ type sSysAgent struct {
 }
 
 // List 代理商列表
-func (s *sSysAgent) List(ctx context.Context, req *system.AgentListReq) (res *system.AgentListRes, err error) {
-	res = new(system.AgentListRes)
+func (s *sSysAgent) List(ctx context.Context, req *system.AgentListReq) (total interface{}, agentList []*entity.SysAgent, err error) {
+
 	err = g.Try(ctx, func(ctx context.Context) {
 		m := dao.SysAgent.Ctx(ctx)
-
-		res.Total, err = m.Count()
+		total, err = m.Count()
 		liberr.ErrIsNil(ctx, err, "代理商列表获取失败")
 
 		if req.PageNum == 0 {
@@ -39,8 +38,7 @@ func (s *sSysAgent) List(ctx context.Context, req *system.AgentListReq) (res *sy
 			req.PageSize = consts.PageSize
 		}
 
-		res.CurrentPage = req.PageNum
-		err = m.Page(req.PageNum, req.PageSize).Order("id asc").Scan(&res.Agents)
+		err = m.Page(req.PageNum, req.PageSize).Order("id asc").Scan(&agentList)
 		liberr.ErrIsNil(ctx, err, "代理商列表获取失败")
 	})
 	return

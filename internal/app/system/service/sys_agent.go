@@ -8,7 +8,7 @@ import (
 )
 
 type ISysAgent interface {
-	List(ctx context.Context, req *system.AgentListReq) (res *system.AgentListRes, err error)
+	List(ctx context.Context, req *system.AgentListReq) (total interface{}, agentList []*entity.SysAgent, err error)
 	Get(ctx context.Context, id uint64) (agent *entity.SysAgent, err error)
 }
 
