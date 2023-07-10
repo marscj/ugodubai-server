@@ -5,6 +5,7 @@ import (
 	"ugodubai-server/api/v1/system"
 	"ugodubai-server/internal/app/system/consts"
 	"ugodubai-server/internal/app/system/dao"
+	"ugodubai-server/internal/app/system/model/entity"
 	"ugodubai-server/internal/app/system/service"
 	"ugodubai-server/library/liberr"
 
@@ -46,19 +47,13 @@ func (s *sSysAgent) List(ctx context.Context, req *system.AgentListReq) (res *sy
 }
 
 //  通过Id获取代理商信息
-func (s *sSysAgent) Get(ctx context.Context, req *system.AgentGetReq) (res *system.AgentGetRes, err error) {
-	res = new(system.AgentGetRes)
+func (s *sSysAgent) Get(ctx context.Context, id uint64) (agent *entity.SysAgent, err error) {
+
 	err = g.Try(ctx, func(ctx context.Context) {
-		err = dao.SysAgent.Ctx(ctx).WherePri(req.Id).Scan(&res.Agent)
+		err = dao.SysAgent.Ctx(ctx).WherePri(id).Scan(&agent)
 
 		if err != nil {
 			liberr.ErrIsNil(ctx, err, "代理商信息获取失败")
-		}
-
-		err = dao.SysUser.Ctx(ctx).Where("agent_id", req.Id).Scan(&res.Users)
-
-		if err != nil {
-			liberr.ErrIsNil(ctx, err, "代理商关联用户获取失败")
 		}
 	})
 	return

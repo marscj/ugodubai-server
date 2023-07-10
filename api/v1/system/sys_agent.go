@@ -2,6 +2,7 @@ package system
 
 import (
 	commonApi "ugodubai-server/api/v1/common"
+	"ugodubai-server/internal/app/system/model"
 	"ugodubai-server/internal/app/system/model/entity"
 
 	"github.com/gogf/gf/v2/frame/g"
@@ -20,11 +21,11 @@ type AgentListRes struct {
 
 type AgentGetReq struct {
 	g.Meta `path:"/agent/get" tags:"代理商管理" method:"get" summary:"获取代理商信息"`
-	Id     uint `p:"id" v:"required#代理商id不能为空""`
+	Id     uint64 `p:"id" v:"required#代理商id不能为空""`
 }
 
 type AgentGetRes struct {
 	g.Meta `mime:"application/json"`
-	Agent  *entity.SysAgent  `json:"agent"`
-	Users  []*entity.SysUser `json:"users"`
+	Agent  *entity.SysAgent          `json:"agent"`
+	User   []*model.SysUserSimpleRes `json:"users"`
 }

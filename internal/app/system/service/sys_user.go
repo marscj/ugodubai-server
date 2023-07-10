@@ -41,6 +41,7 @@ type (
 		ChangeUserStatus(ctx context.Context, req *system.UserStatusReq) (err error)
 		Delete(ctx context.Context, ids []int) (err error)
 		GetUsers(ctx context.Context, ids []int) (users []*model.SysUserSimpleRes, err error)
+		GetAgentUsers(ctx context.Context, id uint64) (users []*model.SysUserSimpleRes, err error)
 	}
 )
 

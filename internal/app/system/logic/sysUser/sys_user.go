@@ -630,3 +630,15 @@ func (s *sSysUser) GetUsers(ctx context.Context, ids []int) (users []*model.SysU
 	})
 	return
 }
+
+func (s *sSysUser) GetAgentUsers(ctx context.Context, id uint64) (users []*model.SysUserSimpleRes, err error) {
+	err = g.Try(ctx, func(ctx context.Context) {
+
+		err = dao.SysUser.Ctx(ctx).Where("agent_id", id).Scan(&users)
+
+		if err != nil {
+			liberr.ErrIsNil(ctx, err, "代理商关联用户获取失败")
+		}
+	})
+	return
+}

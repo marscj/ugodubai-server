@@ -43,8 +43,13 @@ func (c *userController) List(ctx context.Context, req *system.UserSearchReq) (r
 	if err != nil || total == 0 {
 		return
 	}
+
 	res.Total = total
 	res.UserList, err = service.SysUser().GetUsersRoleDept(ctx, userList)
+	if err != nil {
+		return
+	}
+
 	return
 }
 

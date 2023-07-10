@@ -31,8 +31,9 @@ type UserSearchReq struct {
 }
 
 type UserSearchRes struct {
-	g.Meta   `mime:"application/json"`
-	UserList []*model.SysUserRoleDeptRes `json:"user"`
+	g.Meta    `mime:"application/json"`
+	UserList  []*model.SysUserRoleDeptRes `json:"user"`
+	AgentList []*entity.SysAgent          `json:"agent"`
 	commonApi.ListRes
 }
 
