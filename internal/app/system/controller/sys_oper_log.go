@@ -13,7 +13,7 @@ type operateLogController struct {
 }
 
 // List 列表
-func (c *operateLogController) List(ctx context.Context, req *system.SysOperLogListReq) (res *system.SysOperLogListModel, err error) {
+func (c *operateLogController) List(ctx context.Context, req *system.SysOperLogListReq) (res *system.SysOperLogListRes, err error) {
 	res, err = service.OperateLog().List(ctx, req)
 	return
 }

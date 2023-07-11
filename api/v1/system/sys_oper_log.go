@@ -17,8 +17,8 @@ type SysOperLogListReq struct {
 	commonApi.Author
 }
 
-// SysOperLogListModel 列表返回结果
-type SysOperLogListModel struct {
+// SysOperLogListRes 列表返回结果
+type SysOperLogListRes struct {
 	g.Meta `mime:"application/json"`
 	commonApi.ListRes
 	List []*model.SysOperLogListModel `json:"list"`

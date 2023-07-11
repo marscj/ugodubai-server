@@ -13,7 +13,7 @@ type (
 	IOperateLog interface {
 		OperationLog(r *ghttp.Request)
 		Invoke(ctx context.Context, data *model.SysOperLogAdd)
-		List(ctx context.Context, req *system.SysOperLogListReq) (listRes *system.SysOperLogListModel, err error)
+		List(ctx context.Context, req *system.SysOperLogListReq) (listRes *system.SysOperLogListRes, err error)
 		GetByOperId(ctx context.Context, operId uint64) (res *model.SysOperLogInfoModel, err error)
 		DeleteByIds(ctx context.Context, ids []uint64) (err error)
 		ClearLog(ctx context.Context) (err error)

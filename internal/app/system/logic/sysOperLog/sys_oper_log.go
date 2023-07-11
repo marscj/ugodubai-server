@@ -111,8 +111,8 @@ func (s *sOperateLog) operationLogAdd(ctx context.Context, data *model.SysOperLo
 	}
 }
 
-func (s *sOperateLog) List(ctx context.Context, req *system.SysOperLogListReq) (listRes *system.SysOperLogListModel, err error) {
-	listRes = new(system.SysOperLogListModel)
+func (s *sOperateLog) List(ctx context.Context, req *system.SysOperLogListReq) (listRes *system.SysOperLogListRes, err error) {
+	listRes = new(system.SysOperLogListRes)
 	err = g.Try(ctx, func(ctx context.Context) {
 		m := dao.SysOperLog.Ctx(ctx)
 		if req.Title != "" {
@@ -141,7 +141,7 @@ func (s *sOperateLog) List(ctx context.Context, req *system.SysOperLogListReq) (
 			order = req.OrderBy
 		}
 		var res []*model.SysOperLogInfoModel
-		err = m.Fields(system.SysOperLogListModel{}).Page(req.PageNum, req.PageSize).Order(order).Scan(&res)
+		err = m.Fields(system.SysOperLogListRes{}).Page(req.PageNum, req.PageSize).Order(order).Scan(&res)
 		liberr.ErrIsNil(ctx, err, "获取数据失败")
 		listRes.List = make([]*model.SysOperLogListModel, len(res))
 		for k, v := range res {
