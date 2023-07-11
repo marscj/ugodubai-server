@@ -27,7 +27,7 @@ type (
 		GetAdminMenusByRoleIds(ctx context.Context, roleIds []uint) (menus []*model.UserMenus, err error)
 		GetMenusTree(menus []*model.UserMenus, pid uint) []*model.UserMenus
 		GetPermissions(ctx context.Context, roleIds []uint) (userButtons []string, err error)
-		List(ctx context.Context, req *system.UserSearchReq) (total interface{}, userList []*entity.SysUser, err error)
+		List(ctx context.Context, req *system.UserListReq) (total interface{}, userList []*entity.SysUser, err error)
 		GetUsersRoleDept(ctx context.Context, userList []*entity.SysUser) (users []*model.SysUserRoleDeptRes, err error)
 		Add(ctx context.Context, req *system.UserAddReq) (err error)
 		Edit(ctx context.Context, req *system.UserEditReq) (err error)

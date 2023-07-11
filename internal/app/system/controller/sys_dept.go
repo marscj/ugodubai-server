@@ -14,8 +14,8 @@ type sysDeptController struct {
 }
 
 // List 部门列表
-func (c *sysDeptController) List(ctx context.Context, req *system.DeptSearchReq) (res *system.DeptSearchRes, err error) {
-	res = new(system.DeptSearchRes)
+func (c *sysDeptController) List(ctx context.Context, req *system.DeptListReq) (res *system.DeptListRes, err error) {
+	res = new(system.DeptListRes)
 	res.DeptList, err = service.SysDept().GetList(ctx, req)
 	return
 }
@@ -41,7 +41,7 @@ func (c *sysDeptController) Delete(ctx context.Context, req *system.DeptDeleteRe
 // TreeSelect 获取部门数据结构数据
 func (c *sysDeptController) TreeSelect(ctx context.Context, req *system.DeptTreeSelectReq) (res *system.DeptTreeSelectRes, err error) {
 	var deptList []*entity.SysDept
-	deptList, err = service.SysDept().GetList(ctx, &system.DeptSearchReq{
+	deptList, err = service.SysDept().GetList(ctx, &system.DeptListReq{
 		Status: "1", //正常状态数据
 	})
 	if err != nil {

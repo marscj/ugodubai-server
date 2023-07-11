@@ -7,7 +7,7 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 )
 
-type ConfigSearchReq struct {
+type ConfigListReq struct {
 	g.Meta     `path:"/config/list" tags:"系统参数管理" method:"get" summary:"系统参数列表"`
 	ConfigName string `p:"configName"` //参数名称
 	ConfigKey  string `p:"configKey"`  //参数键名
@@ -15,7 +15,7 @@ type ConfigSearchReq struct {
 	commonApi.PageReq
 }
 
-type ConfigSearchRes struct {
+type ConfigListRes struct {
 	g.Meta `mime:"application/json"`
 	List   []*commonEntity.SysConfig `json:"list"`
 	commonApi.ListRes

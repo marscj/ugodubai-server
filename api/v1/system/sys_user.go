@@ -19,8 +19,8 @@ type UserMenusRes struct {
 	Permissions []string           `json:"permissions"`
 }
 
-// UserSearchReq 用户搜索请求参数
-type UserSearchReq struct {
+// UserListReq 用户搜索请求参数
+type UserListReq struct {
 	g.Meta   `path:"/user/list" tags:"用户管理" method:"get" summary:"用户列表"`
 	DeptId   string `p:"deptId"` //部门id
 	Mobile   string `p:"mobile"`
@@ -30,7 +30,7 @@ type UserSearchReq struct {
 	commonApi.Author
 }
 
-type UserSearchRes struct {
+type UserListRes struct {
 	g.Meta    `mime:"application/json"`
 	UserList  []*model.SysUserRoleDeptRes `json:"user"`
 	AgentList []*entity.SysAgent          `json:"agent"`

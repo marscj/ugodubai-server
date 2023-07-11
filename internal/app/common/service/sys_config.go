@@ -13,7 +13,7 @@ import (
 )
 
 type ISysConfig interface {
-	List(ctx context.Context, req *system.ConfigSearchReq) (res *system.ConfigSearchRes, err error)
+	List(ctx context.Context, req *system.ConfigListReq) (res *system.ConfigListRes, err error)
 	Add(ctx context.Context, req *system.ConfigAddReq, userId uint64) (err error)
 	CheckConfigKeyUnique(ctx context.Context, configKey string, configId ...int64) (err error)
 	Get(ctx context.Context, id int) (res *system.ConfigGetRes, err error)

@@ -32,13 +32,13 @@ func (c *userController) GetUserMenus(ctx context.Context, req *system.UserMenus
 }
 
 // List 用户列表
-func (c *userController) List(ctx context.Context, req *system.UserSearchReq) (res *system.UserSearchRes, err error) {
+func (c *userController) List(ctx context.Context, req *system.UserListReq) (res *system.UserListRes, err error) {
 	var (
 		total    interface{}
 		userList []*entity.SysUser
 	)
 
-	res = new(system.UserSearchRes)
+	res = new(system.UserListRes)
 	total, userList, err = service.SysUser().List(ctx, req)
 	if err != nil || total == 0 {
 		return

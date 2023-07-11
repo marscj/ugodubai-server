@@ -9,7 +9,7 @@ import (
 )
 
 type ISysDept interface {
-	GetList(ctx context.Context, req *system.DeptSearchReq) (list []*entity.SysDept, err error)
+	GetList(ctx context.Context, req *system.DeptListReq) (list []*entity.SysDept, err error)
 	GetFromCache(ctx context.Context) (list []*entity.SysDept, err error)
 	Add(ctx context.Context, req *system.DeptAddReq) (err error)
 	Edit(ctx context.Context, req *system.DeptEditReq) (err error)

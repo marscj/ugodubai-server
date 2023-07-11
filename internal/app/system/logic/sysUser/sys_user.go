@@ -309,7 +309,7 @@ func (s *sSysUser) GetPermissions(ctx context.Context, roleIds []uint) (userButt
 }
 
 // List 用户列表
-func (s *sSysUser) List(ctx context.Context, req *system.UserSearchReq) (total interface{}, userList []*entity.SysUser, err error) {
+func (s *sSysUser) List(ctx context.Context, req *system.UserListReq) (total interface{}, userList []*entity.SysUser, err error) {
 	err = g.Try(ctx, func(ctx context.Context) {
 		m := dao.SysUser.Ctx(ctx)
 		if req.KeyWords != "" {

@@ -29,8 +29,8 @@ type sSysConfig struct {
 }
 
 // List 系统参数列表
-func (s *sSysConfig) List(ctx context.Context, req *system.ConfigSearchReq) (res *system.ConfigSearchRes, err error) {
-	res = new(system.ConfigSearchRes)
+func (s *sSysConfig) List(ctx context.Context, req *system.ConfigListReq) (res *system.ConfigListRes, err error) {
+	res = new(system.ConfigListRes)
 	err = g.Try(ctx, func(ctx context.Context) {
 		m := dao.SysConfig.Ctx(ctx)
 		if req != nil {

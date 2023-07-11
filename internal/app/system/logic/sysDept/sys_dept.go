@@ -28,7 +28,7 @@ func New() *sSysDept {
 type sSysDept struct {
 }
 
-func (s *sSysDept) GetList(ctx context.Context, req *system.DeptSearchReq) (list []*entity.SysDept, err error) {
+func (s *sSysDept) GetList(ctx context.Context, req *system.DeptListReq) (list []*entity.SysDept, err error) {
 	list, err = s.GetFromCache(ctx)
 	if err != nil {
 		return

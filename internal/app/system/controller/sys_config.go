@@ -14,7 +14,7 @@ type configController struct {
 }
 
 // List 系统参数列表
-func (c *configController) List(ctx context.Context, req *system.ConfigSearchReq) (res *system.ConfigSearchRes, err error) {
+func (c *configController) List(ctx context.Context, req *system.ConfigListReq) (res *system.ConfigListRes, err error) {
 	res, err = commonService.SysConfig().List(ctx, req)
 	return
 }

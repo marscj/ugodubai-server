@@ -7,13 +7,13 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 )
 
-type DeptSearchReq struct {
+type DeptListReq struct {
 	g.Meta   `path:"/dept/list" tags:"部门管理" method:"get" summary:"部门列表"`
 	DeptName string `p:"deptName"`
 	Status   string `p:"status"`
 }
 
-type DeptSearchRes struct {
+type DeptListRes struct {
 	g.Meta   `mime:"application/json"`
 	DeptList []*entity.SysDept `json:"deptList"`
 }
