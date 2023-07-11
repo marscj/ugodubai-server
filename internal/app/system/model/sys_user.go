@@ -50,3 +50,11 @@ type SysUserSimpleModel struct {
 	UserName     string `orm:"user_name" json:"userName"`            // 用户名
 	UserNickname string `orm:"user_nickname"    json:"userNickname"` // 用户昵称
 }
+
+type SysUserWith struct {
+	gmeta.Meta `orm:"table:sys_user"`
+	*entity.SysUser
+	Agent *SysAgent  `orm:"with:id=agent_id"`
+	Dept  *SysDept   `orm:"with:dept_id=dept_id"`
+	Role  []*SysRole `orm:"with:id=id"`
+}

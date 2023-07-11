@@ -3,6 +3,7 @@ package controller
 import (
 	"context"
 	"ugodubai-server/api/v1/system"
+	"ugodubai-server/internal/app/system/dao"
 	"ugodubai-server/internal/app/system/model"
 	"ugodubai-server/internal/app/system/model/entity"
 	"ugodubai-server/internal/app/system/service"
@@ -28,6 +29,14 @@ func (c *userController) GetUserMenus(ctx context.Context, req *system.UserMenus
 		MenuList:    menuList,
 		Permissions: permissions,
 	}
+	return
+}
+
+func (c *userController) ListWith(ctx context.Context, req *system.UserListWithReq) (res *system.UserListWithRes, err error) {
+	res = new(system.UserListWithRes)
+
+	err = dao.SysUser.Ctx(ctx).WithAll().Scan(&res.UserList)
+
 	return
 }
 

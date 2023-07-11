@@ -6,3 +6,7 @@ type SysDeptTreeModel struct {
 	*entity.SysDept
 	Children []*SysDeptTreeModel `json:"children"`
 }
+
+type SysDept struct {
+	*entity.SysDept
+}
