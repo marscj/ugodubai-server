@@ -202,7 +202,7 @@ func (s *sSysUser) GetAdminRoleIds(ctx context.Context, userId uint64) (roleIds 
 
 func (s *sSysUser) GetAllMenus(ctx context.Context) (menus []*model.UserMenus, err error) {
 	//获取所有开启的菜单
-	var allMenus []*model.SysAuthRuleInfoModel
+	var allMenus []*model.SysAuthRuleInfo
 	allMenus, err = service.SysAuthRule().GetIsMenuList(ctx)
 	if err != nil {
 		return
@@ -258,7 +258,7 @@ func (s *sSysUser) GetMenusTree(menus []*model.UserMenus, pid uint) []*model.Use
 	return returnList
 }
 
-func (s *sSysUser) setMenuData(menu *model.UserMenu, entity *model.SysAuthRuleInfoModel) *model.UserMenu {
+func (s *sSysUser) setMenuData(menu *model.UserMenu, entity *model.SysAuthRuleInfo) *model.UserMenu {
 	menu = &model.UserMenu{
 		Id:        entity.Id,
 		Pid:       entity.Pid,

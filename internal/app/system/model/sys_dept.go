@@ -2,9 +2,9 @@ package model
 
 import "ugodubai-server/internal/app/system/model/entity"
 
-type SysDeptTreeModel struct {
+type SysDeptTree struct {
 	*entity.SysDept
-	Children []*SysDeptTreeModel `json:"children"`
+	Children []*SysDeptTree `json:"children"`
 }
 
 type SysDept struct {

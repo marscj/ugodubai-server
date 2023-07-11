@@ -27,7 +27,7 @@ type RoleGetParamsReq struct {
 
 type RoleGetParamsRes struct {
 	g.Meta `mime:"application/json"`
-	Menu   []*model.SysAuthRuleInfoModel `json:"menu"`
+	Menu   []*model.SysAuthRuleInfo `json:"menu"`
 }
 
 type RoleAddReq struct {

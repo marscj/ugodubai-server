@@ -21,7 +21,7 @@ func (c *operateLogController) List(ctx context.Context, req *system.SysOperLogL
 // Get 获取操作日志
 func (c *operateLogController) Get(ctx context.Context, req *system.SysOperLogGetReq) (res *system.SysOperLogGetRes, err error) {
 	res = new(system.SysOperLogGetRes)
-	res.SysOperLogInfoModel, err = service.OperateLog().GetByOperId(ctx, req.OperId)
+	res.SysOperLogInfo, err = service.OperateLog().GetByOperId(ctx, req.OperId)
 	return
 }
 

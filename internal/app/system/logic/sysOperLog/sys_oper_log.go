@@ -47,7 +47,7 @@ func (s *sOperateLog) OperationLog(r *ghttp.Request) {
 		g.Log().Error(r.GetCtx(), err)
 		return
 	}
-	var menu *model.SysAuthRuleInfoModel
+	var menu *model.SysAuthRuleInfo
 	path := gstr.TrimLeft(url.Path, "/")
 	for _, m := range menuList {
 		if gstr.Equal(m.Name, path) {
@@ -140,12 +140,12 @@ func (s *sOperateLog) List(ctx context.Context, req *system.SysOperLogListReq) (
 		if req.OrderBy != "" {
 			order = req.OrderBy
 		}
-		var res []*model.SysOperLogInfoModel
+		var res []*model.SysOperLogInfo
 		err = m.Fields(system.SysOperLogListRes{}).Page(req.PageNum, req.PageSize).Order(order).Scan(&res)
 		liberr.ErrIsNil(ctx, err, "获取数据失败")
-		listRes.List = make([]*model.SysOperLogListModel, len(res))
+		listRes.List = make([]*model.SysOperLogList, len(res))
 		for k, v := range res {
-			listRes.List[k] = &model.SysOperLogListModel{
+			listRes.List[k] = &model.SysOperLogList{
 				OperId:         v.OperId,
 				Title:          v.Title,
 				RequestMethod:  v.RequestMethod,
@@ -163,7 +163,7 @@ func (s *sOperateLog) List(ctx context.Context, req *system.SysOperLogListReq) (
 	return
 }
 
-func (s *sOperateLog) GetByOperId(ctx context.Context, operId uint64) (res *model.SysOperLogInfoModel, err error) {
+func (s *sOperateLog) GetByOperId(ctx context.Context, operId uint64) (res *model.SysOperLogInfo, err error) {
 	err = g.Try(ctx, func(ctx context.Context) {
 		err = dao.SysOperLog.Ctx(ctx).WithAll().Where(dao.SysOperLog.Columns().OperId, operId).Scan(&res)
 		liberr.ErrIsNil(ctx, err, "获取信息失败")
