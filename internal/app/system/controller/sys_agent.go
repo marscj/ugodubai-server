@@ -33,13 +33,5 @@ func (c *agentController) List(ctx context.Context, req *system.AgentListReq) (r
 func (c *agentController) Get(ctx context.Context, req *system.AgentGetReq) (res *system.AgentGetRes, err error) {
 	res = new(system.AgentGetRes)
 	res.Agent, err = service.SysAgent().Get(ctx, req.Id)
-
-	if err != nil {
-		return
-	}
-
-	if req.User {
-		res.User, err = service.SysUser().GetUsersByAgenId(ctx, req.Id)
-	}
 	return
 }
