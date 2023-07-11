@@ -18,7 +18,7 @@ type RoleListReq struct {
 type RoleListRes struct {
 	g.Meta `mime:"application/json"`
 	commonApi.ListRes
-	List []*entity.SysRole `json:"list"`
+	Role []*entity.SysRole `json:"role"`
 }
 
 type RoleGetParamsReq struct {

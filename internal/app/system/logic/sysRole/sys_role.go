@@ -46,7 +46,7 @@ func (s *sSysRole) GetRoleListSearch(ctx context.Context, req *system.RoleListRe
 		if req.PageSize == 0 {
 			req.PageSize = consts.PageSize
 		}
-		err = model.Page(res.CurrentPage, req.PageSize).Order("id asc").Scan(&res.List)
+		err = model.Page(res.CurrentPage, req.PageSize).Order("id asc").Scan(&res.Role)
 		liberr.ErrIsNil(ctx, err, "获取数据失败")
 	})
 	return
