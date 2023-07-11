@@ -8,7 +8,7 @@ import (
 )
 
 type ISysPost interface {
-	List(ctx context.Context, req *system.PostSearchReq) (res *system.PostSearchRes, err error)
+	List(ctx context.Context, req *system.PostListReq) (res *system.PostListRes, err error)
 	Add(ctx context.Context, req *system.PostAddReq) (err error)
 	Edit(ctx context.Context, req *system.PostEditReq) (err error)
 	Delete(ctx context.Context, ids []int) (err error)

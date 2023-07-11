@@ -10,7 +10,7 @@ import (
 
 type (
 	ISysAuthRule interface {
-		GetMenuListSearch(ctx context.Context, req *system.RuleSearchReq) (res []*model.SysAuthRuleInfoRes, err error)
+		GetMenuListSearch(ctx context.Context, req *system.RuleListReq) (res []*model.SysAuthRuleInfoRes, err error)
 		GetIsMenuList(ctx context.Context) ([]*model.SysAuthRuleInfoRes, error)
 		GetMenuList(ctx context.Context) (list []*model.SysAuthRuleInfoRes, err error)
 		GetIsButtonList(ctx context.Context) ([]*model.SysAuthRuleInfoRes, error)

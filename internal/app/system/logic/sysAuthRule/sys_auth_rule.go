@@ -30,7 +30,7 @@ func New() *sSysAuthRule {
 type sSysAuthRule struct {
 }
 
-func (s *sSysAuthRule) GetMenuListSearch(ctx context.Context, req *system.RuleSearchReq) (res []*model.SysAuthRuleInfoRes, err error) {
+func (s *sSysAuthRule) GetMenuListSearch(ctx context.Context, req *system.RuleListReq) (res []*model.SysAuthRuleInfoRes, err error) {
 	err = g.Try(ctx, func(ctx context.Context) {
 		m := dao.SysAuthRule.Ctx(ctx)
 		if req.Title != "" {

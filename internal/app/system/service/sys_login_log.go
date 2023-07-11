@@ -9,7 +9,7 @@ import (
 
 type ISysLoginLog interface {
 	Invoke(ctx context.Context, data *model.LoginLogParams)
-	List(ctx context.Context, req *system.LoginLogSearchReq) (res *system.LoginLogSearchRes, err error)
+	List(ctx context.Context, req *system.LoginLogListReq) (res *system.LoginLogListRes, err error)
 	DeleteLoginLogByIds(ctx context.Context, ids []int) (err error)
 	ClearLoginLog(ctx context.Context) (err error)
 }

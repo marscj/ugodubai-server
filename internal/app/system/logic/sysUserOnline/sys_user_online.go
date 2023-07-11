@@ -82,7 +82,7 @@ func (s *sSysUserOnline) SaveOnline(ctx context.Context, params *model.SysUserOn
 
 // CheckUserOnline 检查在线用户
 func (s *sSysUserOnline) CheckUserOnline(ctx context.Context) {
-	param := &system.SysUserOnlineSearchReq{
+	param := &system.SysUserOnlineListReqstRes{
 		PageReq: common.PageReq{
 			PageNum:  1,
 			PageSize: 50,
@@ -91,7 +91,7 @@ func (s *sSysUserOnline) CheckUserOnline(ctx context.Context) {
 	var total int
 	for {
 		var (
-			res *system.SysUserOnlineSearchRes
+			res *system.SysUserOnlineListRes
 			err error
 		)
 		res, err = s.GetOnlineListPage(ctx, param, true)
@@ -115,7 +115,7 @@ func (s *sSysUserOnline) CheckUserOnline(ctx context.Context) {
 }
 
 // GetOnlineListPage 搜素在线用户列表
-func (s *sSysUserOnline) GetOnlineListPage(ctx context.Context, req *system.SysUserOnlineSearchReq, hasToken ...bool) (res *system.SysUserOnlineSearchRes, err error) {
+func (s *sSysUserOnline) GetOnlineListPage(ctx context.Context, req *system.SysUserOnlineListReqstRes, hasToken ...bool) (res *system.SysUserOnlineListRes, err error) {
 	if req.PageNum == 0 {
 		req.PageNum = 1
 	}
@@ -129,7 +129,7 @@ func (s *sSysUserOnline) GetOnlineListPage(ctx context.Context, req *system.SysU
 	if req.Username != "" {
 		model = model.Where("user_name like ?", "%"+req.Username+"%")
 	}
-	res = new(system.SysUserOnlineSearchRes)
+	res = new(system.SysUserOnlineListRes)
 	err = g.Try(ctx, func(ctx context.Context) {
 		res.Total, err = model.Count()
 		liberr.ErrIsNil(ctx, err, "获取总行数失败")

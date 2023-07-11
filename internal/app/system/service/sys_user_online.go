@@ -13,7 +13,7 @@ type (
 		Invoke(ctx context.Context, params *model.SysUserOnlineParams)
 		SaveOnline(ctx context.Context, params *model.SysUserOnlineParams)
 		CheckUserOnline(ctx context.Context)
-		GetOnlineListPage(ctx context.Context, req *system.SysUserOnlineSearchReq, hasToken ...bool) (res *system.SysUserOnlineSearchRes, err error)
+		GetOnlineListPage(ctx context.Context, req *system.SysUserOnlineListReqstRes, hasToken ...bool) (res *system.SysUserOnlineListRes, err error)
 		UserIsOnline(ctx context.Context, token string) bool
 		DeleteOnlineByToken(ctx context.Context, token string) (err error)
 		ForceLogout(ctx context.Context, ids []int) (err error)

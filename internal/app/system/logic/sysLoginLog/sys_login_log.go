@@ -38,8 +38,8 @@ func (s *sSysLoginLog) Invoke(ctx context.Context, data *model.LoginLogParams) {
 	)
 }
 
-func (s *sSysLoginLog) List(ctx context.Context, req *system.LoginLogSearchReq) (res *system.LoginLogSearchRes, err error) {
-	res = new(system.LoginLogSearchRes)
+func (s *sSysLoginLog) List(ctx context.Context, req *system.LoginLogListReq) (res *system.LoginLogListRes, err error) {
+	res = new(system.LoginLogListRes)
 	if req.PageNum == 0 {
 		req.PageNum = 1
 	}

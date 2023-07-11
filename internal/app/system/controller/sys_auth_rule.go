@@ -13,7 +13,7 @@ type menuController struct {
 	BaseController
 }
 
-func (c *menuController) List(ctx context.Context, req *system.RuleSearchReq) (res *system.RuleListRes, err error) {
+func (c *menuController) List(ctx context.Context, req *system.RuleListReq) (res *system.RuleListRes, err error) {
 	var list []*model.SysAuthRuleInfoRes
 	res = &system.RuleListRes{
 		Rules: make([]*model.SysAuthRuleTreeRes, 0),

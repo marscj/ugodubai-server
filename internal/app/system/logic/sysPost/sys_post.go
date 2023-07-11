@@ -26,8 +26,8 @@ type sSysPost struct {
 }
 
 // List 岗位列表
-func (s *sSysPost) List(ctx context.Context, req *system.PostSearchReq) (res *system.PostSearchRes, err error) {
-	res = new(system.PostSearchRes)
+func (s *sSysPost) List(ctx context.Context, req *system.PostListReq) (res *system.PostListRes, err error) {
+	res = new(system.PostListRes)
 	err = g.Try(ctx, func(ctx context.Context) {
 		m := dao.SysPost.Ctx(ctx)
 		if req != nil {

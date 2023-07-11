@@ -8,7 +8,7 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 )
 
-type RuleSearchReq struct {
+type RuleListReq struct {
 	g.Meta `path:"/menu/list" tags:"菜单管理" method:"get" summary:"菜单列表"`
 	commonApi.Author
 	Title     string `p:"menuName" `

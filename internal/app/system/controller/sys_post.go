@@ -13,7 +13,7 @@ type postController struct {
 }
 
 // List 岗位列表
-func (c *postController) List(ctx context.Context, req *system.PostSearchReq) (res *system.PostSearchRes, err error) {
+func (c *postController) List(ctx context.Context, req *system.PostListReq) (res *system.PostListRes, err error) {
 	res, err = service.SysPost().List(ctx, req)
 	return
 }

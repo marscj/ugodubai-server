@@ -7,8 +7,8 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 )
 
-// SysUserOnlineSearchReq 列表搜索参数
-type SysUserOnlineSearchReq struct {
+// SysUserOnlineListReqstRes 列表搜索参数
+type SysUserOnlineListReqstRes struct {
 	g.Meta   `path:"/online/list" tags:"在线用户管理" method:"get" summary:"列表"`
 	Username string `p:"userName"`
 	Ip       string `p:"ipaddr"`
@@ -16,8 +16,8 @@ type SysUserOnlineSearchReq struct {
 	commonApi.Author
 }
 
-// SysUserOnlineSearchRes 列表结果
-type SysUserOnlineSearchRes struct {
+// SysUserOnlineListRes 列表结果
+type SysUserOnlineListRes struct {
 	g.Meta `mime:"application/json"`
 	commonApi.ListRes
 	List []*entity.SysUserOnline `json:"list"`

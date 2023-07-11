@@ -7,8 +7,8 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 )
 
-// LoginLogSearchReq 查询列表请求参数
-type LoginLogSearchReq struct {
+// LoginLogListReq 查询列表请求参数
+type LoginLogListReq struct {
 	g.Meta        `path:"/loginLog/list" tags:"登录日志管理" method:"get" summary:"日志列表"`
 	LoginName     string `p:"userName"`      //登陆名
 	Status        string `p:"status"`        //状态
@@ -19,7 +19,7 @@ type LoginLogSearchReq struct {
 	commonApi.PageReq
 }
 
-type LoginLogSearchRes struct {
+type LoginLogListRes struct {
 	g.Meta `mime:"application/json"`
 	commonApi.ListRes
 	List []*entity.SysLoginLog `json:"list"`

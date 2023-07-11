@@ -4,8 +4,8 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 )
 
-type MonitorSearchReq struct {
+type MonitorReq struct {
 	g.Meta `path:"/monitor/server" tags:"服务监控" method:"get" summary:"服务监控"`
 }
 
-type MonitorSearchRes g.Map
+type MonitorRes g.Map

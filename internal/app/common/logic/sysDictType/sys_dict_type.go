@@ -31,8 +31,8 @@ type sSysDictType struct {
 }
 
 // List 字典类型列表
-func (s *sSysDictType) List(ctx context.Context, req *system.DictTypeSearchReq) (res *system.DictTypeSearchRes, err error) {
-	res = new(system.DictTypeSearchRes)
+func (s *sSysDictType) List(ctx context.Context, req *system.DictTypeListReq) (res *system.DictTypeListRes, err error) {
+	res = new(system.DictTypeListRes)
 	err = g.Try(ctx, func(ctx context.Context) {
 		m := dao.SysDictType.Ctx(ctx)
 		if req.DictName != "" {

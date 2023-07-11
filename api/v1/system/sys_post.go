@@ -7,7 +7,7 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 )
 
-type PostSearchReq struct {
+type PostListReq struct {
 	g.Meta   `path:"/post/list" tags:"岗位管理" method:"get" summary:"岗位列表"`
 	PostCode string `p:"postCode"` //岗位编码
 	PostName string `p:"postName"` //岗位名称
@@ -15,7 +15,7 @@ type PostSearchReq struct {
 	commonApi.PageReq
 }
 
-type PostSearchRes struct {
+type PostListRes struct {
 	g.Meta `mime:"application/json"`
 	commonApi.ListRes
 	PostList []*entity.SysPost `json:"postList"`

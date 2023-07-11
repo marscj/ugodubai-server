@@ -13,7 +13,7 @@ type SysDictTypeController struct {
 }
 
 // List 字典类型列表
-func (c *SysDictTypeController) List(ctx context.Context, req *system.DictTypeSearchReq) (res *system.DictTypeSearchRes, err error) {
+func (c *SysDictTypeController) List(ctx context.Context, req *system.DictTypeListReq) (res *system.DictTypeListRes, err error) {
 	res, err = commonService.SysDictType().List(ctx, req)
 	return
 }

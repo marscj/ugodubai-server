@@ -3,6 +3,13 @@ package controller
 import (
 	"context"
 	"fmt"
+	"os"
+	"runtime"
+	"strconv"
+	"time"
+	"ugodubai-server/api/v1/system"
+	"ugodubai-server/library/libUtils"
+
 	"github.com/gogf/gf/v2/os/gtime"
 	"github.com/gogf/gf/v2/util/gconv"
 	"github.com/shirou/gopsutil/v3/cpu"
@@ -10,12 +17,6 @@ import (
 	"github.com/shirou/gopsutil/v3/host"
 	"github.com/shirou/gopsutil/v3/load"
 	"github.com/shirou/gopsutil/v3/mem"
-	"ugodubai-server/api/v1/system"
-	"ugodubai-server/library/libUtils"
-	"os"
-	"runtime"
-	"strconv"
-	"time"
 )
 
 var Monitor = sysMonitorController{
@@ -27,7 +28,7 @@ type sysMonitorController struct {
 	startTime *gtime.Time
 }
 
-func (c *sysMonitorController) List(ctx context.Context, req *system.MonitorSearchReq) (res *system.MonitorSearchRes, err error) {
+func (c *sysMonitorController) List(ctx context.Context, req *system.MonitorReq) (res *system.MonitorRes, err error) {
 	cpuNum := runtime.NumCPU() //核心数
 	var cpuUsed float64 = 0    //用户使用率
 	var cpuAvg5 float64 = 0    //CPU负载5
@@ -112,8 +113,8 @@ func (c *sysMonitorController) List(ctx context.Context, req *system.MonitorSear
 			}
 		}
 	}
-	res = new(system.MonitorSearchRes)
-	res = &system.MonitorSearchRes{
+	res = new(system.MonitorRes)
+	res = &system.MonitorRes{
 		"cpuNum":          cpuNum,
 		"cpuUsed":         cpuUsed,
 		"cpuAvg5":         gconv.String(cpuAvg5),

@@ -8,7 +8,7 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 )
 
-type DictTypeSearchReq struct {
+type DictTypeListReq struct {
 	g.Meta   `path:"/dict/type/list" tags:"字典管理" method:"get" summary:"字典类型列表"`
 	DictName string `p:"dictName"` //字典名称
 	DictType string `p:"dictType"` //字典类型
@@ -16,7 +16,7 @@ type DictTypeSearchReq struct {
 	commonApi.PageReq
 }
 
-type DictTypeSearchRes struct {
+type DictTypeListRes struct {
 	g.Meta       `mime:"application/json"`
 	DictTypeList []*commonModel.SysDictTypeInfoRes `json:"dictTypeList"`
 	commonApi.ListRes

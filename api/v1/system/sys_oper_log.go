@@ -7,8 +7,8 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 )
 
-// SysOperLogSearchReq 分页请求参数
-type SysOperLogSearchReq struct {
+// SysOperLogListReq 分页请求参数
+type SysOperLogListReq struct {
 	g.Meta        `path:"/operLog/list" tags:"操作日志" method:"get" summary:"操作日志列表"`
 	Title         string `p:"title"`         //系统模块
 	RequestMethod string `p:"requestMethod"` //请求方式
@@ -17,8 +17,8 @@ type SysOperLogSearchReq struct {
 	commonApi.Author
 }
 
-// SysOperLogSearchRes 列表返回结果
-type SysOperLogSearchRes struct {
+// SysOperLogListRes 列表返回结果
+type SysOperLogListRes struct {
 	g.Meta `mime:"application/json"`
 	commonApi.ListRes
 	List []*model.SysOperLogListRes `json:"list"`

@@ -13,7 +13,7 @@ import (
 )
 
 type ISysDictType interface {
-	List(ctx context.Context, req *system.DictTypeSearchReq) (res *system.DictTypeSearchRes, err error)
+	List(ctx context.Context, req *system.DictTypeListReq) (res *system.DictTypeListRes, err error)
 	Add(ctx context.Context, req *system.DictTypeAddReq, userId uint64) (err error)
 	Edit(ctx context.Context, req *system.DictTypeEditReq, userId uint64) (err error)
 	Get(ctx context.Context, req *system.DictTypeGetReq) (dictType *entity.SysDictType, err error)

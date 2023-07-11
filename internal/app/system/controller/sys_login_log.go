@@ -12,7 +12,7 @@ type loginLogController struct {
 	BaseController
 }
 
-func (c *loginLogController) List(ctx context.Context, req *system.LoginLogSearchReq) (res *system.LoginLogSearchRes, err error) {
+func (c *loginLogController) List(ctx context.Context, req *system.LoginLogListReq) (res *system.LoginLogListRes, err error) {
 	res, err = service.SysLoginLog().List(ctx, req)
 	return
 }
