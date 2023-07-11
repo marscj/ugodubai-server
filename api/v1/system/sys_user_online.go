@@ -7,8 +7,8 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 )
 
-// SysUserOnlineListReqstRes 列表搜索参数
-type SysUserOnlineListReqstRes struct {
+// SysUserOnlineListReq 列表搜索参数
+type SysUserOnlineListReq struct {
 	g.Meta   `path:"/online/list" tags:"在线用户管理" method:"get" summary:"列表"`
 	Username string `p:"userName"`
 	Ip       string `p:"ipaddr"`

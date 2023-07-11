@@ -82,7 +82,7 @@ func (s *sSysUserOnline) SaveOnline(ctx context.Context, params *model.SysUserOn
 
 // CheckUserOnline 检查在线用户
 func (s *sSysUserOnline) CheckUserOnline(ctx context.Context) {
-	param := &system.SysUserOnlineListReqstRes{
+	param := &system.SysUserOnlineListReq{
 		PageReq: common.PageReq{
 			PageNum:  1,
 			PageSize: 50,
@@ -115,7 +115,7 @@ func (s *sSysUserOnline) CheckUserOnline(ctx context.Context) {
 }
 
 // GetOnlineListPage 搜素在线用户列表
-func (s *sSysUserOnline) GetOnlineListPage(ctx context.Context, req *system.SysUserOnlineListReqstRes, hasToken ...bool) (res *system.SysUserOnlineListRes, err error) {
+func (s *sSysUserOnline) GetOnlineListPage(ctx context.Context, req *system.SysUserOnlineListReq, hasToken ...bool) (res *system.SysUserOnlineListRes, err error) {
 	if req.PageNum == 0 {
 		req.PageNum = 1
 	}

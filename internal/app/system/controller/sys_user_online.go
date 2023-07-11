@@ -10,7 +10,7 @@ var UserOnline = new(SysUserOnlineController)
 
 type SysUserOnlineController struct{}
 
-func (c *SysUserOnlineController) List(ctx context.Context, req *system.SysUserOnlineListReqstRes) (res *system.SysUserOnlineListRes, err error) {
+func (c *SysUserOnlineController) List(ctx context.Context, req *system.SysUserOnlineListReq) (res *system.SysUserOnlineListRes, err error) {
 	res, err = service.SysUserOnline().GetOnlineListPage(ctx, req)
 	return
 }
