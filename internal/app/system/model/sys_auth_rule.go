@@ -1,6 +1,6 @@
 package model
 
-type SysAuthRuleInfoRes struct {
+type SysAuthRuleInfoModel struct {
 	Id        uint   `orm:"id,primary"  json:"id"`        //
 	Pid       uint   `orm:"pid"         json:"pid"`       // 父ID
 	Name      string `orm:"name,unique" json:"name"`      // 规则名称
@@ -21,10 +21,10 @@ type SysAuthRuleInfoRes struct {
 	LinkUrl   string `orm:"link_url" json:"linkUrl"`      //链接地址
 }
 
-// SysAuthRuleTreeRes 菜单树形结构
-type SysAuthRuleTreeRes struct {
-	*SysAuthRuleInfoRes
-	Children []*SysAuthRuleTreeRes `json:"children"`
+// SysAuthRuleTreeModel 菜单树形结构
+type SysAuthRuleTreeModel struct {
+	*SysAuthRuleInfoModel
+	Children []*SysAuthRuleTreeModel `json:"children"`
 }
 
 type UserMenu struct {

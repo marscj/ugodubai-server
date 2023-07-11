@@ -6,8 +6,8 @@ import (
 	"github.com/gogf/gf/v2/util/gmeta"
 )
 
-// LoginUserRes 登录返回
-type LoginUserRes struct {
+// LoginUserModel 登录返回
+type LoginUserModel struct {
 	Id           uint64 `orm:"id,primary"       json:"id"`           //
 	UserName     string `orm:"user_name,unique" json:"userName"`     // 用户名
 	UserNickname string `orm:"user_nickname"    json:"userNickname"` // 用户昵称
@@ -19,30 +19,30 @@ type LoginUserRes struct {
 	DeptId       uint64 `orm:"dept_id"       json:"deptId"`          //部门id
 }
 
-// SysUserRoleDeptRes 带有部门、角色、岗位信息的用户数据
-type SysUserRoleDeptRes struct {
+// SysUserRoleDeptModel 带有部门、角色、岗位信息的用户数据
+type SysUserRoleDeptModel struct {
 	*entity.SysUser
-	Dept     *entity.SysDept       `json:"dept"`
-	RoleInfo []*SysUserRoleInfoRes `json:"roleInfo"`
-	Post     []*SysUserPostInfoRes `json:"post"`
-	Agent    []*SysAgentInfoRes    `json:"agent"`
+	Dept     *entity.SysDept         `json:"dept"`
+	RoleInfo []*SysUserRoleInfoModel `json:"roleInfo"`
+	Post     []*SysUserPostInfoModel `json:"post"`
+	Agent    []*SysAgentInfoModel    `json:"agent"`
 }
 
-type SysUserRoleInfoRes struct {
+type SysUserRoleInfoModel struct {
 	RoleId uint   `json:"roleId"`
 	Name   string `json:"name"`
 }
 
-type SysUserPostInfoRes struct {
+type SysUserPostInfoModel struct {
 	PostId   int64  `json:"postId"`
 	PostName string `json:"postName"`
 }
 
-type SysAgentInfoRes struct {
+type SysAgentInfoModel struct {
 	Name string `json:"name"`
 }
 
-type SysUserSimpleRes struct {
+type SysUserSimpleModel struct {
 	gmeta.Meta   `orm:"table:sys_user"`
 	Id           uint64 `orm:"id"       json:"id"`                   //
 	Avatar       string `orm:"avatar" json:"avatar"`                 // 头像

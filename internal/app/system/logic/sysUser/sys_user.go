@@ -51,7 +51,7 @@ func (s *sSysUser) NotCheckAuthAdminIds(ctx context.Context) *gset.Set {
 	return gset.New()
 }
 
-func (s *sSysUser) GetAdminUserByUsernamePassword(ctx context.Context, req *system.UserLoginReq) (user *model.LoginUserRes, err error) {
+func (s *sSysUser) GetAdminUserByUsernamePassword(ctx context.Context, req *system.UserLoginReq) (user *model.LoginUserModel, err error) {
 	err = g.Try(ctx, func(ctx context.Context) {
 		user, err = s.GetUserByUsername(ctx, req.Username)
 		liberr.ErrIsNil(ctx, err)
@@ -69,9 +69,9 @@ func (s *sSysUser) GetAdminUserByUsernamePassword(ctx context.Context, req *syst
 }
 
 // GetUserByUsername 通过用户名获取用户信息
-func (s *sSysUser) GetUserByUsername(ctx context.Context, userName string) (user *model.LoginUserRes, err error) {
+func (s *sSysUser) GetUserByUsername(ctx context.Context, userName string) (user *model.LoginUserModel, err error) {
 	err = g.Try(ctx, func(ctx context.Context) {
-		user = &model.LoginUserRes{}
+		user = &model.LoginUserModel{}
 		err = dao.SysUser.Ctx(ctx).Fields(user).Where(dao.SysUser.Columns().UserName, userName).Scan(user)
 		liberr.ErrIsNil(ctx, err, "账号密码错误")
 	})
@@ -79,9 +79,9 @@ func (s *sSysUser) GetUserByUsername(ctx context.Context, userName string) (user
 }
 
 // GetUserById 通过用户名获取用户信息
-func (s *sSysUser) GetUserById(ctx context.Context, id uint64) (user *model.LoginUserRes, err error) {
+func (s *sSysUser) GetUserById(ctx context.Context, id uint64) (user *model.LoginUserModel, err error) {
 	err = g.Try(ctx, func(ctx context.Context) {
-		user = &model.LoginUserRes{}
+		user = &model.LoginUserModel{}
 		err = dao.SysUser.Ctx(ctx).Fields(user).WherePri(id).Scan(user)
 		liberr.ErrIsNil(ctx, err, "获取用户信息失败")
 	})
@@ -202,7 +202,7 @@ func (s *sSysUser) GetAdminRoleIds(ctx context.Context, userId uint64) (roleIds 
 
 func (s *sSysUser) GetAllMenus(ctx context.Context) (menus []*model.UserMenus, err error) {
 	//获取所有开启的菜单
-	var allMenus []*model.SysAuthRuleInfoRes
+	var allMenus []*model.SysAuthRuleInfoModel
 	allMenus, err = service.SysAuthRule().GetIsMenuList(ctx)
 	if err != nil {
 		return
@@ -258,7 +258,7 @@ func (s *sSysUser) GetMenusTree(menus []*model.UserMenus, pid uint) []*model.Use
 	return returnList
 }
 
-func (s *sSysUser) setMenuData(menu *model.UserMenu, entity *model.SysAuthRuleInfoRes) *model.UserMenu {
+func (s *sSysUser) setMenuData(menu *model.UserMenu, entity *model.SysAuthRuleInfoModel) *model.UserMenu {
 	menu = &model.UserMenu{
 		Id:        entity.Id,
 		Pid:       entity.Pid,
@@ -346,16 +346,16 @@ func (s *sSysUser) List(ctx context.Context, req *system.UserListReq) (total int
 }
 
 // GetUsersRoleDept 获取多个用户角色 部门信息
-func (s *sSysUser) GetUsersRoleDept(ctx context.Context, userList []*entity.SysUser) (users []*model.SysUserRoleDeptRes, err error) {
+func (s *sSysUser) GetUsersRoleDept(ctx context.Context, userList []*entity.SysUser) (users []*model.SysUserRoleDeptModel, err error) {
 	err = g.Try(ctx, func(ctx context.Context) {
 		allRoles, e := service.SysRole().GetRoleList(ctx)
 		liberr.ErrIsNil(ctx, e)
 		depts, e := service.SysDept().GetFromCache(ctx)
 		liberr.ErrIsNil(ctx, e)
-		users = make([]*model.SysUserRoleDeptRes, len(userList))
+		users = make([]*model.SysUserRoleDeptModel, len(userList))
 		for k, u := range userList {
 			var dept *entity.SysDept
-			users[k] = &model.SysUserRoleDeptRes{
+			users[k] = &model.SysUserRoleDeptModel{
 				SysUser: u,
 			}
 			for _, d := range depts {
@@ -367,7 +367,7 @@ func (s *sSysUser) GetUsersRoleDept(ctx context.Context, userList []*entity.SysU
 			roles, e := s.GetAdminRole(ctx, u.Id, allRoles)
 			liberr.ErrIsNil(ctx, e)
 			for _, r := range roles {
-				users[k].RoleInfo = append(users[k].RoleInfo, &model.SysUserRoleInfoRes{RoleId: r.Id, Name: r.Name})
+				users[k].RoleInfo = append(users[k].RoleInfo, &model.SysUserRoleInfoModel{RoleId: r.Id, Name: r.Name})
 			}
 		}
 	})
@@ -619,7 +619,7 @@ func (s *sSysUser) Delete(ctx context.Context, ids []int) (err error) {
 }
 
 // GetUsers 通过用户ids查询多个用户信息
-func (s *sSysUser) GetUsers(ctx context.Context, ids []int) (users []*model.SysUserSimpleRes, err error) {
+func (s *sSysUser) GetUsers(ctx context.Context, ids []int) (users []*model.SysUserSimpleModel, err error) {
 	if len(ids) == 0 {
 		return
 	}
@@ -631,7 +631,7 @@ func (s *sSysUser) GetUsers(ctx context.Context, ids []int) (users []*model.SysU
 	return
 }
 
-func (s *sSysUser) GetAgentUsers(ctx context.Context, id uint64) (users []*model.SysUserSimpleRes, err error) {
+func (s *sSysUser) GetAgentUsers(ctx context.Context, id uint64) (users []*model.SysUserSimpleModel, err error) {
 	err = g.Try(ctx, func(ctx context.Context) {
 
 		err = dao.SysUser.Ctx(ctx).Where("agent_id", id).Scan(&users)

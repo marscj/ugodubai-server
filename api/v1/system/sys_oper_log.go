@@ -17,11 +17,11 @@ type SysOperLogListReq struct {
 	commonApi.Author
 }
 
-// SysOperLogListRes 列表返回结果
-type SysOperLogListRes struct {
+// SysOperLogListModel 列表返回结果
+type SysOperLogListModel struct {
 	g.Meta `mime:"application/json"`
 	commonApi.ListRes
-	List []*model.SysOperLogListRes `json:"list"`
+	List []*model.SysOperLogListModel `json:"list"`
 }
 
 // SysOperLogGetReq 获取一条数据请求
@@ -34,7 +34,7 @@ type SysOperLogGetReq struct {
 // SysOperLogGetRes 获取一条数据结果
 type SysOperLogGetRes struct {
 	g.Meta `mime:"application/json"`
-	*model.SysOperLogInfoRes
+	*model.SysOperLogInfoModel
 }
 
 // SysOperLogDeleteReq 删除数据请求

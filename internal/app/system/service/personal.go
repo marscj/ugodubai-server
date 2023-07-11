@@ -10,7 +10,7 @@ import (
 type (
 	IPersonal interface {
 		GetPersonalInfo(ctx context.Context, req *system.PersonalInfoReq) (res *system.PersonalInfoRes, err error)
-		EditPersonal(ctx context.Context, req *system.PersonalEditReq) (user *model.LoginUserRes, err error)
+		EditPersonal(ctx context.Context, req *system.PersonalEditReq) (user *model.LoginUserModel, err error)
 		ResetPwdPersonal(ctx context.Context, req *system.PersonalResetPwdReq) (res *system.PersonalResetPwdRes, err error)
 	}
 )

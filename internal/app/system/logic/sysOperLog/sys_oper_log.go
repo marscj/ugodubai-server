@@ -47,7 +47,7 @@ func (s *sOperateLog) OperationLog(r *ghttp.Request) {
 		g.Log().Error(r.GetCtx(), err)
 		return
 	}
-	var menu *model.SysAuthRuleInfoRes
+	var menu *model.SysAuthRuleInfoModel
 	path := gstr.TrimLeft(url.Path, "/")
 	for _, m := range menuList {
 		if gstr.Equal(m.Name, path) {
@@ -111,8 +111,8 @@ func (s *sOperateLog) operationLogAdd(ctx context.Context, data *model.SysOperLo
 	}
 }
 
-func (s *sOperateLog) List(ctx context.Context, req *system.SysOperLogListReq) (listRes *system.SysOperLogListRes, err error) {
-	listRes = new(system.SysOperLogListRes)
+func (s *sOperateLog) List(ctx context.Context, req *system.SysOperLogListReq) (listRes *system.SysOperLogListModel, err error) {
+	listRes = new(system.SysOperLogListModel)
 	err = g.Try(ctx, func(ctx context.Context) {
 		m := dao.SysOperLog.Ctx(ctx)
 		if req.Title != "" {
@@ -140,12 +140,12 @@ func (s *sOperateLog) List(ctx context.Context, req *system.SysOperLogListReq) (
 		if req.OrderBy != "" {
 			order = req.OrderBy
 		}
-		var res []*model.SysOperLogInfoRes
-		err = m.Fields(system.SysOperLogListRes{}).Page(req.PageNum, req.PageSize).Order(order).Scan(&res)
+		var res []*model.SysOperLogInfoModel
+		err = m.Fields(system.SysOperLogListModel{}).Page(req.PageNum, req.PageSize).Order(order).Scan(&res)
 		liberr.ErrIsNil(ctx, err, "获取数据失败")
-		listRes.List = make([]*model.SysOperLogListRes, len(res))
+		listRes.List = make([]*model.SysOperLogListModel, len(res))
 		for k, v := range res {
-			listRes.List[k] = &model.SysOperLogListRes{
+			listRes.List[k] = &model.SysOperLogListModel{
 				OperId:         v.OperId,
 				Title:          v.Title,
 				RequestMethod:  v.RequestMethod,
@@ -163,7 +163,7 @@ func (s *sOperateLog) List(ctx context.Context, req *system.SysOperLogListReq) (
 	return
 }
 
-func (s *sOperateLog) GetByOperId(ctx context.Context, operId uint64) (res *model.SysOperLogInfoRes, err error) {
+func (s *sOperateLog) GetByOperId(ctx context.Context, operId uint64) (res *model.SysOperLogInfoModel, err error) {
 	err = g.Try(ctx, func(ctx context.Context) {
 		err = dao.SysOperLog.Ctx(ctx).WithAll().Where(dao.SysOperLog.Columns().OperId, operId).Scan(&res)
 		liberr.ErrIsNil(ctx, err, "获取信息失败")

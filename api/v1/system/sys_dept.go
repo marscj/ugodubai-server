@@ -61,5 +61,5 @@ type DeptTreeSelectReq struct {
 
 type DeptTreeSelectRes struct {
 	g.Meta `mime:"application/json"`
-	Deps   []*model.SysDeptTreeRes `json:"deps"`
+	Deps   []*model.SysDeptTreeModel `json:"deps"`
 }

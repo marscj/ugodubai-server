@@ -80,7 +80,7 @@ func (s *sMiddleware) Auth(r *ghttp.Request) {
 		g.Log().Error(ctx, err)
 		libResponse.FailJson(true, r, "请求数据失败")
 	}
-	var menu *model.SysAuthRuleInfoRes
+	var menu *model.SysAuthRuleInfoModel
 	for _, m := range menuList {
 		ms := gstr.SubStr(m.Name, 0, gstr.Pos(m.Name, "?"))
 		if m.Name == url || ms == url {

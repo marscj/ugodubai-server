@@ -3,7 +3,6 @@ package system
 import (
 	commonApi "ugodubai-server/api/v1/common"
 	"ugodubai-server/internal/app/system/model"
-	"ugodubai-server/internal/app/system/model/entity"
 
 	"github.com/gogf/gf/v2/frame/g"
 )
@@ -15,7 +14,7 @@ type AgentListReq struct {
 
 type AgentListRes struct {
 	g.Meta `mime:"application/json"`
-	Agents []*entity.SysAgent `json:"agent"`
+	Agents []*model.SysAgentModel `json:"agent"`
 	commonApi.ListRes
 }
 
@@ -27,6 +26,6 @@ type AgentGetReq struct {
 
 type AgentGetRes struct {
 	g.Meta `mime:"application/json"`
-	Agent  *entity.SysAgent          `json:"agent"`
-	User   []*model.SysUserSimpleRes `json:"users"`
+	Agent  *model.SysAgentModel        `json:"agent"`
+	User   []*model.SysUserSimpleModel `json:"users"`
 }

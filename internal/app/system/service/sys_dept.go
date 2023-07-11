@@ -15,7 +15,7 @@ type ISysDept interface {
 	Edit(ctx context.Context, req *system.DeptEditReq) (err error)
 	Delete(ctx context.Context, id uint64) (err error)
 	FindSonByParentId(deptList []*entity.SysDept, deptId uint64) []*entity.SysDept
-	GetListTree(pid uint64, list []*entity.SysDept) (deptTree []*model.SysDeptTreeRes)
+	GetListTree(pid uint64, list []*entity.SysDept) (deptTree []*model.SysDeptTreeModel)
 	GetByDeptId(ctx context.Context, deptId uint64) (dept *entity.SysDept, err error)
 }
 

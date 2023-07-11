@@ -11,7 +11,7 @@ import (
 // SysOperLogAdd 添加操作日志参数
 type SysOperLogAdd struct {
 	User         *ContextUser
-	Menu         *SysAuthRuleInfoRes
+	Menu         *SysAuthRuleInfoModel
 	Url          *url.URL
 	Params       g.Map
 	Method       string
@@ -19,8 +19,8 @@ type SysOperLogAdd struct {
 	OperatorType int
 }
 
-// SysOperLogInfoRes is the golang structure for table sys_oper_log.
-type SysOperLogInfoRes struct {
+// SysOperLogInfoModel is the golang structure for table sys_oper_log.
+type SysOperLogInfoModel struct {
 	gmeta.Meta     `orm:"table:sys_oper_log"`
 	OperId         uint64                   `orm:"oper_id,primary" json:"operId"`       // 日志编号
 	Title          string                   `orm:"title" json:"title"`                  // 系统模块
@@ -45,7 +45,7 @@ type LinkedSysOperLogSysDept struct {
 	DeptName   string `orm:"dept_name" json:"deptName"` // 部门名称
 }
 
-type SysOperLogListRes struct {
+type SysOperLogListModel struct {
 	OperId         uint64                   `json:"operId"`
 	Title          string                   `json:"title"`
 	RequestMethod  string                   `json:"requestMethod"`

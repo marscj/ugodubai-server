@@ -25,7 +25,7 @@ type loginController struct {
 
 func (c *loginController) Login(ctx context.Context, req *system.UserLoginReq) (res *system.UserLoginRes, err error) {
 	var (
-		user        *model.LoginUserRes
+		user        *model.LoginUserModel
 		token       string
 		permissions []string
 		menuList    []*model.UserMenus

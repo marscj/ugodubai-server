@@ -25,6 +25,7 @@ type UserListReq struct {
 	DeptId   string `p:"deptId"` //部门id
 	Mobile   string `p:"mobile"`
 	Status   string `p:"status"`
+	AgentId  string `p:"agentId"` //代理商id
 	KeyWords string `p:"keyWords"`
 	commonApi.PageReq
 	commonApi.Author
@@ -32,8 +33,8 @@ type UserListReq struct {
 
 type UserListRes struct {
 	g.Meta    `mime:"application/json"`
-	UserList  []*model.SysUserRoleDeptRes `json:"user"`
-	AgentList []*entity.SysAgent          `json:"agent"`
+	UserList  []*model.SysUserRoleDeptModel `json:"user"`
+	AgentList []*model.SysAgentModel        `json:"agent"`
 	commonApi.ListRes
 }
 
@@ -131,5 +132,5 @@ type UserGetByIdsReq struct {
 
 type UserGetByIdsRes struct {
 	g.Meta `mime:"application/json"`
-	List   []*model.SysUserSimpleRes `json:"list"`
+	List   []*model.SysUserSimpleModel `json:"list"`
 }

@@ -15,9 +15,9 @@ type (
 	ISysUser interface {
 		GetCasBinUserPrefix() string
 		NotCheckAuthAdminIds(ctx context.Context) *gset.Set
-		GetAdminUserByUsernamePassword(ctx context.Context, req *system.UserLoginReq) (user *model.LoginUserRes, err error)
-		GetUserByUsername(ctx context.Context, userName string) (user *model.LoginUserRes, err error)
-		GetUserById(ctx context.Context, id uint64) (user *model.LoginUserRes, err error)
+		GetAdminUserByUsernamePassword(ctx context.Context, req *system.UserLoginReq) (user *model.LoginUserModel, err error)
+		GetUserByUsername(ctx context.Context, userName string) (user *model.LoginUserModel, err error)
+		GetUserById(ctx context.Context, id uint64) (user *model.LoginUserModel, err error)
 		LoginLog(ctx context.Context, params *model.LoginLogParams)
 		UpdateLoginInfo(ctx context.Context, id uint64, ip string) (err error)
 		GetAdminRules(ctx context.Context, userId uint64) (menuList []*model.UserMenus, permissions []string, err error)
@@ -28,7 +28,7 @@ type (
 		GetMenusTree(menus []*model.UserMenus, pid uint) []*model.UserMenus
 		GetPermissions(ctx context.Context, roleIds []uint) (userButtons []string, err error)
 		List(ctx context.Context, req *system.UserListReq) (total interface{}, userList []*entity.SysUser, err error)
-		GetUsersRoleDept(ctx context.Context, userList []*entity.SysUser) (users []*model.SysUserRoleDeptRes, err error)
+		GetUsersRoleDept(ctx context.Context, userList []*entity.SysUser) (users []*model.SysUserRoleDeptModel, err error)
 		Add(ctx context.Context, req *system.UserAddReq) (err error)
 		Edit(ctx context.Context, req *system.UserEditReq) (err error)
 		AddUserPost(ctx context.Context, tx gdb.TX, postIds []int64, userId int64) (err error)
@@ -40,8 +40,8 @@ type (
 		ResetUserPwd(ctx context.Context, req *system.UserResetPwdReq) (err error)
 		ChangeUserStatus(ctx context.Context, req *system.UserStatusReq) (err error)
 		Delete(ctx context.Context, ids []int) (err error)
-		GetUsers(ctx context.Context, ids []int) (users []*model.SysUserSimpleRes, err error)
-		GetAgentUsers(ctx context.Context, id uint64) (users []*model.SysUserSimpleRes, err error)
+		GetUsers(ctx context.Context, ids []int) (users []*model.SysUserSimpleModel, err error)
+		GetAgentUsers(ctx context.Context, id uint64) (users []*model.SysUserSimpleModel, err error)
 	}
 )
 

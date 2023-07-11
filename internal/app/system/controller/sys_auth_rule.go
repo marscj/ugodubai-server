@@ -14,15 +14,15 @@ type menuController struct {
 }
 
 func (c *menuController) List(ctx context.Context, req *system.RuleListReq) (res *system.RuleListRes, err error) {
-	var list []*model.SysAuthRuleInfoRes
+	var list []*model.SysAuthRuleInfoModel
 	res = &system.RuleListRes{
-		Rules: make([]*model.SysAuthRuleTreeRes, 0),
+		Rules: make([]*model.SysAuthRuleTreeModel, 0),
 	}
 	list, err = service.SysAuthRule().GetMenuListSearch(ctx, req)
 	if req.Title != "" || req.Component != "" {
 		for _, menu := range list {
-			res.Rules = append(res.Rules, &model.SysAuthRuleTreeRes{
-				SysAuthRuleInfoRes: menu,
+			res.Rules = append(res.Rules, &model.SysAuthRuleTreeModel{
+				SysAuthRuleInfoModel: menu,
 			})
 		}
 	} else {

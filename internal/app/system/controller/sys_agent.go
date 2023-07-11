@@ -3,7 +3,7 @@ package controller
 import (
 	"context"
 	"ugodubai-server/api/v1/system"
-	"ugodubai-server/internal/app/system/model/entity"
+	"ugodubai-server/internal/app/system/model"
 	"ugodubai-server/internal/app/system/service"
 )
 
@@ -17,7 +17,7 @@ type agentController struct {
 func (c *agentController) List(ctx context.Context, req *system.AgentListReq) (res *system.AgentListRes, err error) {
 	var (
 		total     interface{}
-		agentList []*entity.SysAgent
+		agentList []*model.SysAgentModel
 	)
 
 	res = new(system.AgentListRes)

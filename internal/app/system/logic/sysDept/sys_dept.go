@@ -139,11 +139,11 @@ func (s *sSysDept) FindSonByParentId(deptList []*entity.SysDept, deptId uint64) 
 }
 
 // GetListTree 部门树形菜单
-func (s *sSysDept) GetListTree(pid uint64, list []*entity.SysDept) (deptTree []*model.SysDeptTreeRes) {
-	deptTree = make([]*model.SysDeptTreeRes, 0, len(list))
+func (s *sSysDept) GetListTree(pid uint64, list []*entity.SysDept) (deptTree []*model.SysDeptTreeModel) {
+	deptTree = make([]*model.SysDeptTreeModel, 0, len(list))
 	for _, v := range list {
 		if v.ParentId == pid {
-			t := &model.SysDeptTreeRes{
+			t := &model.SysDeptTreeModel{
 				SysDept: v,
 			}
 			child := s.GetListTree(v.DeptId, list)

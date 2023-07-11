@@ -30,7 +30,7 @@ func New() *sSysAuthRule {
 type sSysAuthRule struct {
 }
 
-func (s *sSysAuthRule) GetMenuListSearch(ctx context.Context, req *system.RuleListReq) (res []*model.SysAuthRuleInfoRes, err error) {
+func (s *sSysAuthRule) GetMenuListSearch(ctx context.Context, req *system.RuleListReq) (res []*model.SysAuthRuleInfoModel, err error) {
 	err = g.Try(ctx, func(ctx context.Context) {
 		m := dao.SysAuthRule.Ctx(ctx)
 		if req.Title != "" {
@@ -39,19 +39,19 @@ func (s *sSysAuthRule) GetMenuListSearch(ctx context.Context, req *system.RuleLi
 		if req.Component != "" {
 			m = m.Where("component like ?", "%"+req.Component+"%")
 		}
-		err = m.Fields(model.SysAuthRuleInfoRes{}).Order("weigh desc,id asc").Scan(&res)
+		err = m.Fields(model.SysAuthRuleInfoModel{}).Order("weigh desc,id asc").Scan(&res)
 		liberr.ErrIsNil(ctx, err, "获取菜单失败")
 	})
 	return
 }
 
 // GetIsMenuList 获取isMenu=0|1
-func (s *sSysAuthRule) GetIsMenuList(ctx context.Context) ([]*model.SysAuthRuleInfoRes, error) {
+func (s *sSysAuthRule) GetIsMenuList(ctx context.Context) ([]*model.SysAuthRuleInfoModel, error) {
 	list, err := s.GetMenuList(ctx)
 	if err != nil {
 		return nil, err
 	}
-	var gList = make([]*model.SysAuthRuleInfoRes, 0, len(list))
+	var gList = make([]*model.SysAuthRuleInfoModel, 0, len(list))
 	for _, v := range list {
 		if v.MenuType == 0 || v.MenuType == 1 {
 			gList = append(gList, v)
@@ -61,7 +61,7 @@ func (s *sSysAuthRule) GetIsMenuList(ctx context.Context) ([]*model.SysAuthRuleI
 }
 
 // GetMenuList 获取所有菜单
-func (s *sSysAuthRule) GetMenuList(ctx context.Context) (list []*model.SysAuthRuleInfoRes, err error) {
+func (s *sSysAuthRule) GetMenuList(ctx context.Context) (list []*model.SysAuthRuleInfoModel, err error) {
 	cache := commonService.Cache()
 	//从缓存获取
 	iList := cache.GetOrSetFuncLock(ctx, consts.CacheSysAuthMenu, s.getMenuListFromDb, 0, consts.CacheSysAuthTag)
@@ -75,10 +75,10 @@ func (s *sSysAuthRule) GetMenuList(ctx context.Context) (list []*model.SysAuthRu
 // 从数据库获取所有菜单
 func (s *sSysAuthRule) getMenuListFromDb(ctx context.Context) (value interface{}, err error) {
 	err = g.Try(ctx, func(ctx context.Context) {
-		var v []*model.SysAuthRuleInfoRes
+		var v []*model.SysAuthRuleInfoModel
 		//从数据库获取
 		err = dao.SysAuthRule.Ctx(ctx).
-			Fields(model.SysAuthRuleInfoRes{}).Order("weigh desc,id asc").Scan(&v)
+			Fields(model.SysAuthRuleInfoModel{}).Order("weigh desc,id asc").Scan(&v)
 		liberr.ErrIsNil(ctx, err, "获取菜单数据失败")
 		value = v
 	})
@@ -86,12 +86,12 @@ func (s *sSysAuthRule) getMenuListFromDb(ctx context.Context) (value interface{}
 }
 
 // GetIsButtonList 获取所有按钮isMenu=2 菜单列表
-func (s *sSysAuthRule) GetIsButtonList(ctx context.Context) ([]*model.SysAuthRuleInfoRes, error) {
+func (s *sSysAuthRule) GetIsButtonList(ctx context.Context) ([]*model.SysAuthRuleInfoModel, error) {
 	list, err := s.GetMenuList(ctx)
 	if err != nil {
 		return nil, err
 	}
-	var gList = make([]*model.SysAuthRuleInfoRes, 0, len(list))
+	var gList = make([]*model.SysAuthRuleInfoModel, 0, len(list))
 	for _, v := range list {
 		if v.MenuType == 2 {
 			gList = append(gList, v)
@@ -247,12 +247,12 @@ func (s *sSysAuthRule) UpdateRoleRule(ctx context.Context, ruleId uint, roleIds 
 	return
 }
 
-func (s *sSysAuthRule) GetMenuListTree(pid uint, list []*model.SysAuthRuleInfoRes) []*model.SysAuthRuleTreeRes {
-	tree := make([]*model.SysAuthRuleTreeRes, 0, len(list))
+func (s *sSysAuthRule) GetMenuListTree(pid uint, list []*model.SysAuthRuleInfoModel) []*model.SysAuthRuleTreeModel {
+	tree := make([]*model.SysAuthRuleTreeModel, 0, len(list))
 	for _, menu := range list {
 		if menu.Pid == pid {
-			t := &model.SysAuthRuleTreeRes{
-				SysAuthRuleInfoRes: menu,
+			t := &model.SysAuthRuleTreeModel{
+				SysAuthRuleInfoModel: menu,
 			}
 			child := s.GetMenuListTree(menu.Id, list)
 			if child != nil {
@@ -266,7 +266,7 @@ func (s *sSysAuthRule) GetMenuListTree(pid uint, list []*model.SysAuthRuleInfoRe
 
 // DeleteMenuByIds 删除菜单
 func (s *sSysAuthRule) DeleteMenuByIds(ctx context.Context, ids []int) (err error) {
-	var list []*model.SysAuthRuleInfoRes
+	var list []*model.SysAuthRuleInfoModel
 	list, err = s.GetMenuList(ctx)
 	if err != nil {
 		return
@@ -297,8 +297,8 @@ func (s *sSysAuthRule) DeleteMenuByIds(ctx context.Context, ids []int) (err erro
 	return
 }
 
-func (s *sSysAuthRule) FindSonByParentId(list []*model.SysAuthRuleInfoRes, pid uint) []*model.SysAuthRuleInfoRes {
-	children := make([]*model.SysAuthRuleInfoRes, 0, len(list))
+func (s *sSysAuthRule) FindSonByParentId(list []*model.SysAuthRuleInfoModel, pid uint) []*model.SysAuthRuleInfoModel {
+	children := make([]*model.SysAuthRuleInfoModel, 0, len(list))
 	for _, v := range list {
 		if v.Pid == pid {
 			children = append(children, v)
