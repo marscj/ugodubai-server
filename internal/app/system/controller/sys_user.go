@@ -34,9 +34,8 @@ func (c *userController) GetUserMenus(ctx context.Context, req *system.UserMenus
 // List 用户列表
 func (c *userController) List(ctx context.Context, req *system.UserListReq) (res *system.UserListRes, err error) {
 	var (
-		total     interface{}
-		userList  []*entity.SysUser
-		agentList []*model.SysAgentListModel
+		total    interface{}
+		userList []*entity.SysUser
 	)
 
 	res = new(system.UserListRes)
@@ -50,8 +49,6 @@ func (c *userController) List(ctx context.Context, req *system.UserListReq) (res
 	if err != nil {
 		return
 	}
-
-	res.AgentList, err = service.SysUser().GetAgentUsers(ctx, agentList)
 
 	return
 }

@@ -374,6 +374,19 @@ func (s *sSysUser) GetUsersRoleDept(ctx context.Context, userList []*entity.SysU
 	return
 }
 
+// 获取Agent关联的User
+func (s *sSysUser) GetUsersByAgenId(ctx context.Context, id uint64) (users []*model.SysUserSimpleModel, err error) {
+	err = g.Try(ctx, func(ctx context.Context) {
+
+		err = dao.SysUser.Ctx(ctx).Where("agent_id", id).Scan(&users)
+
+		if err != nil {
+			liberr.ErrIsNil(ctx, err, "代理商关联用户获取失败")
+		}
+	})
+	return
+}
+
 func (s *sSysUser) getSearchDeptIds(ctx context.Context, deptId uint64) (deptIds []uint64, err error) {
 	err = g.Try(ctx, func(ctx context.Context) {
 		deptAll, e := service.SysDept().GetFromCache(ctx)
@@ -627,18 +640,6 @@ func (s *sSysUser) GetUsers(ctx context.Context, ids []int) (users []*model.SysU
 	err = g.Try(ctx, func(ctx context.Context) {
 		err = dao.SysUser.Ctx(ctx).Where(dao.SysUser.Columns().Id+" in(?)", idsSet).
 			Order(dao.SysUser.Columns().Id + " ASC").Scan(&users)
-	})
-	return
-}
-
-func (s *sSysUser) GetAgentUsers(ctx context.Context, id uint64) (users []*model.SysUserSimpleModel, err error) {
-	err = g.Try(ctx, func(ctx context.Context) {
-
-		err = dao.SysUser.Ctx(ctx).Where("agent_id", id).Scan(&users)
-
-		if err != nil {
-			liberr.ErrIsNil(ctx, err, "代理商关联用户获取失败")
-		}
 	})
 	return
 }

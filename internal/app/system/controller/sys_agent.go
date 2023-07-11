@@ -39,7 +39,7 @@ func (c *agentController) Get(ctx context.Context, req *system.AgentGetReq) (res
 	}
 
 	if req.User {
-		res.User, err = service.SysUser().GetAgentUsers(ctx, req.Id)
+		res.User, err = service.SysUser().GetUsersByAgenId(ctx, req.Id)
 	}
 	return
 }
