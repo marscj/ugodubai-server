@@ -17,7 +17,7 @@ type agentController struct {
 func (c *agentController) List(ctx context.Context, req *system.AgentListReq) (res *system.AgentListRes, err error) {
 	var (
 		total     interface{}
-		agentList []*model.SysAgentModel
+		agentList []*model.SysAgent
 	)
 
 	res = new(system.AgentListRes)

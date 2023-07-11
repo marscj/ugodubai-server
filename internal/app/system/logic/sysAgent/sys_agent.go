@@ -24,7 +24,7 @@ type sSysAgent struct {
 }
 
 // List 代理商列表
-func (s *sSysAgent) List(ctx context.Context, req *system.AgentListReq) (total interface{}, agentList []*model.SysAgentModel, err error) {
+func (s *sSysAgent) List(ctx context.Context, req *system.AgentListReq) (total interface{}, agentList []*model.SysAgent, err error) {
 
 	err = g.Try(ctx, func(ctx context.Context) {
 		m := dao.SysAgent.Ctx(ctx)
@@ -45,7 +45,7 @@ func (s *sSysAgent) List(ctx context.Context, req *system.AgentListReq) (total i
 }
 
 //  通过Id获取代理商信息
-func (s *sSysAgent) Get(ctx context.Context, id uint64) (agent *model.SysAgentModel, err error) {
+func (s *sSysAgent) Get(ctx context.Context, id uint64) (agent *model.SysAgent, err error) {
 
 	err = g.Try(ctx, func(ctx context.Context) {
 		err = dao.SysAgent.Ctx(ctx).WherePri(id).Scan(&agent)

@@ -8,8 +8,8 @@ import (
 )
 
 type ISysAgent interface {
-	List(ctx context.Context, req *system.AgentListReq) (total interface{}, agentList []*model.SysAgentModel, err error)
-	Get(ctx context.Context, id uint64) (agent *model.SysAgentModel, err error)
+	List(ctx context.Context, req *system.AgentListReq) (total interface{}, agentList []*model.SysAgent, err error)
+	Get(ctx context.Context, id uint64) (agent *model.SysAgent, err error)
 }
 
 var localSysAgent ISysAgent

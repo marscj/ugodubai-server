@@ -34,7 +34,7 @@ type UserListReq struct {
 type UserListRes struct {
 	g.Meta    `mime:"application/json"`
 	UserList  []*model.SysUserRoleDeptModel `json:"user"`
-	AgentList []*model.SysAgentModel        `json:"agent"`
+	AgentList []*model.SysAgent             `json:"agent"`
 	commonApi.ListRes
 }
 
