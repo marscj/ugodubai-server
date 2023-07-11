@@ -13,7 +13,7 @@ import (
 
 type ISysDictData interface {
 	GetDictWithDataByType(ctx context.Context, req *system.GetDictReq) (dict *system.GetDictRes, err error)
-	List(ctx context.Context, req *system.DictDataSearchReq) (res *system.DictDataSearchRes, err error)
+	List(ctx context.Context, req *system.DictDataListReq) (res *system.DictDataListRes, err error)
 	Add(ctx context.Context, req *system.DictDataAddReq, userId uint64) (err error)
 	Get(ctx context.Context, dictCode uint) (res *system.DictDataGetRes, err error)
 	Edit(ctx context.Context, req *system.DictDataEditReq, userId uint64) (err error)

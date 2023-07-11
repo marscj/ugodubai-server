@@ -19,7 +19,7 @@ func (c *dictDataController) GetDictData(ctx context.Context, req *system.GetDic
 }
 
 // List 获取字典数据列表
-func (c *dictDataController) List(ctx context.Context, req *system.DictDataSearchReq) (res *system.DictDataSearchRes, err error) {
+func (c *dictDataController) List(ctx context.Context, req *system.DictDataListReq) (res *system.DictDataListRes, err error) {
 	res, err = commonService.SysDictData().List(ctx, req)
 	return
 }

@@ -71,8 +71,8 @@ func (s *sSysDictData) GetDictWithDataByType(ctx context.Context, req *system.Ge
 }
 
 // List 获取字典数据
-func (s *sSysDictData) List(ctx context.Context, req *system.DictDataSearchReq) (res *system.DictDataSearchRes, err error) {
-	res = new(system.DictDataSearchRes)
+func (s *sSysDictData) List(ctx context.Context, req *system.DictDataListReq) (res *system.DictDataListRes, err error) {
+	res = new(system.DictDataListRes)
 	err = g.Try(ctx, func(ctx context.Context) {
 		m := dao.SysDictData.Ctx(ctx)
 		if req != nil {

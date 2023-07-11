@@ -23,8 +23,8 @@ type GetDictRes struct {
 	Values []*commonModel.DictDataRes `json:"values"`
 }
 
-// DictDataSearchReq 分页请求参数
-type DictDataSearchReq struct {
+// DictDataListReq 分页请求参数
+type DictDataListReq struct {
 	g.Meta    `path:"/dict/data/list" tags:"字典管理" method:"get" summary:"字典数据列表"`
 	DictType  string `p:"dictType"`  //字典类型
 	DictLabel string `p:"dictLabel"` //字典标签
@@ -32,8 +32,8 @@ type DictDataSearchReq struct {
 	commonApi.PageReq
 }
 
-// DictDataSearchRes 字典数据结果
-type DictDataSearchRes struct {
+// DictDataListRes 字典数据结果
+type DictDataListRes struct {
 	g.Meta `mime:"application/json"`
 	List   []*commonEntity.SysDictData `json:"list"`
 	commonApi.ListRes
