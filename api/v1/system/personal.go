@@ -41,8 +41,8 @@ type PersonalEditReq struct {
 
 type PersonalEditRes struct {
 	commonApi.EmptyRes
-	UserInfo *model.LoginUserModel `json:"userInfo"`
-	Token    string                `json:"token"`
+	UserInfo *model.LoginUser `json:"userInfo"`
+	Token    string           `json:"token"`
 }
 
 type PersonalResetPwdReq struct {

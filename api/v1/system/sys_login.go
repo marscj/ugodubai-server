@@ -17,10 +17,10 @@ type UserLoginReq struct {
 
 type UserLoginRes struct {
 	g.Meta      `mime:"application/json"`
-	UserInfo    *model.LoginUserModel `json:"userInfo"`
-	Token       string                `json:"token"`
-	MenuList    []*model.UserMenus    `json:"menuList"`
-	Permissions []string              `json:"permissions"`
+	UserInfo    *model.LoginUser   `json:"userInfo"`
+	Token       string             `json:"token"`
+	MenuList    []*model.UserMenus `json:"menuList"`
+	Permissions []string           `json:"permissions"`
 }
 
 type UserLoginOutReq struct {

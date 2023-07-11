@@ -51,7 +51,7 @@ func (s *sSysUser) NotCheckAuthAdminIds(ctx context.Context) *gset.Set {
 	return gset.New()
 }
 
-func (s *sSysUser) GetAdminUserByUsernamePassword(ctx context.Context, req *system.UserLoginReq) (user *model.LoginUserModel, err error) {
+func (s *sSysUser) GetAdminUserByUsernamePassword(ctx context.Context, req *system.UserLoginReq) (user *model.LoginUser, err error) {
 	err = g.Try(ctx, func(ctx context.Context) {
 		user, err = s.GetUserByUsername(ctx, req.Username)
 		liberr.ErrIsNil(ctx, err)
@@ -69,9 +69,9 @@ func (s *sSysUser) GetAdminUserByUsernamePassword(ctx context.Context, req *syst
 }
 
 // GetUserByUsername 通过用户名获取用户信息
-func (s *sSysUser) GetUserByUsername(ctx context.Context, userName string) (user *model.LoginUserModel, err error) {
+func (s *sSysUser) GetUserByUsername(ctx context.Context, userName string) (user *model.LoginUser, err error) {
 	err = g.Try(ctx, func(ctx context.Context) {
-		user = &model.LoginUserModel{}
+		user = &model.LoginUser{}
 		err = dao.SysUser.Ctx(ctx).Fields(user).Where(dao.SysUser.Columns().UserName, userName).Scan(user)
 		liberr.ErrIsNil(ctx, err, "账号密码错误")
 	})
@@ -79,9 +79,9 @@ func (s *sSysUser) GetUserByUsername(ctx context.Context, userName string) (user
 }
 
 // GetUserById 通过用户名获取用户信息
-func (s *sSysUser) GetUserById(ctx context.Context, id uint64) (user *model.LoginUserModel, err error) {
+func (s *sSysUser) GetUserById(ctx context.Context, id uint64) (user *model.LoginUser, err error) {
 	err = g.Try(ctx, func(ctx context.Context) {
-		user = &model.LoginUserModel{}
+		user = &model.LoginUser{}
 		err = dao.SysUser.Ctx(ctx).Fields(user).WherePri(id).Scan(user)
 		liberr.ErrIsNil(ctx, err, "获取用户信息失败")
 	})
@@ -309,7 +309,7 @@ func (s *sSysUser) GetPermissions(ctx context.Context, roleIds []uint) (userButt
 }
 
 // List 用户列表
-func (s *sSysUser) List(ctx context.Context, req *system.UserListReq) (total interface{}, userList []*entity.SysUser, err error) {
+func (s *sSysUser) List(ctx context.Context, req *system.UserListReq) (total interface{}, userList []*model.SysUser, err error) {
 	err = g.Try(ctx, func(ctx context.Context) {
 		m := dao.SysUser.Ctx(ctx)
 		if req.KeyWords != "" {
@@ -339,43 +339,14 @@ func (s *sSysUser) List(ctx context.Context, req *system.UserListReq) (total int
 		total, err = m.Count()
 		liberr.ErrIsNil(ctx, err, "获取用户数据失败")
 		err = m.FieldsEx(dao.SysUser.Columns().UserPassword, dao.SysUser.Columns().UserSalt).
-			Page(req.PageNum, req.PageSize).Order("id asc").Scan(&userList)
+			Page(req.PageNum, req.PageSize).Order("id asc").WithAll().Scan(&userList)
 		liberr.ErrIsNil(ctx, err, "获取用户列表失败")
 	})
 	return
 }
 
-// GetUsersRoleDept 获取多个用户角色 部门信息
-func (s *sSysUser) GetUsersRoleDept(ctx context.Context, userList []*entity.SysUser) (users []*model.SysUserRoleDeptModel, err error) {
-	err = g.Try(ctx, func(ctx context.Context) {
-		allRoles, e := service.SysRole().GetRoleList(ctx)
-		liberr.ErrIsNil(ctx, e)
-		depts, e := service.SysDept().GetFromCache(ctx)
-		liberr.ErrIsNil(ctx, e)
-		users = make([]*model.SysUserRoleDeptModel, len(userList))
-		for k, u := range userList {
-			var dept *entity.SysDept
-			users[k] = &model.SysUserRoleDeptModel{
-				SysUser: u,
-			}
-			for _, d := range depts {
-				if u.DeptId == uint64(d.DeptId) {
-					dept = d
-				}
-			}
-			users[k].Dept = dept
-			roles, e := s.GetAdminRole(ctx, u.Id, allRoles)
-			liberr.ErrIsNil(ctx, e)
-			for _, r := range roles {
-				users[k].RoleInfo = append(users[k].RoleInfo, &model.SysUserRoleInfoModel{RoleId: r.Id, Name: r.Name})
-			}
-		}
-	})
-	return
-}
-
 // 获取Agent关联的User
-func (s *sSysUser) GetUsersByAgenId(ctx context.Context, id uint64) (users []*model.SysUserSimpleModel, err error) {
+func (s *sSysUser) GetUsersByAgenId(ctx context.Context, id uint64) (users []*model.SysUserSimple, err error) {
 	err = g.Try(ctx, func(ctx context.Context) {
 
 		err = dao.SysUser.Ctx(ctx).Where("agent_id", id).Scan(&users)
@@ -632,7 +603,7 @@ func (s *sSysUser) Delete(ctx context.Context, ids []int) (err error) {
 }
 
 // GetUsers 通过用户ids查询多个用户信息
-func (s *sSysUser) GetUsers(ctx context.Context, ids []int) (users []*model.SysUserSimpleModel, err error) {
+func (s *sSysUser) GetUsers(ctx context.Context, ids []int) (users []*model.SysUserSimple, err error) {
 	if len(ids) == 0 {
 		return
 	}

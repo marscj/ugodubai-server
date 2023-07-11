@@ -32,26 +32,9 @@ type UserListReq struct {
 }
 
 type UserListRes struct {
-	g.Meta    `mime:"application/json"`
-	UserList  []*model.SysUserRoleDeptModel `json:"user"`
-	AgentList []*model.SysAgent             `json:"agent"`
-	commonApi.ListRes
-}
-
-type UserListWithReq struct {
-	g.Meta   `path:"/user/listwith" tags:"用户管理" method:"get" summary:"用户列表"`
-	DeptId   string `p:"deptId"` //部门id
-	Mobile   string `p:"mobile"`
-	Status   string `p:"status"`
-	AgentId  string `p:"agentId"` //代理商id
-	KeyWords string `p:"keyWords"`
-	commonApi.PageReq
-	commonApi.Author
-}
-
-type UserListWithRes struct {
 	g.Meta   `mime:"application/json"`
-	UserList []*model.SysUserWith `json:"user"`
+	UserList []*model.SysUser `json:"user"`
+	commonApi.ListRes
 }
 
 type UserGetParamsReq struct {
@@ -148,5 +131,5 @@ type UserGetByIdsReq struct {
 
 type UserGetByIdsRes struct {
 	g.Meta `mime:"application/json"`
-	List   []*model.SysUserSimpleModel `json:"list"`
+	List   []*model.SysUserSimple `json:"list"`
 }

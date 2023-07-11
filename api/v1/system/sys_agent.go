@@ -26,6 +26,6 @@ type AgentGetReq struct {
 
 type AgentGetRes struct {
 	g.Meta `mime:"application/json"`
-	Agent  *model.SysAgent             `json:"agent"`
-	User   []*model.SysUserSimpleModel `json:"users"`
+	Agent  *model.SysAgent        `json:"agent"`
+	User   []*model.SysUserSimple `json:"users"`
 }

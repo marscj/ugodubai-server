@@ -3,9 +3,7 @@ package controller
 import (
 	"context"
 	"ugodubai-server/api/v1/system"
-	"ugodubai-server/internal/app/system/dao"
 	"ugodubai-server/internal/app/system/model"
-	"ugodubai-server/internal/app/system/model/entity"
 	"ugodubai-server/internal/app/system/service"
 )
 
@@ -32,33 +30,10 @@ func (c *userController) GetUserMenus(ctx context.Context, req *system.UserMenus
 	return
 }
 
-func (c *userController) ListWith(ctx context.Context, req *system.UserListWithReq) (res *system.UserListWithRes, err error) {
-	res = new(system.UserListWithRes)
-
-	err = dao.SysUser.Ctx(ctx).WithAll().Scan(&res.UserList)
-
-	return
-}
-
 // List 用户列表
 func (c *userController) List(ctx context.Context, req *system.UserListReq) (res *system.UserListRes, err error) {
-	var (
-		total    interface{}
-		userList []*entity.SysUser
-	)
-
 	res = new(system.UserListRes)
-	total, userList, err = service.SysUser().List(ctx, req)
-	if err != nil || total == 0 {
-		return
-	}
-
-	res.Total = total
-	res.UserList, err = service.SysUser().GetUsersRoleDept(ctx, userList)
-	if err != nil {
-		return
-	}
-
+	res.Total, res.UserList, err = service.SysUser().List(ctx, req)
 	return
 }
 

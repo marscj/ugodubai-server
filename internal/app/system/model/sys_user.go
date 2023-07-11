@@ -6,8 +6,8 @@ import (
 	"github.com/gogf/gf/v2/util/gmeta"
 )
 
-// LoginUserModel 登录返回
-type LoginUserModel struct {
+// LoginUser 登录返回
+type LoginUser struct {
 	Id           uint64 `orm:"id,primary"       json:"id"`           //
 	UserName     string `orm:"user_name,unique" json:"userName"`     // 用户名
 	UserNickname string `orm:"user_nickname"    json:"userNickname"` // 用户昵称
@@ -19,42 +19,19 @@ type LoginUserModel struct {
 	DeptId       uint64 `orm:"dept_id"       json:"deptId"`          //部门id
 }
 
-// SysUserRoleDeptModel 带有部门、角色、岗位信息的用户数据
-type SysUserRoleDeptModel struct {
+type SysUser struct {
+	gmeta.Meta `orm:"table:sys_user"`
 	*entity.SysUser
-	Dept     *entity.SysDept         `json:"dept"`
-	RoleInfo []*SysUserRoleInfoModel `json:"roleInfo"`
-	Post     []*SysUserPostInfoModel `json:"post"`
-	Agent    []*SysAgentInfoModel    `json:"agent"`
+	Agent *SysAgent  `orm:"with:id=agent_id" json:"agent"`
+	Dept  *SysDept   `orm:"with:dept_id=dept_id" json:"dept"`
+	Role  []*SysRole `orm:"with:id=id" json:"role"`
 }
 
-type SysUserRoleInfoModel struct {
-	RoleId uint   `json:"roleId"`
-	Name   string `json:"name"`
-}
-
-type SysUserPostInfoModel struct {
-	PostId   int64  `json:"postId"`
-	PostName string `json:"postName"`
-}
-
-type SysAgentInfoModel struct {
-	Name string `json:"name"`
-}
-
-type SysUserSimpleModel struct {
+type SysUserSimple struct {
 	gmeta.Meta   `orm:"table:sys_user"`
 	Id           uint64 `orm:"id"       json:"id"`                   //
 	Avatar       string `orm:"avatar" json:"avatar"`                 // 头像
 	Sex          int    `orm:"sex" json:"sex"`                       // 性别
 	UserName     string `orm:"user_name" json:"userName"`            // 用户名
 	UserNickname string `orm:"user_nickname"    json:"userNickname"` // 用户昵称
-}
-
-type SysUserWith struct {
-	gmeta.Meta `orm:"table:sys_user"`
-	*entity.SysUser
-	Agent *SysAgent  `orm:"with:id=agent_id"`
-	Dept  *SysDept   `orm:"with:dept_id=dept_id"`
-	Role  []*SysRole `orm:"with:id=id"`
 }

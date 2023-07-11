@@ -5,5 +5,5 @@ type Context struct {
 }
 
 type ContextUser struct {
-	*LoginUserModel
+	*LoginUser
 }
