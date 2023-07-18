@@ -19,8 +19,8 @@ type GetDictReq struct {
 // GetDictRes 完整的一个字典信息
 type GetDictRes struct {
 	g.Meta `mime:"application/json"`
-	Info   *commonModel.DictTypeRes   `json:"info"`
-	Values []*commonModel.DictDataRes `json:"values"`
+	Info   *commonModel.DictType   `json:"info"`
+	Values []*commonModel.DictData `json:"values"`
 }
 
 // DictDataListReq 分页请求参数

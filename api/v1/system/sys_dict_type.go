@@ -18,7 +18,7 @@ type DictTypeListReq struct {
 
 type DictTypeListRes struct {
 	g.Meta       `mime:"application/json"`
-	DictTypeList []*commonModel.SysDictTypeInfoRes `json:"dictTypeList"`
+	DictTypeList []*commonModel.SysDictTypeInfo `json:"dictTypeList"`
 	commonApi.ListRes
 }
 

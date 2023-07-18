@@ -39,9 +39,9 @@ func (s *sSysDictData) GetDictWithDataByType(ctx context.Context, req *system.Ge
 			dict = &system.GetDictRes{}
 			//获取类型数据
 			err = dao.SysDictType.Ctx(ctx).Where(dao.SysDictType.Columns().DictType, req.DictType).
-				Where(dao.SysDictType.Columns().Status, 1).Fields(model.DictTypeRes{}).Scan(&dict.Info)
+				Where(dao.SysDictType.Columns().Status, 1).Fields(model.DictType{}).Scan(&dict.Info)
 			liberr.ErrIsNil(ctx, err, "获取字典类型失败")
-			err = dao.SysDictData.Ctx(ctx).Fields(model.DictDataRes{}).
+			err = dao.SysDictData.Ctx(ctx).Fields(model.DictData{}).
 				Where(dao.SysDictData.Columns().DictType, req.DictType).
 				Order(dao.SysDictData.Columns().DictSort + " asc," +
 					dao.SysDictData.Columns().DictCode + " asc").

@@ -53,7 +53,7 @@ func (s *sSysDictType) List(ctx context.Context, req *system.DictTypeListReq) (r
 		if req.PageSize == 0 {
 			req.PageSize = systemConsts.PageSize
 		}
-		err = m.Fields(model.SysDictTypeInfoRes{}).Page(req.PageNum, req.PageSize).
+		err = m.Fields(model.SysDictTypeInfo{}).Page(req.PageNum, req.PageSize).
 			Order(dao.SysDictType.Columns().DictId + " asc").Scan(&res.DictTypeList)
 		liberr.ErrIsNil(ctx, err, "获取字典类型失败")
 	})

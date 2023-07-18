@@ -1,12 +1,12 @@
 package model
 
-type DictTypeRes struct {
+type DictType struct {
 	DictName string `json:"name"`
 	Remark   string `json:"remark"`
 }
 
 // DictDataRes 字典数据
-type DictDataRes struct {
+type DictData struct {
 	DictValue string `json:"key"`
 	DictLabel string `json:"value"`
 	IsDefault int    `json:"isDefault"`

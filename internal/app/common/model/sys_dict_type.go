@@ -2,7 +2,7 @@ package model
 
 import "github.com/gogf/gf/v2/os/gtime"
 
-type SysDictTypeInfoRes struct {
+type SysDictTypeInfo struct {
 	DictId    uint64      `orm:"dict_id,primary"  json:"dictId"`    // 字典主键
 	DictName  string      `orm:"dict_name"        json:"dictName"`  // 字典名称
 	DictType  string      `orm:"dict_type,unique" json:"dictType"`  // 字典类型
