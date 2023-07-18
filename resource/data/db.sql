@@ -39,14 +39,14 @@ INSERT INTO `casbin_rule` VALUES ('p', '1', '28', 'All', '', '', '');
 INSERT INTO `casbin_rule` VALUES ('p', '1', '29', 'All', '', '', '');
 INSERT INTO `casbin_rule` VALUES ('p', '1', '30', 'All', '', '', '');
 INSERT INTO `casbin_rule` VALUES ('p', '1', '1', 'All', '', '', '');
-INSERT INTO `casbin_rule` VALUES ('p', '1', '2', 'All', '', '', '');
+INSERT INTO `casbin_rule` VALUES ('p', '3', '2', 'All', '', '', '');
 INSERT INTO `casbin_rule` VALUES ('p', '1', '3', 'All', '', '', '');
 INSERT INTO `casbin_rule` VALUES ('p', '1', '4', 'All', '', '', '');
 INSERT INTO `casbin_rule` VALUES ('p', '1', '11', 'All', '', '', '');
 INSERT INTO `casbin_rule` VALUES ('p', '1', '10', 'All', '', '', '');
-INSERT INTO `casbin_rule` VALUES ('p', '1', '12', 'All', '', '', '');
-INSERT INTO `casbin_rule` VALUES ('p', '1', '13', 'All', '', '', '');
-INSERT INTO `casbin_rule` VALUES ('p', '1', '14', 'All', '', '', '');
+INSERT INTO `casbin_rule` VALUES ('p', '3', '12', 'All', '', '', '');
+INSERT INTO `casbin_rule` VALUES ('p', '3', '13', 'All', '', '', '');
+INSERT INTO `casbin_rule` VALUES ('p', '3', '14', 'All', '', '', '');
 INSERT INTO `casbin_rule` VALUES ('p', '1', '15', 'All', '', '', '');
 INSERT INTO `casbin_rule` VALUES ('p', '1', '19', 'All', '', '', '');
 INSERT INTO `casbin_rule` VALUES ('p', '1', '20', 'All', '', '', '');
@@ -102,7 +102,7 @@ CREATE TABLE `sys_auth_rule`  (
 -- Records of sys_auth_rule
 -- ----------------------------
 INSERT INTO `sys_auth_rule` VALUES (1, 0, 'api/v1/system/auth', '权限管理', 'ele-Stamp', '', '', 0, 30, 0, '/system/auth', 'layout/routerView/parent', 0, '', 0, 0, 1, '0', 0, '', '2022-03-24 15:03:37', '2022-04-14 16:29:19');
-INSERT INTO `sys_auth_rule` VALUES (2, 1, 'api/v1/system/auth/menuList', '菜单管理', 'ele-Calendar', '', '', 1, 0, 0, '/system/auth/menuList', 'system/menu/index', 0, '', 0, 0, 1, '', 0, '', '2022-03-24 17:24:13', '2022-03-29 10:54:49');
+INSERT INTO `sys_auth_rule` VALUES (2, 1, 'api/v1/system/menu/list', '菜单管理', 'ele-Calendar', '', '', 1, 0, 0, '/system/auth/menuList', 'system/menu/index', 0, '', 0, 0, 1, '', 0, '', '2022-03-24 17:24:13', '2022-03-29 10:54:49');
 INSERT INTO `sys_auth_rule` VALUES (3, 2, 'api/v1/system/menu/add', '添加菜单', '', '', '', 2, 0, 0, '', '', 0, '', 0, 0, 1, '', 0, '', '2022-03-29 16:48:43', '2022-03-29 17:05:19');
 INSERT INTO `sys_auth_rule` VALUES (4, 2, 'api/v1/system/menu/update', '修改菜单', '', '', '', 2, 0, 0, '', '', 0, '', 0, 0, 1, '', 0, '', '2022-03-29 17:04:25', '2022-03-29 18:11:36');
 INSERT INTO `sys_auth_rule` VALUES (10, 1, 'api/v1/system/role/list', '角色管理', 'iconfont icon-juxingkaobei', '', '', 1, 0, 0, '/system/auth/roleList', 'system/role/index', 0, '', 0, 0, 1, '', 0, '', '2022-03-29 18:15:03', '2022-03-30 10:25:34');
