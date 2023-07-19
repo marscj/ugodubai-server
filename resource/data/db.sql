@@ -205,7 +205,6 @@ CREATE TABLE `sys_dict_data`  (
   `create_by` bigint(64) UNSIGNED NULL DEFAULT 0 COMMENT '创建者',
   `update_by` bigint(64) UNSIGNED NULL DEFAULT 0 COMMENT '更新者',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
-  `lanuage` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'zh_CN' COMMENT '语言',
   `created_at` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `updated_at` datetime NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`dict_code`) USING BTREE
@@ -214,8 +213,8 @@ CREATE TABLE `sys_dict_data`  (
 -- ----------------------------
 -- Records of sys_dict_data
 -- ----------------------------
-INSERT INTO `sys_dict_data` VALUES (1, 0, '男', '1', 'sys_user_sex', '', '', 0, 1, 2, 2, '备注信息', 'zh_CN', NULL, NULL);
-INSERT INTO `sys_dict_data` VALUES (2, 0, '女', '2', 'sys_user_sex', '', '', 0, 1, 2, 2, '备注信息', 'zh_CN', NULL, NULL);
+INSERT INTO `sys_dict_data` VALUES (1, 0, '男', '1', 'sys_user_sex', '', '', 0, 1, 2, 2, '备注信息', NULL, NULL);
+INSERT INTO `sys_dict_data` VALUES (2, 0, '女', '2', 'sys_user_sex', '', '', 0, 1, 2, 2, '备注信息', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_dict_type
