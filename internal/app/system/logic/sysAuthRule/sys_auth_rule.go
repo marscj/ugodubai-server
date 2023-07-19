@@ -39,7 +39,7 @@ func (s *sSysAuthRule) GetMenuListSearch(ctx context.Context, req *system.RuleLi
 		if req.Component != "" {
 			m = m.Where("component like ?", "%"+req.Component+"%")
 		}
-		err = m.Fields(model.SysAuthRuleInfo{}).Order("weigh desc,id asc").Scan(&res)
+		err = m.Fields(model.SysAuthRuleInfo{}).Order("pid asc,id asc").Scan(&res)
 		liberr.ErrIsNil(ctx, err, "获取菜单失败")
 	})
 	return

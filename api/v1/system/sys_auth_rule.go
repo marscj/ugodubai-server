@@ -17,7 +17,8 @@ type RuleListReq struct {
 
 type RuleListRes struct {
 	g.Meta `mime:"application/json"`
-	Rules  []*model.SysAuthRuleTree `json:"rules"`
+	// Rules  []*model.SysAuthRuleTree `json:"rules"`
+	Rules []*model.SysAuthRuleInfo `json:"menu"`
 }
 
 type RuleAddReq struct {

@@ -3,7 +3,6 @@ package controller
 import (
 	"context"
 	"ugodubai-server/api/v1/system"
-	"ugodubai-server/internal/app/system/model"
 	"ugodubai-server/internal/app/system/service"
 )
 
@@ -13,21 +12,27 @@ type menuController struct {
 	BaseController
 }
 
+// func (c *menuController) List(ctx context.Context, req *system.RuleListReq) (res *system.RuleListRes, err error) {
+// 	var list []*model.SysAuthRuleInfo
+// 	res = &system.RuleListRes{
+// 		Rules: make([]*model.SysAuthRuleTree, 0),
+// 	}
+// 	list, err = service.SysAuthRule().GetMenuListSearch(ctx, req)
+// 	if req.Title != "" || req.Component != "" {
+// 		for _, menu := range list {
+// 			res.Rules = append(res.Rules, &model.SysAuthRuleTree{
+// 				SysAuthRuleInfo: menu,
+// 			})
+// 		}
+// 	} else {
+// 		res.Rules = service.SysAuthRule().GetMenuListTree(0, list)
+// 	}
+// 	return
+// }
+
 func (c *menuController) List(ctx context.Context, req *system.RuleListReq) (res *system.RuleListRes, err error) {
-	var list []*model.SysAuthRuleInfo
-	res = &system.RuleListRes{
-		Rules: make([]*model.SysAuthRuleTree, 0),
-	}
-	list, err = service.SysAuthRule().GetMenuListSearch(ctx, req)
-	if req.Title != "" || req.Component != "" {
-		for _, menu := range list {
-			res.Rules = append(res.Rules, &model.SysAuthRuleTree{
-				SysAuthRuleInfo: menu,
-			})
-		}
-	} else {
-		res.Rules = service.SysAuthRule().GetMenuListTree(0, list)
-	}
+	res = new(system.RuleListRes)
+	res.Rules, err = service.SysAuthRule().GetMenuListSearch(ctx, req)
 	return
 }
 
