@@ -101,7 +101,7 @@ CREATE TABLE `sys_auth_rule`  (
 -- ----------------------------
 -- Records of sys_auth_rule
 -- ----------------------------
-INSERT INTO `sys_auth_rule` VALUES (1, 0, 'api/v1/system/auth', '权限管理', 'ele-Stamp', '', '', 0, 30, 0, '/system/auth', 'layout/routerView/parent', 0, '', 0, 0, 1, '0', 0, '', '2022-03-24 15:03:37', '2022-04-14 16:29:19');
+INSERT INTO `sys_auth_rule` VALUES (1, 0, 'api/v1/system/auth', '权限管理', 'ele-Stamp', '', '', 0, 30, 0, '/system/auth', 'layout/routerView/parent', 0, '', 0, 0, 1, '', 0, '', '2022-03-24 15:03:37', '2022-04-14 16:29:19');
 INSERT INTO `sys_auth_rule` VALUES (2, 1, 'api/v1/system/menu/list', '菜单管理', 'ele-Calendar', '', '', 1, 0, 0, '/system/auth/menuList', 'system/menu/index', 0, '', 0, 0, 1, '', 0, '', '2022-03-24 17:24:13', '2022-03-29 10:54:49');
 INSERT INTO `sys_auth_rule` VALUES (3, 2, 'api/v1/system/menu/add', '添加菜单', '', '', '', 2, 0, 0, '', '', 0, '', 0, 0, 1, '', 0, '', '2022-03-29 16:48:43', '2022-03-29 17:05:19');
 INSERT INTO `sys_auth_rule` VALUES (4, 2, 'api/v1/system/menu/update', '修改菜单', '', '', '', 2, 0, 0, '', '', 0, '', 0, 0, 1, '', 0, '', '2022-03-29 17:04:25', '2022-03-29 18:11:36');
@@ -122,7 +122,7 @@ INSERT INTO `sys_auth_rule` VALUES (14, 10, '/api/v1/system/role/delete', '删�
 -- INSERT INTO `sys_auth_rule` VALUES (24, 22, 'api/v1/system/post/edit', '修改岗位', '', '', '', 2, 0, 0, '', '', 0, '', 0, 0, 1, '', 0, '', '2022-04-09 14:15:25', '2022-04-09 14:15:25');
 -- INSERT INTO `sys_auth_rule` VALUES (25, 22, 'api/v1/system/post/delete', '删除岗位', '', '', '', 2, 0, 0, '', '', 0, '', 0, 0, 1, '', 0, '', '2022-04-09 14:15:47', '2022-04-09 14:15:47');
 INSERT INTO `sys_auth_rule` VALUES (26, 1, 'api/v1/system/user/list', '用户管理', 'ele-User', '', '', 1, 0, 0, '/system/auth/user/list', 'system/user/index', 0, '', 0, 0, 1, '', 0, '', '2022-04-09 14:19:10', '2022-04-09 14:19:58');
-INSERT INTO `sys_auth_rule` VALUES (27, 0, 'api/v1/system/dict', '系统配置', 'iconfont icon-shuxingtu', '', '', 0, 40, 0, '/system/dict', 'layout/routerView/parent', 0, '', 0, 0, 1, '654', 0, '', '2022-04-14 16:28:51', '2022-04-18 14:40:56');
+INSERT INTO `sys_auth_rule` VALUES (27, 0, 'api/v1/system/dict', '系统配置', 'iconfont icon-shuxingtu', '', '', 0, 40, 0, '/system/dict', 'layout/routerView/parent', 0, '', 0, 0, 1, '', 0, '', '2022-04-14 16:28:51', '2022-04-18 14:40:56');
 INSERT INTO `sys_auth_rule` VALUES (28, 27, 'api/v1/system/dict/type/list', '字典管理', 'iconfont icon-crew_feature', '', '', 1, 0, 0, '/system/dict/type/list', 'system/dict/index', 0, '', 0, 0, 1, '', 0, '', '2022-04-14 16:32:10', '2022-04-16 17:02:50');
 INSERT INTO `sys_auth_rule` VALUES (29, 27, 'api/v1/system/dict/dataList', '字典数据管理', 'iconfont icon-putong', '', '', 1, 0, 1, '/system/dict/data/list/:dictType', 'system/dict/dataList', 0, '', 0, 0, 1, '', 0, '', '2022-04-18 12:04:17', '2022-04-18 14:58:43');
 INSERT INTO `sys_auth_rule` VALUES (30, 27, 'api/v1/system/config/list', '参数管理', 'ele-Cherry', '', '', 1, 0, 0, '/system/config/list', 'system/config/index', 0, '', 0, 0, 1, '', 0, '', '2022-04-18 21:05:20', '2022-04-18 21:13:19');
@@ -456,19 +456,63 @@ CREATE TABLE `sys_agent` (
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`id`) USING BTREE,
-    UNIQUE INDEX `name`(`name`) USING BTREE
+    UNIQUE INDEX `name`(`name`) USING BTREE,
+    UNIQUE INDEX `agent_code`(`agent_code`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '代理商表' ROW_FORMAT = COMPACT;
 
-INSERT INTO `sys_agent` VALUES (1, '第五季', 'agent1@example.com', 'Contact Name 1', '1234567890', 'Address 1', 'China', 'AGT001', 10000.14, 20000.14, 5000.14, 100.10, 1, 1, 'https://example.com/license1','2022-11-03 15:44:38','2022-11-03 15:44:38');
-INSERT INTO `sys_agent` VALUES (2, '京鱼', 'agent2@example.com', 'Contact Name 2', '2345678901', 'Address 2', 'Japan', 'AGT002', 15000.14, 25000.14, 7500.14, 100.10, 0, 2, 'https://example.com/license2','2022-11-03 15:44:38','2022-11-03 15:44:38');
-INSERT INTO `sys_agent` VALUES (3, '程品', 'agent3@example.com', 'Contact Name 3', '3456789012', 'Address 3', 'USA', 'AGT003', 20000.14, 30000.14, 10000.14, 100.10, 1, 3, 'https://example.com/license3','2022-11-03 15:44:38','2022-11-03 15:44:38');
-INSERT INTO `sys_agent` VALUES (4, 'Sun Light', 'agent4@example.com', 'Contact Name 4', '4567890123', 'Address 4', 'Germany', 'AGT004', 25000.14, 35000.14, 100.10, 12500.14, 1, 4, 'https://example.com/license4','2022-11-03 15:44:38','2022-11-03 15:44:38');
-INSERT INTO `sys_agent` VALUES (5, '任我行', 'agent5@example.com', 'Contact Name 5', '5678901234', 'Address 5', 'France', 'AGT005', 30000.14, 40000.14, 15000.14, 100.10, 1, 5, 'https://example.com/license5','2022-11-03 15:44:38','2022-11-03 15:44:38');
-INSERT INTO `sys_agent` VALUES (6, '深圳自由行', 'agent6@example.com', 'Contact Name 6', '6789012345', 'Address 6', 'China', 'AGT006', 35000.14, 45000.14, 17500.14, 100.10, 1, 6, 'https://example.com/license6','2022-11-03 15:44:38','2022-11-03 15:44:38');
-INSERT INTO `sys_agent` VALUES (7, '野图', 'agent7@example.com', 'Contact Name 7', '7890123456', 'Address 7', 'Australia', 'AGT007', 40000.14, 50000.14, 20000.14, 100.10, 1, 7, 'https://example.com/license7','2022-11-03 15:44:38','2022-11-03 15:44:38');
-INSERT INTO `sys_agent` VALUES (8, 'Silk Way', 'agent8@example.com', 'Contact Name 8', '8901234567', 'Address 8', 'China', 'AGT008', 45000.14, 55000.14, 22500.14, 100.10, 1, 8, 'https://example.com/license8','2022-11-03 15:44:38','2022-11-03 15:44:38');
-INSERT INTO `sys_agent` VALUES (9, '皇家旅途', 'agent9@example.com', 'Contact Name 9', '9012345678', 'Address 9', 'UK', 'AGT009', 50000.14, 60000.14, 25000.14, 100.10, 1, 9, 'https://example.com/license9','2022-11-03 15:44:38','2022-11-03 15:44:38');
-INSERT INTO `sys_agent` VALUES (10, 'Starking', 'agent10@example.com', 'Contact Name 10', '0123456789', 'Address 10', 'China', 'AGT010', 55000.14, 65000.14, 27500.14, 100.10, 1, 10, 'https://example.com/license10','2022-11-03 15:44:38','2022-11-03 15:44:38');
+-- INSERT INTO `sys_agent` VALUES (1, '第五季', 'agent1@example.com', 'Contact Name 1', '1234567890', 'Address 1', 'China', 'AGT001', 10000.14, 20000.14, 5000.14, 100.10, 1, 1, 'https://example.com/license1','2022-11-03 15:44:38','2022-11-03 15:44:38');
+-- INSERT INTO `sys_agent` VALUES (2, '京鱼', 'agent2@example.com', 'Contact Name 2', '2345678901', 'Address 2', 'Japan', 'AGT002', 15000.14, 25000.14, 7500.14, 100.10, 0, 2, 'https://example.com/license2','2022-11-03 15:44:38','2022-11-03 15:44:38');
+-- INSERT INTO `sys_agent` VALUES (3, '程品', 'agent3@example.com', 'Contact Name 3', '3456789012', 'Address 3', 'USA', 'AGT003', 20000.14, 30000.14, 10000.14, 100.10, 1, 3, 'https://example.com/license3','2022-11-03 15:44:38','2022-11-03 15:44:38');
+-- INSERT INTO `sys_agent` VALUES (4, 'Sun Light', 'agent4@example.com', 'Contact Name 4', '4567890123', 'Address 4', 'Germany', 'AGT004', 25000.14, 35000.14, 100.10, 12500.14, 1, 4, 'https://example.com/license4','2022-11-03 15:44:38','2022-11-03 15:44:38');
+-- INSERT INTO `sys_agent` VALUES (5, '任我行', 'agent5@example.com', 'Contact Name 5', '5678901234', 'Address 5', 'France', 'AGT005', 30000.14, 40000.14, 15000.14, 100.10, 1, 5, 'https://example.com/license5','2022-11-03 15:44:38','2022-11-03 15:44:38');
+-- INSERT INTO `sys_agent` VALUES (6, '深圳自由行', 'agent6@example.com', 'Contact Name 6', '6789012345', 'Address 6', 'China', 'AGT006', 35000.14, 45000.14, 17500.14, 100.10, 1, 6, 'https://example.com/license6','2022-11-03 15:44:38','2022-11-03 15:44:38');
+-- INSERT INTO `sys_agent` VALUES (7, '野图', 'agent7@example.com', 'Contact Name 7', '7890123456', 'Address 7', 'Australia', 'AGT007', 40000.14, 50000.14, 20000.14, 100.10, 1, 7, 'https://example.com/license7','2022-11-03 15:44:38','2022-11-03 15:44:38');
+-- INSERT INTO `sys_agent` VALUES (8, 'Silk Way', 'agent8@example.com', 'Contact Name 8', '8901234567', 'Address 8', 'China', 'AGT008', 45000.14, 55000.14, 22500.14, 100.10, 1, 8, 'https://example.com/license8','2022-11-03 15:44:38','2022-11-03 15:44:38');
+-- INSERT INTO `sys_agent` VALUES (9, '皇家旅途', 'agent9@example.com', 'Contact Name 9', '9012345678', 'Address 9', 'UK', 'AGT009', 50000.14, 60000.14, 25000.14, 100.10, 1, 9, 'https://example.com/license9','2022-11-03 15:44:38','2022-11-03 15:44:38');
+-- INSERT INTO `sys_agent` VALUES (10, 'Starking', 'agent10@example.com', 'Contact Name 10', '0123456789', 'Address 10', 'China', 'AGT010', 55000.14, 65000.14, 27500.14, 100.10, 1, 10, 'https://example.com/license10','2022-11-03 15:44:38','2022-11-03 15:44:38');
 
+-- ----------------------------
+-- Table structure for sys_order
+-- ----------------------------
+-- 删除现有的sys_agent表
+DROP TABLE IF EXISTS `sys_order`;
+
+-- 创建sys_agent表并设置自增ID从10开始，并添加COMMENT和ROW_FORMAT
+CREATE TABLE `sys_order` (
+  `id` BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY COMMENT '唯一标识符',
+  `uuid` CHAR(36) NOT NULL COMMENT 'UUID',
+  `name` VARCHAR(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
+  `order_number` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '订单号',
+  `action_date` DATE NULL DEFAULT NULL COMMENT '执行日期',
+  `action_time` TIME NULL DEFAULT NULL COMMENT '执行时间',
+  `agent_id` INT UNSIGNED NULL DEFAULT NULL COMMENT '代理商ID',
+  `agent_code` VARCHAR(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '代理商代码',
+  `product_name` VARCHAR(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT  '产品名称',
+  `guest_name` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT  '客人姓名',
+  `guest_contact` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '客人联系方式',
+  `unit_price` DECIMAL(10, 2) COMMENT '单价',
+  `quantity` INT COMMENT '数量',
+  `total_price` DECIMAL(10, 2) COMMENT '总价',
+  `status` TINYINT NOT NULL DEFAULT 1 COMMENT '状态',
+  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '备注',
+  `currency` VARCHAR(3)  NULL DEFAULT 'AED' COMMENT '货币',
+  `created_by` BIGINT UNSIGNED NULL DEFAULT NULL COMMENT '创建者',
+  `updated_by` BIGINT UNSIGNED NULL DEFAULT NULL COMMENT '更新者',
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '订单表' ROW_FORMAT = COMPACT;
+
+INSERT INTO `sys_order` (`uuid`, `name`, `order_number`, `action_date`, `action_time`, `agent_id`, `agent_code`, `product_name`, `guest_name`, `guest_contact`, `unit_price`, `quantity`, `total_price`, `status`, `remark`, `currency`, `created_by`, `updated_by`)
+VALUES
+  ('2703e5e1-2df4-429f-ae86-0fe56398da81', 'Order 001', 'ORD001', '2022-10-01', '08:30:00', 1, 'AGT001', 'Product A', 'John Doe', 'john@example.com', 10.99, 2, 21.98, 0, 'Remark 1', 'AED', 1, NULL),
+  ('35f8f7c6-394e-45cf-9632-b44e56aad3e0', 'Order 002', 'ORD002', '2022-10-02', '10:45:00', 2, 'AGT002', 'Product B', 'Jane Smith', 'jane@example.com', 15.99, 1, 15.99, 0, 'Remark 2', 'AED', 1, NULL),
+  ('4c4ef7c7-1c3a-4b62-b36d-bf988d373f11', 'Order 003', 'ORD003', '2022-10-03', '14:15:00', 1, 'AGT001', 'Product C', 'David Johnson', 'david@example.com', 8.99, 3, 26.97, 0, 'Remark 3', 'AED', 1, NULL),
+  ('6d4ea3ed-f8ea-4a00-848e-1239b8b135ac', 'Order 004', 'ORD004', '2022-10-04', '16:30:00', 3, 'AGT003', 'Product D', 'Emily Davis', 'emily@example.com', 12.99, 2, 25.98, 0, 'Remark 4', 'AED', 1, NULL),
+  ('8f7b78e7-306d-4818-9092-9a9bd192508d', 'Order 005', 'ORD005', '2022-10-05', '11:00:00', 2, 'AGT002', 'Product E', 'Michael Wilson', 'michael@example.com', 9.99, 1, 9.99, 0, 'Remark 5', 'AED', 1, NULL),
+  ('9f4fa41d-8d10-4136-8e22-7d1dd92c0e8f', 'Order 006', 'ORD006', '2022-10-06', '10:45:00', 4, 'AGT004', 'Product F', 'Emma Anderson', 'emma@example.com', 11.99, 4, 47.96, 0, 'Remark 6', 'AED', 1, NULL),
+  ('ad7c6d3b-50a7-41e2-b905-60123544d1e9', 'Order 007', 'ORD007', '2022-10-07', '09:15:00', 3, 'AGT003', 'Product G', 'Oliver Wilson', 'oliver@example.com', 14.99, 2, 29.98, 0, 'Remark 7', 'AED', 1, NULL),
+  ('b3599270-1dd2-4a5f-b115-d3bd3ccedb89', 'Order 008', 'ORD008', '2022-10-08', '13:30:00', 2, 'AGT002', 'Product H', 'Sophia Thomas', 'sophia@example.com', 18.99, 3, 56.97, 0, 'Remark 8', 'AED', 1, NULL),
+  ('cfd7c3bd-a76b-4463-9d42-30757eb7f6f2', 'Order 009', 'ORD009', '2022-10-09', '16:45:00', 4, 'AGT004', 'Product I', 'Matthew Thompson', 'matthew@example.com', 13.99, 2, 27.98, 0, 'Remark 9', 'AED', 1, NULL),
+  ('de5821ea-bd25-4d62-a2a6-17592a89e88e', 'Order 010', 'ORD010', '2022-10-10', '14:00:00', 1, 'AGT001', 'Product J', 'Ava Scott', 'ava@example.com', 16.99, 1, 16.99, 0, 'Remark 10', 'AED', 1, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
