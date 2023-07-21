@@ -24,13 +24,15 @@ type SysOrderColumns struct {
 	Uuid          string // UUID
 	RelatedId     string // 关联订单ID
 	FitNumber     string // 订单号
+	Sku           string // SKU
 	ActionDate    string // 执行日期
 	ActionTime    string // 执行时间
-	AgentId       string // 代理商ID
-	AgentCode     string // 代理商代码
-	ProductName   string // 产品名称
 	GuestName     string // 客人姓名
 	GuestContact  string // 客人联系方式
+	AgentId       string // 代理商ID
+	AgentCode     string // 代理商代码
+	ProductId     string // 代理商ID
+	ProductName   string // 产品名称
 	UnitPrice     string // 单价
 	Quantity      string // 数量
 	TotalPrice    string // 总价
@@ -50,13 +52,15 @@ var sysOrderColumns = SysOrderColumns{
 	Uuid:          "uuid",
 	RelatedId:     "related_id",
 	FitNumber:     "fit_number",
+	Sku:           "sku",
 	ActionDate:    "action_date",
 	ActionTime:    "action_time",
-	AgentId:       "agent_id",
-	AgentCode:     "agent_code",
-	ProductName:   "product_name",
 	GuestName:     "guest_name",
 	GuestContact:  "guest_contact",
+	AgentId:       "agent_id",
+	AgentCode:     "agent_code",
+	ProductId:     "product_id",
+	ProductName:   "product_name",
 	UnitPrice:     "unit_price",
 	Quantity:      "quantity",
 	TotalPrice:    "total_price",

@@ -16,13 +16,15 @@ type SysOrder struct {
 	Uuid          interface{} // UUID
 	RelatedId     interface{} // 关联订单ID
 	FitNumber     interface{} // 订单号
+	Sku           interface{} // SKU
 	ActionDate    *gtime.Time // 执行日期
 	ActionTime    *gtime.Time // 执行时间
-	AgentId       interface{} // 代理商ID
-	AgentCode     interface{} // 代理商代码
-	ProductName   interface{} // 产品名称
 	GuestName     interface{} // 客人姓名
 	GuestContact  interface{} // 客人联系方式
+	AgentId       interface{} // 代理商ID
+	AgentCode     interface{} // 代理商代码
+	ProductId     interface{} // 代理商ID
+	ProductName   interface{} // 产品名称
 	UnitPrice     interface{} // 单价
 	Quantity      interface{} // 数量
 	TotalPrice    interface{} // 总价

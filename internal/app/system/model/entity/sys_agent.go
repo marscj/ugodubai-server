@@ -23,7 +23,7 @@ type SysAgent struct {
 	OutstandingBalance float64     `json:"outstandingBalance" description:"未结算额度"`
 	AccountBlance      float64     `json:"accountBlance"      description:"账户余额"`
 	Status             int         `json:"status"             description:"状态"`
-	AdminId            int         `json:"adminId"            description:"管理员ID"`
+	AdminId            uint64      `json:"adminId"            description:"管理员ID"`
 	LicenseUrl         string      `json:"licenseUrl"         description:"许可证URL"`
 	CreatedAt          *gtime.Time `json:"createdAt"          description:"创建时间"`
 	UpdatedAt          *gtime.Time `json:"updatedAt"          description:"更新时间"`

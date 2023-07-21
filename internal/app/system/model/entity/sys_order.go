@@ -14,13 +14,15 @@ type SysOrder struct {
 	Uuid          string      `json:"uuid"          description:"UUID"`
 	RelatedId     string      `json:"relatedId"     description:"关联订单ID"`
 	FitNumber     string      `json:"fitNumber"     description:"订单号"`
+	Sku           string      `json:"sku"           description:"SKU"`
 	ActionDate    *gtime.Time `json:"actionDate"    description:"执行日期"`
 	ActionTime    *gtime.Time `json:"actionTime"    description:"执行时间"`
-	AgentId       uint        `json:"agentId"       description:"代理商ID"`
-	AgentCode     string      `json:"agentCode"     description:"代理商代码"`
-	ProductName   string      `json:"productName"   description:"产品名称"`
 	GuestName     string      `json:"guestName"     description:"客人姓名"`
 	GuestContact  string      `json:"guestContact"  description:"客人联系方式"`
+	AgentId       uint64      `json:"agentId"       description:"代理商ID"`
+	AgentCode     string      `json:"agentCode"     description:"代理商代码"`
+	ProductId     uint64      `json:"productId"     description:"代理商ID"`
+	ProductName   string      `json:"productName"   description:"产品名称"`
 	UnitPrice     float64     `json:"unitPrice"     description:"单价"`
 	Quantity      int         `json:"quantity"      description:"数量"`
 	TotalPrice    float64     `json:"totalPrice"    description:"总价"`
