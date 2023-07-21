@@ -25,4 +25,6 @@ import (
 	_ "ugodubai-server/internal/app/system/logic/token"
 
 	_ "ugodubai-server/internal/app/system/logic/sysAgent"
+
+	_ "ugodubai-server/internal/app/system/logic/sysOrder"
 )

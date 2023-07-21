@@ -8,7 +8,7 @@ import (
 )
 
 type OrderListReq struct {
-	g.Meta `path:"/order/list" tags:"代理商管理" method:"get" summary:"代理商列表"`
+	g.Meta `path:"/order/list" tags:"订单管理" method:"get" summary:"订单列表"`
 	commonApi.PageReq
 }
 
@@ -19,8 +19,8 @@ type OrderListRes struct {
 }
 
 type OrderGetReq struct {
-	g.Meta `path:"/order/get" tags:"代理商管理" method:"get" summary:"获取代理商信息"`
-	Id     uint64 `p:"id" v:"required#代理商id不能为空""`
+	g.Meta `path:"/order/get" tags:"订单管理" method:"get" summary:"获取订单商信息"`
+	Id     uint64 `p:"id" v:"required#订单id不能为空""`
 }
 
 type OrderGetRes struct {

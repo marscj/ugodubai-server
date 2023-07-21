@@ -38,7 +38,7 @@ func (s *sSysOrder) List(ctx context.Context, req *system.OrderListReq) (total i
 			req.PageSize = consts.PageSize
 		}
 
-		err = m.Page(req.PageNum, req.PageSize).Order("id asc").WithAll().Scan(&orderList)
+		err = m.Page(req.PageNum, req.PageSize).Order("id desc").Scan(&orderList)
 		liberr.ErrIsNil(ctx, err, "代理商列表获取失败")
 	})
 	return
@@ -48,7 +48,7 @@ func (s *sSysOrder) List(ctx context.Context, req *system.OrderListReq) (total i
 func (s *sSysOrder) Get(ctx context.Context, id uint64) (order *model.SysOrder, err error) {
 
 	err = g.Try(ctx, func(ctx context.Context) {
-		err = dao.SysOrder.Ctx(ctx).WherePri(id).WithAll().Scan(&order)
+		err = dao.SysOrder.Ctx(ctx).WherePri(id).Scan(&order)
 
 		if err != nil {
 			liberr.ErrIsNil(ctx, err, "代理商信息获取失败")
