@@ -21,13 +21,14 @@ type SysOrder struct {
 	GuestContact  string      `json:"guestContact"  description:"客人联系方式"`
 	AgentId       uint64      `json:"agentId"       description:"代理商ID"`
 	AgentCode     string      `json:"agentCode"     description:"代理商代码"`
-	ProductId     uint64      `json:"productId"     description:"代理商ID"`
+	ProductId     uint64      `json:"productId"     description:"产品ID"`
 	ProductName   string      `json:"productName"   description:"产品名称"`
 	UnitPrice     float64     `json:"unitPrice"     description:"单价"`
 	Quantity      int         `json:"quantity"      description:"数量"`
 	TotalPrice    float64     `json:"totalPrice"    description:"总价"`
-	OrderStatus   int         `json:"orderStatus"   description:"订单状态"`
-	PaymentStatus int         `json:"paymentStatus" description:"支付状态"`
+	OrderStatus   int         `json:"orderStatus"   description:"订单状态 0.待核单 1.已核单出票中 2.已出票 3.取消待确认 4.已取消"`
+	PaymentStatus int         `json:"paymentStatus" description:"支付状态 0.等待支付 1.未支付 2.已支付 3.已退款"`
+	PaymentMethod int         `json:"paymentMethod" description:"支付方式 0.余额 1.信用 2.支付宝 3.微信 4.公司转账"`
 	Remark        string      `json:"remark"        description:"备注"`
 	Currency      string      `json:"currency"      description:"货币"`
 	CreatedBy     uint64      `json:"createdBy"     description:"创建者"`

@@ -31,13 +31,14 @@ type SysOrderColumns struct {
 	GuestContact  string // 客人联系方式
 	AgentId       string // 代理商ID
 	AgentCode     string // 代理商代码
-	ProductId     string // 代理商ID
+	ProductId     string // 产品ID
 	ProductName   string // 产品名称
 	UnitPrice     string // 单价
 	Quantity      string // 数量
 	TotalPrice    string // 总价
-	OrderStatus   string // 订单状态
-	PaymentStatus string // 支付状态
+	OrderStatus   string // 订单状态 0.待核单 1.已核单出票中 2.已出票 3.取消待确认 4.已取消
+	PaymentStatus string // 支付状态 0.等待支付 1.未支付 2.已支付 3.已退款
+	PaymentMethod string // 支付方式 0.余额 1.信用 2.支付宝 3.微信 4.公司转账
 	Remark        string // 备注
 	Currency      string // 货币
 	CreatedBy     string // 创建者
@@ -66,6 +67,7 @@ var sysOrderColumns = SysOrderColumns{
 	TotalPrice:    "total_price",
 	OrderStatus:   "order_status",
 	PaymentStatus: "payment_status",
+	PaymentMethod: "payment_method",
 	Remark:        "remark",
 	Currency:      "currency",
 	CreatedBy:     "created_by",

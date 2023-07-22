@@ -24,7 +24,7 @@ type SysAgent struct {
 	CreditLimit        interface{} // 信用额度
 	OutstandingBalance interface{} // 未结算额度
 	AccountBlance      interface{} // 账户余额
-	Status             interface{} // 状态
+	Status             interface{} // 状态 0.不可用 1.可用
 	AdminId            interface{} // 管理员ID
 	LicenseUrl         interface{} // 许可证URL
 	CreatedAt          *gtime.Time // 创建时间

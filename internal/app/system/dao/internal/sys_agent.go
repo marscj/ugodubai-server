@@ -32,7 +32,7 @@ type SysAgentColumns struct {
 	CreditLimit        string // 信用额度
 	OutstandingBalance string // 未结算额度
 	AccountBlance      string // 账户余额
-	Status             string // 状态
+	Status             string // 状态 0.不可用 1.可用
 	AdminId            string // 管理员ID
 	LicenseUrl         string // 许可证URL
 	CreatedAt          string // 创建时间

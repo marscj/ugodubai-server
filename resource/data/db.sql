@@ -519,4 +519,18 @@ VALUES
   ('cfd7c3bd-a76b-4463-9d42-30757eb7f6f2', 'related_id_009', 'ORD009', 'SKU001', '2022-10-09', '16:45:00', 4,  'Product I', 'Matthew Thompson', 'matthew@example.com', 13.99, 2, 27.98, 1, 0, 'Remark 9', 'AED', 1, NULL),
   ('de5821ea-bd25-4d62-a2a6-17592a89e88e', 'related_id_010', 'ORD010', 'SKU001', '2022-10-10', '14:00:00', 1,  'Product J', 'Ava Scott', 'ava@example.com', 16.99, 1, 16.99, 1, 0, 'Remark 10', 'AED', 1, NULL);
 
+
+-- ----------------------------
+-- Table structure for sys_order
+-- ----------------------------
+-- 删除现有的sys_agent表
+DROP TABLE IF EXISTS `sys_supplier`;
+
+-- 创建sys_agent表并设置自增ID从10开始，并添加COMMENT和ROW_FORMAT
+CREATE TABLE `sys_supplier` (
+  `id` BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY COMMENT '唯一标识符',
+  `name` VARCHAR(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
+  `banlance` DECIMAL(10, 2) COMMENT '余额'
+)ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '供应商' ROW_FORMAT = COMPACT;
+
 SET FOREIGN_KEY_CHECKS = 1;
