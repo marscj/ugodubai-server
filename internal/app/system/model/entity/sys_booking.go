@@ -26,9 +26,9 @@ type SysBooking struct {
 	Quantity      int         `json:"quantity"      description:"数量"`
 	TotalPrice    float64     `json:"totalPrice"    description:"总价"`
 	Tax           float64     `json:"tax"           description:"税"`
+	Currency      string      `json:"currency"      description:"货币"`
 	BookingStatus int         `json:"bookingStatus" description:"订单状态 0.待核单 1.已核单出票中 2.已出票 3.取消待确认 4.已取消"`
 	Remark        string      `json:"remark"        description:"备注"`
-	Currency      string      `json:"currency"      description:"货币"`
 	CreatedBy     uint64      `json:"createdBy"     description:"创建者"`
 	UpdatedBy     uint64      `json:"updatedBy"     description:"更新者"`
 	CreatedAt     *gtime.Time `json:"createdAt"     description:""`

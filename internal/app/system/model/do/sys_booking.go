@@ -28,9 +28,9 @@ type SysBooking struct {
 	Quantity      interface{} // 数量
 	TotalPrice    interface{} // 总价
 	Tax           interface{} // 税
+	Currency      interface{} // 货币
 	BookingStatus interface{} // 订单状态 0.待核单 1.已核单出票中 2.已出票 3.取消待确认 4.已取消
 	Remark        interface{} // 备注
-	Currency      interface{} // 货币
 	CreatedBy     interface{} // 创建者
 	UpdatedBy     interface{} // 更新者
 	CreatedAt     *gtime.Time //

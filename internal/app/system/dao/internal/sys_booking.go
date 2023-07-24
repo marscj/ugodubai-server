@@ -36,9 +36,9 @@ type SysBookingColumns struct {
 	Quantity      string // 数量
 	TotalPrice    string // 总价
 	Tax           string // 税
+	Currency      string // 货币
 	BookingStatus string // 订单状态 0.待核单 1.已核单出票中 2.已出票 3.取消待确认 4.已取消
 	Remark        string // 备注
-	Currency      string // 货币
 	CreatedBy     string // 创建者
 	UpdatedBy     string // 更新者
 	CreatedAt     string //
@@ -63,9 +63,9 @@ var sysBookingColumns = SysBookingColumns{
 	Quantity:      "quantity",
 	TotalPrice:    "total_price",
 	Tax:           "tax",
+	Currency:      "currency",
 	BookingStatus: "booking_status",
 	Remark:        "remark",
-	Currency:      "currency",
 	CreatedBy:     "created_by",
 	UpdatedBy:     "updated_by",
 	CreatedAt:     "created_at",
