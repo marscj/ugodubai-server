@@ -17,7 +17,10 @@ type SysProductPrice struct {
 	StartDate    *gtime.Time `json:"startDate"    description:""`
 	EndDate      *gtime.Time `json:"endDate"      description:""`
 	CostPrice    float64     `json:"costPrice"    description:"成本价"`
-	SpecialPrice float64     `json:"specialPrice" description:"预付价格"`
 	SellingPrice float64     `json:"sellingPrice" description:"销售价"`
+	SpecialPrice float64     `json:"specialPrice" description:"预付价格"`
 	Currency     string      `json:"currency"     description:"货币"`
+	Status       int         `json:"status"       description:"状态 0.下线 1.上线"`
+	Limit        int         `json:"limit"        description:"状态 0.使用库存 1.无限"`
+	Stock        int         `json:"stock"        description:""`
 }

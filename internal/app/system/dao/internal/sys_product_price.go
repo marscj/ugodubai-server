@@ -27,9 +27,12 @@ type SysProductPriceColumns struct {
 	StartDate    string //
 	EndDate      string //
 	CostPrice    string // 成本价
-	SpecialPrice string // 预付价格
 	SellingPrice string // 销售价
+	SpecialPrice string // 预付价格
 	Currency     string // 货币
+	Status       string // 状态 0.下线 1.上线
+	Limit        string // 状态 0.使用库存 1.无限
+	Stock        string //
 }
 
 // sysProductPriceColumns holds the columns for table sys_product_price.
@@ -41,9 +44,12 @@ var sysProductPriceColumns = SysProductPriceColumns{
 	StartDate:    "start_date",
 	EndDate:      "end_date",
 	CostPrice:    "cost_price",
-	SpecialPrice: "special_price",
 	SellingPrice: "selling_price",
+	SpecialPrice: "special_price",
 	Currency:     "currency",
+	Status:       "status",
+	Limit:        "limit",
+	Stock:        "stock",
 }
 
 // NewSysProductPriceDao creates and returns a new DAO object for table data access.
