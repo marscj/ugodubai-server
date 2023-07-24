@@ -171,7 +171,7 @@ CREATE TABLE `sys_dept`  (
   `parent_id` bigint(20) UNSIGNED NULL DEFAULT 0 COMMENT '父部门id',
   `ancestors` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '祖级列表',
   `dept_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '部门名称',
-  `order_num` int(4) NULL DEFAULT 0 COMMENT '显示顺序',
+  `booking_num` int(4) NULL DEFAULT 0 COMMENT '显示顺序',
   `leader` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '负责人',
   `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '联系电话',
   `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '邮箱',
@@ -321,7 +321,7 @@ DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role`  (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `status` tinyint(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '状态;0:禁用;1:正常',
-  `list_order` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '排序',
+  `list_booking` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '排序',
   `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '角色名称',
   `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '备注',
   `data_scope` tinyint(3) UNSIGNED NOT NULL DEFAULT 3 COMMENT '数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）',
@@ -427,10 +427,6 @@ CREATE TABLE `sys_user_post`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户与岗位关联表' ROW_FORMAT = COMPACT;
 
 -- ----------------------------
--- Records of sys_user_post
--- ----------------------------
-
--- ----------------------------
 -- Table structure for sys_agent
 -- ----------------------------
 -- 删除现有的sys_agent表
@@ -472,65 +468,169 @@ INSERT INTO `sys_agent` VALUES (9, '皇家旅途', 'agent9@example.com', 'Contac
 INSERT INTO `sys_agent` VALUES (10, 'Starking', 'agent10@example.com', 'Contact Name 10', '0123456789', 'Address 10', 'China', 'AGT010', 55000.14, 65000.14, 27500.14, 100.10, 1, 10, 'https://example.com/license10','2022-11-03 15:44:38','2022-11-03 15:44:38');
 
 -- ----------------------------
--- Table structure for sys_order
+-- Table structure for sys_supplier
 -- ----------------------------
--- 删除现有的sys_agent表
-DROP TABLE IF EXISTS `sys_order`;
+DROP TABLE IF EXISTS `sys_supplier`;
+CREATE TABLE `sys_supplier` (
+  `id` bigint(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY COMMENT '唯一标识符',
+  `name` VARCHAR(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
+  `code` VARCHAR(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
+  UNIQUE INDEX `name`(`name`) USING BTREE
+)ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '供应商' ROW_FORMAT = COMPACT;
 
--- 创建sys_agent表并设置自增ID从10开始，并添加COMMENT和ROW_FORMAT
-CREATE TABLE `sys_order` (
-  `id` BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY COMMENT '唯一标识符',
-  `uuid` VARCHAR(36) NOT NULL COMMENT 'UUID',
-  `related_id` VARCHAR(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '关联订单ID',
-  `fit_number` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '订单号',
-  `sku` VARCHAR(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'SKU',
-  `action_date` DATE NULL DEFAULT NULL COMMENT '执行日期',
-  `action_time` TIME NULL DEFAULT NULL COMMENT '执行时间',
-  `guest_name` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT  '客人姓名',
-  `guest_contact` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '客人联系方式',
+-- ----------------------------
+-- Table structure for sys_booking
+-- ----------------------------
+-- 删除现有的sys_booking表
+DROP TABLE IF EXISTS `sys_booking`;
+CREATE TABLE `sys_booking` ( 
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '代理商ID',
+  `parent_id` bigint(20) UNSIGNED NULL DEFAULT 0 COMMENT '父',
+  `related_id` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT  '关联订单ID',
   `agent_id` bigint(20) UNSIGNED NULL DEFAULT 0 COMMENT '代理商ID',
-  `agent_code` VARCHAR(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '代理商代码',
-  `product_id` bigint(20) UNSIGNED NULL DEFAULT 0 COMMENT '产品ID',
-  `product_name` VARCHAR(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT  '产品名称',
-  `unit_price` DECIMAL(10, 2) COMMENT '单价',
-  `quantity` INT COMMENT '数量',
-  `total_price` DECIMAL(10, 2) COMMENT '总价',
-  `order_status` TINYINT NOT NULL DEFAULT 1 COMMENT '订单状态 0.待核单 1.已核单出票中 2.已出票 3.取消待确认 4.已取消',
-  `payment_status` TINYINT NOT NULL DEFAULT 1 COMMENT '支付状态 0.等待支付 1.未支付 2.已支付 3.已退款',
-  `payment_method` TINYINT NOT NULL DEFAULT 1 COMMENT '支付方式 0.余额 1.信用 2.支付宝 3.微信 4.公司转账',
-  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '备注',
-  `currency` VARCHAR(3)  NULL DEFAULT 'AED' COMMENT '货币',
-  `created_by` BIGINT UNSIGNED NULL DEFAULT NULL COMMENT '创建者',
-  `updated_by` BIGINT UNSIGNED NULL DEFAULT NULL COMMENT '更新者',
-  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
+  -- `action_date`
+  -- `product_id` bigint(20) UNSIGNED NULL DEFAULT 0 COMMENT '产品ID',
+  -- `variation_id` bigint(20) UNSIGNED NULL DEFAULT 0 COMMENT '变体产品',
+  -- `fit_number` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT  'FIT',
+  -- `sku` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT  'SKU',
+  -- `guest_name` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT  '客人姓名',
+  -- `guest_contact` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '客人联系方式',
+  -- `product_name` VARCHAR(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT  '产品名称',
+  -- `unit_price` DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '单价',
+  -- `quantity` INT NOT NULL DEFAULT 1 COMMENT '数量',
+  -- `total_price` DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '总价',
+  -- `tax` DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '税',
+  -- `booking_status` TINYINT NOT NULL DEFAULT 1 COMMENT '订单状态 0.待核单 1.已核单出票中 2.已出票 3.取消待确认 4.已取消',
+  -- `payment_status` TINYINT NOT NULL DEFAULT 1 COMMENT '支付状态 0.等待支付 1.未支付 2.已支付 3.已退款',
+  -- `payment_method` TINYINT NOT NULL DEFAULT 1 COMMENT '支付方式 0.余额 1.信用 2.支付宝 3.微信 4.公司转账',
+  -- `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '备注',
+  -- `currency` VARCHAR(3)  NULL DEFAULT 'AED' COMMENT '货币',
+  `created_by` bigint(20) UNSIGNED NULL DEFAULT 0 COMMENT '创建者',
+  `updated_by` bigint(20) UNSIGNED NULL DEFAULT 0 COMMENT '更新者',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP, 
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 10000 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '订单表' ROW_FORMAT = COMPACT;
 
-INSERT INTO `sys_order` (`uuid`, `related_id`, `fit_number`, `sku`, `action_date`, `action_time`, `agent_id`, `product_name`, `guest_name`, `guest_contact`, `unit_price`, `quantity`, `total_price`,`payment_status`, `order_status`, `remark`, `currency`, `created_by`, `updated_by`)
-VALUES
-  ('2703e5e1-2df4-429f-ae86-0fe56398da81', 'related_id_001', 'ORD001', 'SKU001', '2022-10-01', '08:30:00', 1,  'Product A', 'John Doe', 'john@example.com', 10.99, 2, 21.98, 1, 0, 'Remark 1', 'AED', 1, NULL),
-  ('35f8f7c6-394e-45cf-9632-b44e56aad3e0', 'related_id_002', 'ORD002', 'SKU001', '2022-10-02', '10:45:00', 2,  'Product B', 'Jane Smith', 'jane@example.com', 15.99, 1, 15.99, 1, 0, 'Remark 2', 'AED', 1, NULL),
-  ('4c4ef7c7-1c3a-4b62-b36d-bf988d373f11', 'related_id_003', 'ORD003', 'SKU001', '2022-10-03', '14:15:00', 1,  'Product C', 'David Johnson', 'david@example.com', 8.99, 3, 26.97, 1, 0, 'Remark 3', 'AED', 1, NULL),
-  ('6d4ea3ed-f8ea-4a00-848e-1239b8b135ac', 'related_id_004', 'ORD004', 'SKU001', '2022-10-04', '16:30:00', 3,  'Product D', 'Emily Davis', 'emily@example.com', 12.99, 2, 25.98, 1, 0, 'Remark 4', 'AED', 1, NULL),
-  ('8f7b78e7-306d-4818-9092-9a9bd192508d', 'related_id_005', 'ORD005', 'SKU001', '2022-10-05', '11:00:00', 2,  'Product E', 'Michael Wilson', 'michael@example.com', 9.99, 1, 9.99, 1, 0, 'Remark 5', 'AED', 1, NULL),
-  ('9f4fa41d-8d10-4136-8e22-7d1dd92c0e8f', 'related_id_006', 'ORD006', 'SKU001', '2022-10-06', '10:45:00', 4,  'Product F', 'Emma Anderson', 'emma@example.com', 11.99, 4, 47.96, 1, 0, 'Remark 6', 'AED', 1, NULL),
-  ('ad7c6d3b-50a7-41e2-b905-60123544d1e9', 'related_id_007', 'ORD007', 'SKU001', '2022-10-07', '09:15:00', 3,  'Product G', 'Oliver Wilson', 'oliver@example.com', 14.99, 2, 29.98, 1, 0, 'Remark 7', 'AED', 1, NULL),
-  ('b3599270-1dd2-4a5f-b115-d3bd3ccedb89', 'related_id_008', 'ORD008', 'SKU001', '2022-10-08', '13:30:00', 2,  'Product H', 'Sophia Thomas', 'sophia@example.com', 18.99, 3, 56.97, 1, 0, 'Remark 8', 'AED', 1, NULL),
-  ('cfd7c3bd-a76b-4463-9d42-30757eb7f6f2', 'related_id_009', 'ORD009', 'SKU001', '2022-10-09', '16:45:00', 4,  'Product I', 'Matthew Thompson', 'matthew@example.com', 13.99, 2, 27.98, 1, 0, 'Remark 9', 'AED', 1, NULL),
-  ('de5821ea-bd25-4d62-a2a6-17592a89e88e', 'related_id_010', 'ORD010', 'SKU001', '2022-10-10', '14:00:00', 1,  'Product J', 'Ava Scott', 'ava@example.com', 16.99, 1, 16.99, 1, 0, 'Remark 10', 'AED', 1, NULL);
-
+-- ----------------------------
+-- Table structure for sys_booking_meta
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_booking_meta`;
+CREATE TABLE `sys_booking_meta` (
+  `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `booking_id` bbigint(20) UNSIGNED NULL DEFAULT 0,
+  `meta_key` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `meta_value` longtext COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`meta_id`),
+  KEY `booking_id` (`booking_id`),
+  KEY `meta_key` (`meta_key`(32))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '订单meta表' ROW_FORMAT = COMPACT;
 
 -- ----------------------------
--- Table structure for sys_order
+-- Table structure for sys_payment_tokens
 -- ----------------------------
--- 删除现有的sys_agent表
-DROP TABLE IF EXISTS `sys_supplier`;
+DROP TABLE IF EXISTS `sys_payment_tokens`;
+CREATE TABLE `sys_payment_tokens` (
+  `token_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `gateway_id` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL DEFAULT '0',
+  `agent_id` bigint(20) UNSIGNED NOT NULL DEFAULT '0',
+  `type` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_default` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`token_id`),
+  KEY `user_id` (`user_id`),
+  KEY `agent_id` (`agent_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '支付表' ROW_FORMAT = COMPACT;
 
--- 创建sys_agent表并设置自增ID从10开始，并添加COMMENT和ROW_FORMAT
-CREATE TABLE `sys_supplier` (
-  `id` BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY COMMENT '唯一标识符',
+-- ----------------------------
+-- Table structure for sys_payment_tokenmeta
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_payment_tokenmeta`;
+CREATE TABLE `sys_payment_tokenmeta` (
+  `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `payment_token_id` bigint(20) UNSIGNED NOT NULL,
+  `meta_key` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `meta_value` longtext COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`meta_id`),
+  KEY `payment_token_id` (`payment_token_id`),
+  KEY `meta_key` (`meta_key`(32))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '支付meta表' ROW_FORMAT = COMPACT;
+INSERT INTO `sys_payment_tokenmeta` (`meta_id`, `payment_token_id`, `meta_key`, `meta_value`) VALUES
+(1, 1, 'image_url', 'google.com'),
+(2, 1, 'image_url', 'google.com');
+
+-- ----------------------------
+-- Table structure for sys_product
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_product`;
+CREATE TABLE `sys_product` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
-  `banlance` DECIMAL(10, 2) COMMENT '余额'
-)ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '供应商' ROW_FORMAT = COMPACT;
+  `description` longtext COLLATE utf8mb4_unicode_ci,
+  `short_description` longtext COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '产品表' ROW_FORMAT = COMPACT;
+
+-- ----------------------------
+-- Table structure for sys_product_price
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_product_price`;
+CREATE TABLE `sys_product_price` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `product_id` bigint(20) UNSIGNED NULL DEFAULT '0',
+  `variation_id` bigint(20) UNSIGNED NULL DEFAULT '0', 
+  `agent_id` bigint(20) UNSIGNED NOT NULL DEFAULT '0',
+  `start_date` DATE DEFAULT NULL,
+  `end_date` DATE DEFAULT NULL,
+  `cost_price` DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '成本价',
+  `selling_price`  DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '销售价',
+  `special_price`  DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '预付价格',
+  `currency` VARCHAR(3)  NULL DEFAULT 'AED' COMMENT '货币',
+  `status` TINYINT NOT NULL DEFAULT '0' COMMENT '状态 0.下线 1.上线',
+  `limit` TINYINT NOT NULL DEFAULT '0' COMMENT '状态 0.使用库存 1.无限',
+  `stock` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '产品价格表' ROW_FORMAT = COMPACT;
+
+
+-- ----------------------------
+-- Table structure for sys_product_meta
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_product_meta`;
+CREATE TABLE `sys_product_meta` (
+  `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `product_id` bigint(20) UNSIGNED NULL DEFAULT '0',
+  `meta_key` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `meta_value` longtext COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`meta_id`),
+  KEY `product_id` (`product_id`),
+  KEY `meta_key` (`meta_key`(32))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品meta表' ROW_FORMAT = COMPACT;
+
+-- ----------------------------
+-- Table structure for sys_terms
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_terms`;
+CREATE TABLE `sys_terms` (
+  `term_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `taxonomy` varchar(32) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
+  `parent` bigint(20) UNSIGNED NOT NULL DEFAULT '0',
+  `name` varchar(200) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
+  `slug` varchar(200) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
+  `term_order` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`term_id`),
+  KEY `slug` (`slug`(191)),
+  KEY `name` (`name`(191))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品术语表' ROW_FORMAT = COMPACT;
+
+INSERT INTO `sys_terms` (`term_id`, `taxonomy`, `name`, `slug`) VALUES
+(6, 'category', '热门景点', 'tour'),
+(1, 'category', '门票', 'ticket'),
+(2, 'category', '一日游', 'day_tour'),
+(3, 'category', '餐饮', 'tour'),
+(5, 'category', '租车', 'tour');
+
+
 
 SET FOREIGN_KEY_CHECKS = 1;
