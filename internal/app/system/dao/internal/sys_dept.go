@@ -20,38 +20,38 @@ type SysDeptDao struct {
 
 // SysDeptColumns defines and stores column names for table sys_dept.
 type SysDeptColumns struct {
-	DeptId    string // 部门id
-	ParentId  string // 父部门id
-	Ancestors string // 祖级列表
-	DeptName  string // 部门名称
-	OrderNum  string // 显示顺序
-	Leader    string // 负责人
-	Phone     string // 联系电话
-	Email     string // 邮箱
-	Status    string // 部门状态（0正常 1停用）
-	CreatedBy string // 创建人
-	UpdatedBy string // 修改人
-	CreatedAt string // 创建时间
-	UpdatedAt string // 修改时间
-	DeletedAt string // 删除时间
+	DeptId     string // 部门id
+	ParentId   string // 父部门id
+	Ancestors  string // 祖级列表
+	DeptName   string // 部门名称
+	BookingNum string // 显示顺序
+	Leader     string // 负责人
+	Phone      string // 联系电话
+	Email      string // 邮箱
+	Status     string // 部门状态（0正常 1停用）
+	CreatedBy  string // 创建人
+	UpdatedBy  string // 修改人
+	CreatedAt  string // 创建时间
+	UpdatedAt  string // 修改时间
+	DeletedAt  string // 删除时间
 }
 
 // sysDeptColumns holds the columns for table sys_dept.
 var sysDeptColumns = SysDeptColumns{
-	DeptId:    "dept_id",
-	ParentId:  "parent_id",
-	Ancestors: "ancestors",
-	DeptName:  "dept_name",
-	OrderNum:  "order_num",
-	Leader:    "leader",
-	Phone:     "phone",
-	Email:     "email",
-	Status:    "status",
-	CreatedBy: "created_by",
-	UpdatedBy: "updated_by",
-	CreatedAt: "created_at",
-	UpdatedAt: "updated_at",
-	DeletedAt: "deleted_at",
+	DeptId:     "dept_id",
+	ParentId:   "parent_id",
+	Ancestors:  "ancestors",
+	DeptName:   "dept_name",
+	BookingNum: "booking_num",
+	Leader:     "leader",
+	Phone:      "phone",
+	Email:      "email",
+	Status:     "status",
+	CreatedBy:  "created_by",
+	UpdatedBy:  "updated_by",
+	CreatedAt:  "created_at",
+	UpdatedAt:  "updated_at",
+	DeletedAt:  "deleted_at",
 }
 
 // NewSysDeptDao creates and returns a new DAO object for table data access.

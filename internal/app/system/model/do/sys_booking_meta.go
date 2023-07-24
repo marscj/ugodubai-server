@@ -8,10 +8,11 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 )
 
-// SysSupplier is the golang structure of table sys_supplier for DAO operations like Where/Data.
-type SysSupplier struct {
-	g.Meta `orm:"table:sys_supplier, do:true"`
-	Id     interface{} // 唯一标识符
-	Name   interface{} // 名称
-	Code   interface{} // 名称
+// SysBookingMeta is the golang structure of table sys_booking_meta for DAO operations like Where/Data.
+type SysBookingMeta struct {
+	g.Meta    `orm:"table:sys_booking_meta, do:true"`
+	MetaId    interface{} //
+	BookingId interface{} //
+	MetaKey   interface{} //
+	MetaValue interface{} //
 }

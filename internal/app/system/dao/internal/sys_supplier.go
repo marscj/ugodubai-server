@@ -20,16 +20,16 @@ type SysSupplierDao struct {
 
 // SysSupplierColumns defines and stores column names for table sys_supplier.
 type SysSupplierColumns struct {
-	Id       string // 唯一标识符
-	Name     string // 名称
-	Banlance string // 余额
+	Id   string // 唯一标识符
+	Name string // 名称
+	Code string // 名称
 }
 
 // sysSupplierColumns holds the columns for table sys_supplier.
 var sysSupplierColumns = SysSupplierColumns{
-	Id:       "id",
-	Name:     "name",
-	Banlance: "banlance",
+	Id:   "id",
+	Name: "name",
+	Code: "code",
 }
 
 // NewSysSupplierDao creates and returns a new DAO object for table data access.

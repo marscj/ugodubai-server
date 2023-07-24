@@ -20,26 +20,26 @@ type SysRoleDao struct {
 
 // SysRoleColumns defines and stores column names for table sys_role.
 type SysRoleColumns struct {
-	Id        string //
-	Status    string // 状态;0:禁用;1:正常
-	ListOrder string // 排序
-	Name      string // 角色名称
-	Remark    string // 备注
-	DataScope string // 数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）
-	CreatedAt string // 创建时间
-	UpdatedAt string // 更新时间
+	Id          string //
+	Status      string // 状态;0:禁用;1:正常
+	ListBooking string // 排序
+	Name        string // 角色名称
+	Remark      string // 备注
+	DataScope   string // 数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）
+	CreatedAt   string // 创建时间
+	UpdatedAt   string // 更新时间
 }
 
 // sysRoleColumns holds the columns for table sys_role.
 var sysRoleColumns = SysRoleColumns{
-	Id:        "id",
-	Status:    "status",
-	ListOrder: "list_order",
-	Name:      "name",
-	Remark:    "remark",
-	DataScope: "data_scope",
-	CreatedAt: "created_at",
-	UpdatedAt: "updated_at",
+	Id:          "id",
+	Status:      "status",
+	ListBooking: "list_booking",
+	Name:        "name",
+	Remark:      "remark",
+	DataScope:   "data_scope",
+	CreatedAt:   "created_at",
+	UpdatedAt:   "updated_at",
 }
 
 // NewSysRoleDao creates and returns a new DAO object for table data access.

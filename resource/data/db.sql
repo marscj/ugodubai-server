@@ -518,7 +518,7 @@ CREATE TABLE `sys_booking` (
 DROP TABLE IF EXISTS `sys_booking_meta`;
 CREATE TABLE `sys_booking_meta` (
   `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `booking_id` bbigint(20) UNSIGNED NULL DEFAULT 0,
+  `booking_id` bigint(20) UNSIGNED NOT NULL,
   `meta_key` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `meta_value` longtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`meta_id`),
@@ -566,33 +566,27 @@ INSERT INTO `sys_payment_tokenmeta` (`meta_id`, `payment_token_id`, `meta_key`, 
 DROP TABLE IF EXISTS `sys_product`;
 CREATE TABLE `sys_product` (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
-  `description` longtext COLLATE utf8mb4_unicode_ci,
-  `short_description` longtext COLLATE utf8mb4_unicode_ci,
+  `sku` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT  'SKU',
+  `name` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
+  `description` longtext COLLATE utf8mb4_unicode_ci  COMMENT '产品简介',
+  `content` longtext COLLATE utf8mb4_unicode_ci COMMENT '产品内容',
+  `status` TINYINT NOT NULL DEFAULT 0 COMMENT '状态 0.下线 1.上线',
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '产品表' ROW_FORMAT = COMPACT;
-
--- ----------------------------
--- Table structure for sys_product_price
--- ----------------------------
-DROP TABLE IF EXISTS `sys_product_price`;
-CREATE TABLE `sys_product_price` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `product_id` bigint(20) UNSIGNED NULL DEFAULT '0',
-  `variation_id` bigint(20) UNSIGNED NULL DEFAULT '0', 
-  `agent_id` bigint(20) UNSIGNED NOT NULL DEFAULT '0',
-  `start_date` DATE DEFAULT NULL,
-  `end_date` DATE DEFAULT NULL,
-  `cost_price` DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '成本价',
-  `selling_price`  DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '销售价',
-  `special_price`  DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '预付价格',
-  `currency` VARCHAR(3)  NULL DEFAULT 'AED' COMMENT '货币',
-  `status` TINYINT NOT NULL DEFAULT '0' COMMENT '状态 0.下线 1.上线',
-  `limit` TINYINT NOT NULL DEFAULT '0' COMMENT '状态 0.使用库存 1.无限',
-  `stock` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '产品价格表' ROW_FORMAT = COMPACT;
-
+INSERT INTO `sys_product` (`sku`, `name`, `description`, `content`) VALUES
+('ATT', '哈利法塔', '迪拜塔，也被称为哈利法塔，是阿联酋迪拜市的标志性建筑物。它是世界上最高的人造结构物，高828米，拥有163层。迪拜塔于2010年完工，并成为一个多功能建筑，包括豪华酒店、住宅、观光景点和办公空间。塔内设有观景台，游客可以欣赏到壮观的城市景色。迪拜塔成为迪拜市的象征之一，吸引着全球游客前来参观。', '<div><p>参观迪拜塔时需要注意以下事项：</p>
+<ol>
+<li>提前预订门票：迪拜塔是一座著名的旅游景点，门票需提前预订以确保入场。</li>
+<li>遵守规定：参观者需遵守迪拜塔的参观规定和指示，包括禁止吸烟、禁止携带食物等。</li>
+<li>注意穿着：建议穿着轻便舒适的服装，因为在迪拜塔室外环境可能较炎热。</li>
+<li>爬塔禁止：迪拜塔的顶部并不对公众开放，不允许任何人爬塔或试图进入无授权区域。</li>
+<li>安全意识：参观时请保持警惕，注意个人财物安全，并遵守塔内的安全提示和指示。</li>
+<li>摄影规定：摄影是允许的，但需要遵守规定，尤其是在观景台上注意不要阻碍其他游客。</li>
+<li>注意时间安排：预计参观迪拜塔可能需要一些时间，包括排队等待和观赏城市景色，建议提前做好时间规划。</li>
+<li>注意天气状况：由于迪拜气候炎热，建议参观者带上防晒霜、帽子和水，并在炎热期间随时寻找遮阴处。
+请记住这些注意事项以确保您的参观体验顺利和愉快。</li>
+</ol>
+</div>');
 
 -- ----------------------------
 -- Table structure for sys_product_meta
@@ -607,6 +601,52 @@ CREATE TABLE `sys_product_meta` (
   KEY `product_id` (`product_id`),
   KEY `meta_key` (`meta_key`(32))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品meta表' ROW_FORMAT = COMPACT;
+INSERT INTO `sys_product_meta` (`meta_id`, `product_id`, `meta_key`, `meta_value`) VALUES
+(1, 1, 'category', '1'),
+(2, 1, 'tag', '5'),
+(3, 1, 'tag', '6'),
+(4, 1, 'idle_url', 'google.com'),
+(5, 1, 'gallery_url', 'google.com'),
+(6, 1, 'gallery_url', 'google.com');
+
+-- ----------------------------
+-- Table structure for sys_product_variation
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_product_variation`;
+CREATE TABLE `sys_product_variation` (
+  `variation_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `product_id` bigint(20) UNSIGNED NULL DEFAULT '0',
+  `name` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
+  `sku` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT  'SKU',
+  `status` TINYINT NOT NULL DEFAULT '0' COMMENT '状态 0.下线 1.上线',
+  `limit` TINYINT NOT NULL DEFAULT '0' COMMENT '状态 0.无限 1.使用库存',
+  `stock` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`variation_id`)
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '产品变体表' ROW_FORMAT = COMPACT;
+INSERT INTO `sys_product_variation` (`variation_id`, `product_id`, `name`, `sku`) VALUES
+(1, 1, '124+125层普通票', '124+125'),
+(2, 1, '124+125层普通票(儿童)', '124+125 CHILD');
+
+-- ----------------------------
+-- Table structure for sys_product_price
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_product_price`;
+CREATE TABLE `sys_product_price` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `product_id` bigint(20) UNSIGNED NULL DEFAULT '0',
+  `variation_id` bigint(20) UNSIGNED NULL DEFAULT '0',
+  `agent_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `start_date` DATE DEFAULT NULL,
+  `end_date` DATE DEFAULT NULL,
+  `cost_price` DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '成本价',
+  `special_price`  DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '预付价格',
+  `selling_price`  DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '销售价',
+  `currency` VARCHAR(3)  NULL DEFAULT 'AED' COMMENT '货币',
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '产品变体表' ROW_FORMAT = COMPACT;
+INSERT INTO `sys_product_price` (`variation_id`, `product_id`, `start_date`, `end_date`, `cost_price`,`special_price`,`selling_price`) VALUES
+(1, 1, '2023-07-24', '2023-07-30', '147.00', '150.00', '155.00'),
+(2, 2, '2023-07-24', '2023-07-30', '120.00', '124.00', '147.00');
 
 -- ----------------------------
 -- Table structure for sys_terms
@@ -625,11 +665,12 @@ CREATE TABLE `sys_terms` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品术语表' ROW_FORMAT = COMPACT;
 
 INSERT INTO `sys_terms` (`term_id`, `taxonomy`, `name`, `slug`) VALUES
-(6, 'category', '热门景点', 'tour'),
 (1, 'category', '门票', 'ticket'),
 (2, 'category', '一日游', 'day_tour'),
 (3, 'category', '餐饮', 'tour'),
-(5, 'category', '租车', 'tour');
+(4, 'category', '租车', 'tour'),
+(5, 'tag', '特色推荐', 'featured'),
+(6, 'tag', '必玩', 'biwan');
 
 
 
