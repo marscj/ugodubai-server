@@ -19,10 +19,7 @@ type SysProductPrice struct {
 	StartDate    *gtime.Time //
 	EndDate      *gtime.Time //
 	CostPrice    interface{} // 成本价
-	SellingPrice interface{} // 销售价
 	SpecialPrice interface{} // 预付价格
+	SellingPrice interface{} // 销售价
 	Currency     interface{} // 货币
-	Status       interface{} // 状态 0.下线 1.上线
-	Limit        interface{} // 状态 0.使用库存 1.无限
-	Stock        interface{} //
 }

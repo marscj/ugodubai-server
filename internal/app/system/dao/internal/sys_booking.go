@@ -20,26 +20,56 @@ type SysBookingDao struct {
 
 // SysBookingColumns defines and stores column names for table sys_booking.
 type SysBookingColumns struct {
-	Id        string // 代理商ID
-	ParentId  string // 父
-	RelatedId string // 关联订单ID
-	AgentId   string // 代理商ID
-	CreatedBy string // 创建者
-	UpdatedBy string // 更新者
-	CreatedAt string //
-	UpdatedAt string //
+	Id            string // 代理商ID
+	ParentId      string // 父
+	RelatedId     string // 关联订单ID
+	AgentId       string // 代理商ID
+	ActionDate    string // 执行日期
+	ProductId     string // 产品ID
+	VariationId   string // 变体产品
+	FitNumber     string // FIT
+	Sku           string // SKU
+	GuestName     string // 客人姓名
+	GuestContact  string // 客人联系方式
+	ProductName   string // 产品名称
+	UnitPrice     string // 单价
+	Quantity      string // 数量
+	TotalPrice    string // 总价
+	Tax           string // 税
+	BookingStatus string // 订单状态 0.待核单 1.已核单出票中 2.已出票 3.取消待确认 4.已取消
+	Remark        string // 备注
+	Currency      string // 货币
+	CreatedBy     string // 创建者
+	UpdatedBy     string // 更新者
+	CreatedAt     string //
+	UpdatedAt     string //
 }
 
 // sysBookingColumns holds the columns for table sys_booking.
 var sysBookingColumns = SysBookingColumns{
-	Id:        "id",
-	ParentId:  "parent_id",
-	RelatedId: "related_id",
-	AgentId:   "agent_id",
-	CreatedBy: "created_by",
-	UpdatedBy: "updated_by",
-	CreatedAt: "created_at",
-	UpdatedAt: "updated_at",
+	Id:            "id",
+	ParentId:      "parent_id",
+	RelatedId:     "related_id",
+	AgentId:       "agent_id",
+	ActionDate:    "action_date",
+	ProductId:     "product_id",
+	VariationId:   "variation_id",
+	FitNumber:     "fit_number",
+	Sku:           "sku",
+	GuestName:     "guest_name",
+	GuestContact:  "guest_contact",
+	ProductName:   "product_name",
+	UnitPrice:     "unit_price",
+	Quantity:      "quantity",
+	TotalPrice:    "total_price",
+	Tax:           "tax",
+	BookingStatus: "booking_status",
+	Remark:        "remark",
+	Currency:      "currency",
+	CreatedBy:     "created_by",
+	UpdatedBy:     "updated_by",
+	CreatedAt:     "created_at",
+	UpdatedAt:     "updated_at",
 }
 
 // NewSysBookingDao creates and returns a new DAO object for table data access.
