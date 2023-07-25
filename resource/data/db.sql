@@ -527,6 +527,20 @@ CREATE TABLE `sys_booking_meta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '订单meta表' ROW_FORMAT = COMPACT;
 
 -- ----------------------------
+-- Table structure for sys_gateway
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_gateway`;
+CREATE TABLE `sys_gateway` (
+  `gateway_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
+  PRIMARY KEY (`gateway_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '支付表' ROW_FORMAT = COMPACT;
+INSERT INTO `sys_gateway` (`name`) VALUES
+('余额'),
+('信用度'),
+('银行转账');
+
+-- ----------------------------
 -- Table structure for sys_payment_tokens
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_payment_tokens`;
@@ -556,6 +570,7 @@ CREATE TABLE `sys_payment_tokenmeta` (
   KEY `payment_token_id` (`payment_token_id`),
   KEY `meta_key` (`meta_key`(32))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '支付meta表' ROW_FORMAT = COMPACT;
+
 INSERT INTO `sys_payment_tokenmeta` (`meta_id`, `payment_token_id`, `meta_key`, `meta_value`) VALUES
 (1, 1, 'image_url', 'google.com'),
 (2, 1, 'image_url', 'google.com');
@@ -571,8 +586,10 @@ CREATE TABLE `sys_product` (
   `description` longtext COLLATE utf8mb4_unicode_ci  COMMENT '产品简介',
   `content` longtext COLLATE utf8mb4_unicode_ci COMMENT '产品内容',
   `status` TINYINT NOT NULL DEFAULT 0 COMMENT '状态 0.下线 1.上线',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `name` (`name`)
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '产品表' ROW_FORMAT = COMPACT;
+
 INSERT INTO `sys_product` (`sku`, `name`, `description`, `content`) VALUES
 ('ATT', '哈利法塔', '迪拜塔，也被称为哈利法塔，是阿联酋迪拜市的标志性建筑物。它是世界上最高的人造结构物，高828米，拥有163层。迪拜塔于2010年完工，并成为一个多功能建筑，包括豪华酒店、住宅、观光景点和办公空间。塔内设有观景台，游客可以欣赏到壮观的城市景色。迪拜塔成为迪拜市的象征之一，吸引着全球游客前来参观。', '<div><p>参观迪拜塔时需要注意以下事项：</p>
 <ol>
@@ -595,12 +612,13 @@ DROP TABLE IF EXISTS `sys_product_meta`;
 CREATE TABLE `sys_product_meta` (
   `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `product_id` bigint(20) UNSIGNED NULL DEFAULT '0',
-  `meta_key` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `meta_key` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `meta_value` longtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`meta_id`),
   KEY `product_id` (`product_id`),
   KEY `meta_key` (`meta_key`(32))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品meta表' ROW_FORMAT = COMPACT;
+
 INSERT INTO `sys_product_meta` (`meta_id`, `product_id`, `meta_key`, `meta_value`) VALUES
 (1, 1, 'category', '1'),
 (2, 1, 'tag', '5'),
@@ -623,58 +641,89 @@ CREATE TABLE `sys_product_variation` (
   `stock` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`variation_id`)
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '产品变体表' ROW_FORMAT = COMPACT;
+
 INSERT INTO `sys_product_variation` (`variation_id`, `product_id`, `name`, `sku`) VALUES
-(1, 1, '124+125层普通票', '124+125'),
-(2, 1, '124+125层普通票(儿童)', '124+125 CHILD');
+(1, 1, '124+125层普通票', '124+125');
 
 -- ----------------------------
--- Table structure for sys_product_price
+-- Table structure for sys_product_variation_meta
 -- ----------------------------
-DROP TABLE IF EXISTS `sys_product_price`;
-CREATE TABLE `sys_product_price` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `product_id` bigint(20) UNSIGNED NULL DEFAULT '0',
+DROP TABLE IF EXISTS `sys_product_variation_meta`;
+CREATE TABLE `sys_product_variation_meta` (
+  `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `variation_id` bigint(20) UNSIGNED NULL DEFAULT '0',
+  `meta_key` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `meta_value` longtext COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`meta_id`),
+  KEY `variation_id` (`variation_id`),
+  KEY `meta_key` (`meta_key`(32))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品变体META表' ROW_FORMAT = COMPACT;
+
+INSERT INTO `sys_product_variation_meta` (`meta_id`, `variation_id`, `meta_key`, `meta_value`) VALUES
+(1, 1, 'age', '成人'),
+(2, 1, 'age', '小孩');
+
+-- ----------------------------
+-- Table structure for sys_product_variation_price
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_product_variation_price`;
+CREATE TABLE `sys_product_variation_price` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `variation_meta_id` bigint(20) UNSIGNED NULL DEFAULT '0',
   `agent_id` bigint(20) UNSIGNED DEFAULT NULL,
   `start_date` DATE DEFAULT NULL,
   `end_date` DATE DEFAULT NULL,
   `cost_price` DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '成本价',
   `special_price`  DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '预付价格',
   `selling_price`  DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '销售价',
-  `child_cost_price` DECIMAL(10, 2)   DEFAULT NULL COMMENT '儿童成本价',
-  `child_special_price`  DECIMAL(10, 2) DEFAULT NULL  COMMENT '儿童预付价格',
-  `child_selling_price`  DECIMAL(10, 2) DEFAULT NULL  COMMENT '儿童销售价',
   `currency` VARCHAR(3)  NULL DEFAULT 'AED' COMMENT '货币',
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '产品变体表' ROW_FORMAT = COMPACT;
-INSERT INTO `sys_product_price` (`variation_id`, `product_id`, `start_date`, `end_date`, `cost_price`,`special_price`,`selling_price`) VALUES
-(1, 1, '2023-07-24', '2023-07-30', '147.00', '150.00', '155.00'),
-(2, 2, '2023-07-24', '2023-07-30', '120.00', '124.00', '147.00');
+
+INSERT INTO `sys_product_variation_price` (`variation_meta_id`, `start_date`, `end_date`, `cost_price`,`special_price`,`selling_price`) VALUES
+(1, '2023-07-24', '2023-07-30', '147.00', '150.00', '155.00'),
+(2, '2023-07-24', '2023-07-30', '120.00', '124.00', '147.00');
 
 -- ----------------------------
 -- Table structure for sys_terms
 -- ----------------------------
-DROP TABLE IF EXISTS `sys_terms`;
-CREATE TABLE `sys_terms` (
+DROP TABLE IF EXISTS `sys_product_terms`;
+CREATE TABLE `sys_product_terms` (
   `term_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `taxonomy` varchar(32) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
   `parent` bigint(20) UNSIGNED NOT NULL DEFAULT '0',
-  `name` varchar(200) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
-  `slug` varchar(200) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
+  `name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
+  `slug` varchar(100) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
   `term_order` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`term_id`),
-  KEY `slug` (`slug`(191)),
-  KEY `name` (`name`(191))
+  PRIMARY KEY (`term_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品术语表' ROW_FORMAT = COMPACT;
 
-INSERT INTO `sys_terms` (`term_id`, `taxonomy`, `name`, `slug`) VALUES
+INSERT INTO `sys_product_terms` (`term_id`, `taxonomy`, `name`, `slug`) VALUES
 (1, 'category', '门票', 'ticket'),
-(2, 'category', '一日游', 'day_tour'),
-(3, 'category', '餐饮', 'tour'),
-(4, 'category', '租车', 'tour'),
+(2, 'category', '一日游', 'day-tour'),
+(3, 'category', '餐饮', 'food'),
+(4, 'category', '租车', 'car-rental'),
 (5, 'tag', '特色推荐', 'featured'),
 (6, 'tag', '必玩', 'biwan');
 
+-- ----------------------------
+-- Table structure for sys_translation
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_translation`;
+CREATE TABLE sys_translation (
+  `id` bigint(20) UNSIGNED AUTO_INCREMENT COMMENT '唯一标识符',
+  `record_type` VARCHAR(50),
+  `record_id` bigint(20) UNSIGNED NOT NULL DEFAULT '0',
+  `language_code` VARCHAR(20) COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'zh-CN',
+  `meta_key` VARCHAR(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `meta_value` longtext COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`id`),
+  KEY `record_type` (`record_type`),
+  KEY `meta_key` (`meta_key`(32))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '语言翻译表' ROW_FORMAT = COMPACT;
 
+INSERT INTO `sys_translation` (`record_type`, `record_id`,`language_code`, `meta_key`, `meta_value`) VALUES
+('Product', 1, 'zh-CN', 'name', '哈利法塔'),
+('Product', 1, 'en-US', 'name', 'Burj Khalifa');
 
 SET FOREIGN_KEY_CHECKS = 1;
