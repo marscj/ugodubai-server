@@ -641,6 +641,9 @@ CREATE TABLE `sys_product_price` (
   `cost_price` DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '成本价',
   `special_price`  DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '预付价格',
   `selling_price`  DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '销售价',
+  `child_cost_price` DECIMAL(10, 2)   DEFAULT NULL COMMENT '儿童成本价',
+  `child_special_price`  DECIMAL(10, 2) DEFAULT NULL  COMMENT '儿童预付价格',
+  `child_selling_price`  DECIMAL(10, 2) DEFAULT NULL  COMMENT '儿童销售价',
   `currency` VARCHAR(3)  NULL DEFAULT 'AED' COMMENT '货币',
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '产品变体表' ROW_FORMAT = COMPACT;

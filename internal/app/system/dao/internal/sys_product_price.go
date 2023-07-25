@@ -20,30 +20,36 @@ type SysProductPriceDao struct {
 
 // SysProductPriceColumns defines and stores column names for table sys_product_price.
 type SysProductPriceColumns struct {
-	Id           string //
-	ProductId    string //
-	VariationId  string //
-	AgentId      string //
-	StartDate    string //
-	EndDate      string //
-	CostPrice    string // 成本价
-	SpecialPrice string // 预付价格
-	SellingPrice string // 销售价
-	Currency     string // 货币
+	Id                string //
+	ProductId         string //
+	VariationId       string //
+	AgentId           string //
+	StartDate         string //
+	EndDate           string //
+	CostPrice         string // 成本价
+	SpecialPrice      string // 预付价格
+	SellingPrice      string // 销售价
+	ChildCostPrice    string // 儿童成本价
+	ChildSpecialPrice string // 儿童预付价格
+	ChildSellingPrice string // 儿童销售价
+	Currency          string // 货币
 }
 
 // sysProductPriceColumns holds the columns for table sys_product_price.
 var sysProductPriceColumns = SysProductPriceColumns{
-	Id:           "id",
-	ProductId:    "product_id",
-	VariationId:  "variation_id",
-	AgentId:      "agent_id",
-	StartDate:    "start_date",
-	EndDate:      "end_date",
-	CostPrice:    "cost_price",
-	SpecialPrice: "special_price",
-	SellingPrice: "selling_price",
-	Currency:     "currency",
+	Id:                "id",
+	ProductId:         "product_id",
+	VariationId:       "variation_id",
+	AgentId:           "agent_id",
+	StartDate:         "start_date",
+	EndDate:           "end_date",
+	CostPrice:         "cost_price",
+	SpecialPrice:      "special_price",
+	SellingPrice:      "selling_price",
+	ChildCostPrice:    "child_cost_price",
+	ChildSpecialPrice: "child_special_price",
+	ChildSellingPrice: "child_selling_price",
+	Currency:          "currency",
 }
 
 // NewSysProductPriceDao creates and returns a new DAO object for table data access.
