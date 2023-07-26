@@ -434,7 +434,7 @@ DROP TABLE IF EXISTS `sys_agent`;
 
 -- 创建sys_agent表并设置自增ID从10开始，并添加COMMENT和ROW_FORMAT
 CREATE TABLE `sys_agent` (
-    `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '代理商ID',
+    `agent_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '代理商ID',
     `name` VARCHAR(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
     `email` VARCHAR(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '邮箱',
     `contact_name` VARCHAR(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '联系人姓名',
@@ -451,7 +451,7 @@ CREATE TABLE `sys_agent` (
     `license_url` VARCHAR(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '许可证URL',
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    PRIMARY KEY (`id`) USING BTREE,
+    PRIMARY KEY (`agent_id`) USING BTREE,
     UNIQUE INDEX `name`(`name`) USING BTREE,
     UNIQUE INDEX `agent_code`(`agent_code`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '代理商表' ROW_FORMAT = COMPACT;
@@ -472,7 +472,7 @@ INSERT INTO `sys_agent` VALUES (10, 'Starking', 'agent10@example.com', 'Contact 
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_supplier`;
 CREATE TABLE `sys_supplier` (
-  `id` bigint(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY COMMENT '唯一标识符',
+  `supplier_id` bigint(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY COMMENT '唯一标识符',
   `name` VARCHAR(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
   `code` VARCHAR(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
   UNIQUE INDEX `name`(`name`) USING BTREE
@@ -484,7 +484,7 @@ CREATE TABLE `sys_supplier` (
 -- 删除现有的sys_booking表
 DROP TABLE IF EXISTS `sys_booking`;
 CREATE TABLE `sys_booking` ( 
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '代理商ID',
+  `booking_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '代理商ID',
   `parent_id` bigint(20) UNSIGNED NULL DEFAULT 0 COMMENT '父',
   `related_id` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT  '关联订单ID',
   `agent_id` bigint(20) UNSIGNED NULL DEFAULT 0 COMMENT '代理商ID',
@@ -509,7 +509,7 @@ CREATE TABLE `sys_booking` (
   `updated_by` bigint(20) UNSIGNED NULL DEFAULT 0 COMMENT '更新者',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP, 
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`) USING BTREE
+  PRIMARY KEY (`booking_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 10000 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '订单表' ROW_FORMAT = COMPACT;
 
 -- ----------------------------
@@ -580,7 +580,7 @@ CREATE TABLE `sys_payment_tokenmeta` (
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_product`;
 CREATE TABLE `sys_product` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `product_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `sku` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT  'SKU',
   `name_en` VARCHAR(180) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
   `name_cn` VARCHAR(180) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
@@ -590,7 +590,7 @@ CREATE TABLE `sys_product` (
   `content_cn` longtext COLLATE utf8mb4_unicode_ci COMMENT '产品内容',
   `status` TINYINT NOT NULL DEFAULT 0 COMMENT '状态 0.下线 1.上线',
   `image` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '缩略图',
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`product_id`),
   KEY `name_en` (`name_en`),
   KEY `name_cn` (`name_cn`)
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '产品表' ROW_FORMAT = COMPACT;
@@ -721,7 +721,7 @@ CREATE TABLE `sys_product_variation_price` (
 
 INSERT INTO `sys_product_variation_price` (`variation_id`, `attribute_id`, `agent_id`, `start_date`, `end_date`, `cost_price`,`special_price`,`selling_price`) VALUES
 (1, 1, 1, '2023-07-24', '2023-07-30', '147.00', '150.00', '155.00'),
-(1, 2, 1, '2023-07-24', '2023-07-30', '120.00', '124.00', '147.00');
+(1, 2, 2, '2023-07-24', '2023-07-30', '120.00', '124.00', '147.00');
 
 
 

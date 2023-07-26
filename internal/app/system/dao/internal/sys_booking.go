@@ -20,7 +20,7 @@ type SysBookingDao struct {
 
 // SysBookingColumns defines and stores column names for table sys_booking.
 type SysBookingColumns struct {
-	Id            string // 代理商ID
+	BookingId     string // 代理商ID
 	ParentId      string // 父
 	RelatedId     string // 关联订单ID
 	AgentId       string // 代理商ID
@@ -47,7 +47,7 @@ type SysBookingColumns struct {
 
 // sysBookingColumns holds the columns for table sys_booking.
 var sysBookingColumns = SysBookingColumns{
-	Id:            "id",
+	BookingId:     "booking_id",
 	ParentId:      "parent_id",
 	RelatedId:     "related_id",
 	AgentId:       "agent_id",

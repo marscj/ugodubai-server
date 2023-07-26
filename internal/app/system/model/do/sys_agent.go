@@ -12,7 +12,7 @@ import (
 // SysAgent is the golang structure of table sys_agent for DAO operations like Where/Data.
 type SysAgent struct {
 	g.Meta             `orm:"table:sys_agent, do:true"`
-	Id                 interface{} // 代理商ID
+	AgentId            interface{} // 代理商ID
 	Name               interface{} // 名称
 	Email              interface{} // 邮箱
 	ContactName        interface{} // 联系人姓名

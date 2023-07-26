@@ -1,11 +1,15 @@
 package model
 
-import "ugodubai-server/internal/app/system/model/entity"
+import (
+	"ugodubai-server/internal/app/system/model/do"
+	"ugodubai-server/internal/app/system/model/entity"
+)
 
 type SysProduct struct {
 	*entity.SysProduct
-	Meta      []*SysProductMeta      `orm:"with:product_id=id" json:"meta"`
-	Variation []*SysProductVariation `orm:"with:product_id=id" json:"variation"`
+	Meta      []*SysProductMeta        `orm:"with:product_id=product_id" json:"meta"`
+	Terms     []*SysProductTermsLookup `orm:"with:product_id=product_id" json:"terms"`
+	Variation []*SysProductVariation   `orm:"with:product_id=product_id" json:"variation"`
 }
 
 type SysProductMeta struct {
@@ -28,5 +32,10 @@ type SysProductAttribute struct {
 }
 
 type SysProductTerms struct {
-	*entity.SysProductTerms
+	*do.SysProductTerms
+}
+
+type SysProductTermsLookup struct {
+	*do.SysProductTermsLookup
+	Terms []*entity.SysProductTerms `orm:"with:term_id=term_id" json:"terms"`
 }

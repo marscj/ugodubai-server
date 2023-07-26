@@ -11,7 +11,7 @@ import (
 // SysProduct is the golang structure of table sys_product for DAO operations like Where/Data.
 type SysProduct struct {
 	g.Meta        `orm:"table:sys_product, do:true"`
-	Id            interface{} //
+	ProductId     interface{} //
 	Sku           interface{} // SKU
 	NameEn        interface{} // 名称
 	NameCn        interface{} // 名称

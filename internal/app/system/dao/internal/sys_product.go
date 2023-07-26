@@ -20,7 +20,7 @@ type SysProductDao struct {
 
 // SysProductColumns defines and stores column names for table sys_product.
 type SysProductColumns struct {
-	Id            string //
+	ProductId     string //
 	Sku           string // SKU
 	NameEn        string // 名称
 	NameCn        string // 名称
@@ -34,7 +34,7 @@ type SysProductColumns struct {
 
 // sysProductColumns holds the columns for table sys_product.
 var sysProductColumns = SysProductColumns{
-	Id:            "id",
+	ProductId:     "product_id",
 	Sku:           "sku",
 	NameEn:        "name_en",
 	NameCn:        "name_cn",

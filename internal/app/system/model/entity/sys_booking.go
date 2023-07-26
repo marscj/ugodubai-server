@@ -10,7 +10,7 @@ import (
 
 // SysBooking is the golang structure for table sys_booking.
 type SysBooking struct {
-	Id            uint64      `json:"id"            description:"代理商ID"`
+	BookingId     uint64      `json:"bookingId"     description:"代理商ID"`
 	ParentId      uint64      `json:"parentId"      description:"父"`
 	RelatedId     string      `json:"relatedId"     description:"关联订单ID"`
 	AgentId       uint64      `json:"agentId"       description:"代理商ID"`

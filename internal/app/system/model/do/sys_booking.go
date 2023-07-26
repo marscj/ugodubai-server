@@ -12,7 +12,7 @@ import (
 // SysBooking is the golang structure of table sys_booking for DAO operations like Where/Data.
 type SysBooking struct {
 	g.Meta        `orm:"table:sys_booking, do:true"`
-	Id            interface{} // 代理商ID
+	BookingId     interface{} // 代理商ID
 	ParentId      interface{} // 父
 	RelatedId     interface{} // 关联订单ID
 	AgentId       interface{} // 代理商ID

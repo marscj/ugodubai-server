@@ -6,7 +6,7 @@ package entity
 
 // SysProduct is the golang structure for table sys_product.
 type SysProduct struct {
-	Id            uint64 `json:"id"            description:""`
+	ProductId     uint64 `json:"productId"     description:""`
 	Sku           string `json:"sku"           description:"SKU"`
 	NameEn        string `json:"nameEn"        description:"名称"`
 	NameCn        string `json:"nameCn"        description:"名称"`

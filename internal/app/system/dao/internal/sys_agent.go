@@ -20,7 +20,7 @@ type SysAgentDao struct {
 
 // SysAgentColumns defines and stores column names for table sys_agent.
 type SysAgentColumns struct {
-	Id                 string // 代理商ID
+	AgentId            string // 代理商ID
 	Name               string // 名称
 	Email              string // 邮箱
 	ContactName        string // 联系人姓名
@@ -41,7 +41,7 @@ type SysAgentColumns struct {
 
 // sysAgentColumns holds the columns for table sys_agent.
 var sysAgentColumns = SysAgentColumns{
-	Id:                 "id",
+	AgentId:            "agent_id",
 	Name:               "name",
 	Email:              "email",
 	ContactName:        "contact_name",
