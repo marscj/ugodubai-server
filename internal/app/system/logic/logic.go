@@ -26,5 +26,5 @@ import (
 
 	_ "ugodubai-server/internal/app/system/logic/sysAgent"
 
-	_ "ugodubai-server/internal/app/system/logic/sysOrder"
+	_ "ugodubai-server/internal/app/system/logic/sysBooking"
 )

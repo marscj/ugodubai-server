@@ -1,4 +1,4 @@
-package sysOrder
+package sysBooking
 
 import (
 	"context"
@@ -13,21 +13,21 @@ import (
 )
 
 func init() {
-	service.RegisterSysOrder(New())
+	service.RegisterSysBooking(New())
 }
 
-func New() *sSysOrder {
-	return &sSysOrder{}
+func New() *sSysBooking {
+	return &sSysBooking{}
 }
 
-type sSysOrder struct {
+type sSysBooking struct {
 }
 
 // List 代理商列表
-func (s *sSysOrder) List(ctx context.Context, req *system.OrderListReq) (total interface{}, orderList []*model.SysOrder, err error) {
+func (s *sSysBooking) List(ctx context.Context, req *system.BookingListReq) (total interface{}, bookingList []*model.SysBooking, err error) {
 
 	err = g.Try(ctx, func(ctx context.Context) {
-		m := dao.SysOrder.Ctx(ctx)
+		m := dao.SysBooking.Ctx(ctx)
 		total, err = m.Count()
 		liberr.ErrIsNil(ctx, err, "代理商列表获取失败")
 
@@ -38,17 +38,17 @@ func (s *sSysOrder) List(ctx context.Context, req *system.OrderListReq) (total i
 			req.PageSize = consts.PageSize
 		}
 
-		err = m.Page(req.PageNum, req.PageSize).Order("id desc").Scan(&orderList)
+		err = m.Page(req.PageNum, req.PageSize).Order("id desc").Scan(&bookingList)
 		liberr.ErrIsNil(ctx, err, "代理商列表获取失败")
 	})
 	return
 }
 
 //  通过Id获取代理商信息
-func (s *sSysOrder) Get(ctx context.Context, id uint64) (order *model.SysOrder, err error) {
+func (s *sSysBooking) Get(ctx context.Context, id uint64) (booking *model.SysBooking, err error) {
 
 	err = g.Try(ctx, func(ctx context.Context) {
-		err = dao.SysOrder.Ctx(ctx).WherePri(id).Scan(&order)
+		err = dao.SysBooking.Ctx(ctx).WherePri(id).Scan(&booking)
 
 		if err != nil {
 			liberr.ErrIsNil(ctx, err, "代理商信息获取失败")

@@ -7,23 +7,23 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 )
 
-type OrderListReq struct {
+type BookingListReq struct {
 	g.Meta `path:"/order/list" tags:"订单管理" method:"get" summary:"订单列表"`
 	commonApi.PageReq
 }
 
-type OrderListRes struct {
-	g.Meta `mime:"application/json"`
-	Orders []*model.SysOrder `json:"order"`
+type BookingListRes struct {
+	g.Meta   `mime:"application/json"`
+	Bookings []*model.SysBooking `json:"order"`
 	commonApi.ListRes
 }
 
-type OrderGetReq struct {
+type BookingGetReq struct {
 	g.Meta `path:"/order/get" tags:"订单管理" method:"get" summary:"获取订单商信息"`
 	Id     uint64 `p:"id" v:"required#订单id不能为空""`
 }
 
-type OrderGetRes struct {
-	g.Meta `mime:"application/json"`
-	Order  *model.SysOrder `json:"order"`
+type BookingGetRes struct {
+	g.Meta  `mime:"application/json"`
+	Booking *model.SysBooking `json:"order"`
 }

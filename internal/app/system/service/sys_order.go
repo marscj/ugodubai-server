@@ -7,20 +7,20 @@ import (
 	"ugodubai-server/internal/app/system/model"
 )
 
-type ISysOrder interface {
-	List(ctx context.Context, req *system.OrderListReq) (total interface{}, orderList []*model.SysOrder, err error)
-	Get(ctx context.Context, id uint64) (order *model.SysOrder, err error)
+type ISysBooking interface {
+	List(ctx context.Context, req *system.BookingListReq) (total interface{}, bookingList []*model.SysBooking, err error)
+	Get(ctx context.Context, id uint64) (booking *model.SysBooking, err error)
 }
 
-var localSysOrder ISysOrder
+var localSysBooking ISysBooking
 
-func SysOrder() ISysOrder {
-	if localSysOrder == nil {
-		panic("implement not found for interface ISysOrder, forgot register?")
+func SysBooking() ISysBooking {
+	if localSysBooking == nil {
+		panic("implement not found for interface ISysBooking, forgot register?")
 	}
-	return localSysOrder
+	return localSysBooking
 }
 
-func RegisterSysOrder(i ISysOrder) {
-	localSysOrder = i
+func RegisterSysBooking(i ISysBooking) {
+	localSysBooking = i
 }
