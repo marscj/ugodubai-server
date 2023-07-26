@@ -8,7 +8,8 @@ package entity
 type SysProductVariation struct {
 	VariationId uint64 `json:"variationId" description:""`
 	ProductId   uint64 `json:"productId"   description:""`
-	Name        string `json:"name"        description:"默认名称"`
+	NameEn      string `json:"nameEn"      description:"默认名称"`
+	NameCn      string `json:"nameCn"      description:"默认名称"`
 	Sku         string `json:"sku"         description:"SKU"`
 	Status      int    `json:"status"      description:"状态 0.下线 1.上线"`
 }

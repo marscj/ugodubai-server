@@ -646,11 +646,10 @@ CREATE TABLE `sys_product_meta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品meta表' ROW_FORMAT = COMPACT;
 
 INSERT INTO `sys_product_meta` (`meta_id`, `product_id`, `meta_key`, `meta_value`) VALUES
-(1, 1, 'sys_product_terms', '1'),
-(2, 1, 'sys_product_terms', '5'),
-(3, 1, 'sys_product_terms', '6'),
-(5, 1, 'gallery_url', 'google.com'),
-(6, 1, 'gallery_url', 'google.com');
+(1, 1, 'gallery_url', 'google.com'),
+(2, 1, 'gallery_url', 'google.com'),
+(3, 1, 'sys_product_terms', '1'),
+(4, 1, 'sys_product_terms', '5');
 
 -- ----------------------------
 -- Table structure for sys_product_variation
@@ -659,13 +658,14 @@ DROP TABLE IF EXISTS `sys_product_variation`;
 CREATE TABLE `sys_product_variation` (
   `variation_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `product_id` bigint(20) UNSIGNED NULL DEFAULT '0',
-  `name` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '默认名称',
+  `name_en` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '默认名称',
+  `name_cn` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '默认名称',
   `sku` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT  'SKU',
   `status` TINYINT NOT NULL DEFAULT '0' COMMENT '状态 0.下线 1.上线',
   PRIMARY KEY (`variation_id`)
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '产品变体表' ROW_FORMAT = COMPACT;
 
-INSERT INTO `sys_product_variation` (`variation_id`, `product_id`, `name`, `sku`) VALUES
+INSERT INTO `sys_product_variation` (`variation_id`, `product_id`, `name_cn`, `sku`) VALUES
 (1, 1, '124+125层普通票', '124+125');
 
 -- ----------------------------

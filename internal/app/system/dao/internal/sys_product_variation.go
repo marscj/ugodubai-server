@@ -22,7 +22,8 @@ type SysProductVariationDao struct {
 type SysProductVariationColumns struct {
 	VariationId string //
 	ProductId   string //
-	Name        string // 默认名称
+	NameEn      string // 默认名称
+	NameCn      string // 默认名称
 	Sku         string // SKU
 	Status      string // 状态 0.下线 1.上线
 }
@@ -31,7 +32,8 @@ type SysProductVariationColumns struct {
 var sysProductVariationColumns = SysProductVariationColumns{
 	VariationId: "variation_id",
 	ProductId:   "product_id",
-	Name:        "name",
+	NameEn:      "name_en",
+	NameCn:      "name_cn",
 	Sku:         "sku",
 	Status:      "status",
 }
