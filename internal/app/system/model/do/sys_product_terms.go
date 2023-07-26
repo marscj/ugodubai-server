@@ -10,11 +10,10 @@ import (
 
 // SysProductTerms is the golang structure of table sys_product_terms for DAO operations like Where/Data.
 type SysProductTerms struct {
-	g.Meta    `orm:"table:sys_product_terms, do:true"`
-	TermId    interface{} //
-	Taxonomy  interface{} //
-	Parent    interface{} //
-	Name      interface{} //
-	Slug      interface{} //
-	TermOrder interface{} //
+	g.Meta   `orm:"table:sys_product_terms, do:true"`
+	TermId   interface{} //
+	Taxonomy interface{} //
+	Parent   interface{} //
+	NameEn   interface{} //
+	NameCn   interface{} //
 }

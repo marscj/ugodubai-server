@@ -20,22 +20,28 @@ type SysProductDao struct {
 
 // SysProductColumns defines and stores column names for table sys_product.
 type SysProductColumns struct {
-	Id          string //
-	Sku         string // SKU
-	Name        string // 名称
-	Description string // 产品简介
-	Content     string // 产品内容
-	Status      string // 状态 0.下线 1.上线
+	Id            string //
+	Sku           string // SKU
+	NameEn        string // 名称
+	NameCn        string // 名称
+	DescriptionEn string // 产品简介
+	DescriptionCn string // 产品简介
+	ContentEn     string // 产品内容
+	ContentCn     string // 产品内容
+	Status        string // 状态 0.下线 1.上线
 }
 
 // sysProductColumns holds the columns for table sys_product.
 var sysProductColumns = SysProductColumns{
-	Id:          "id",
-	Sku:         "sku",
-	Name:        "name",
-	Description: "description",
-	Content:     "content",
-	Status:      "status",
+	Id:            "id",
+	Sku:           "sku",
+	NameEn:        "name_en",
+	NameCn:        "name_cn",
+	DescriptionEn: "description_en",
+	DescriptionCn: "description_cn",
+	ContentEn:     "content_en",
+	ContentCn:     "content_cn",
+	Status:        "status",
 }
 
 // NewSysProductDao creates and returns a new DAO object for table data access.

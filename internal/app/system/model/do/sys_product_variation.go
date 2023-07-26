@@ -13,9 +13,7 @@ type SysProductVariation struct {
 	g.Meta      `orm:"table:sys_product_variation, do:true"`
 	VariationId interface{} //
 	ProductId   interface{} //
-	Name        interface{} // 名称
+	Name        interface{} // 默认名称
 	Sku         interface{} // SKU
 	Status      interface{} // 状态 0.下线 1.上线
-	Limit       interface{} // 状态 0.无限 1.使用库存
-	Stock       interface{} //
 }

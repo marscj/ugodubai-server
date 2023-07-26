@@ -20,28 +20,34 @@ type SysProductVariationPriceDao struct {
 
 // SysProductVariationPriceColumns defines and stores column names for table sys_product_variation_price.
 type SysProductVariationPriceColumns struct {
-	Id              string //
-	VariationMetaId string //
-	AgentId         string //
-	StartDate       string //
-	EndDate         string //
-	CostPrice       string // 成本价
-	SpecialPrice    string // 预付价格
-	SellingPrice    string // 销售价
-	Currency        string // 货币
+	Id           string //
+	AttributeId  string //
+	VariationId  string //
+	AgentId      string //
+	StartDate    string //
+	EndDate      string //
+	CostPrice    string // 成本价
+	SpecialPrice string // 预付价格
+	SellingPrice string // 销售价
+	Currency     string // 货币
+	Status       string // 状态 0.下线 1.上线
+	Stock        string //
 }
 
 // sysProductVariationPriceColumns holds the columns for table sys_product_variation_price.
 var sysProductVariationPriceColumns = SysProductVariationPriceColumns{
-	Id:              "id",
-	VariationMetaId: "variation_meta_id",
-	AgentId:         "agent_id",
-	StartDate:       "start_date",
-	EndDate:         "end_date",
-	CostPrice:       "cost_price",
-	SpecialPrice:    "special_price",
-	SellingPrice:    "selling_price",
-	Currency:        "currency",
+	Id:           "id",
+	AttributeId:  "attribute_id",
+	VariationId:  "variation_id",
+	AgentId:      "agent_id",
+	StartDate:    "start_date",
+	EndDate:      "end_date",
+	CostPrice:    "cost_price",
+	SpecialPrice: "special_price",
+	SellingPrice: "selling_price",
+	Currency:     "currency",
+	Status:       "status",
+	Stock:        "stock",
 }
 
 // NewSysProductVariationPriceDao creates and returns a new DAO object for table data access.

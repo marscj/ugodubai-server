@@ -20,22 +20,20 @@ type SysProductTermsDao struct {
 
 // SysProductTermsColumns defines and stores column names for table sys_product_terms.
 type SysProductTermsColumns struct {
-	TermId    string //
-	Taxonomy  string //
-	Parent    string //
-	Name      string //
-	Slug      string //
-	TermOrder string //
+	TermId   string //
+	Taxonomy string //
+	Parent   string //
+	NameEn   string //
+	NameCn   string //
 }
 
 // sysProductTermsColumns holds the columns for table sys_product_terms.
 var sysProductTermsColumns = SysProductTermsColumns{
-	TermId:    "term_id",
-	Taxonomy:  "taxonomy",
-	Parent:    "parent",
-	Name:      "name",
-	Slug:      "slug",
-	TermOrder: "term_order",
+	TermId:   "term_id",
+	Taxonomy: "taxonomy",
+	Parent:   "parent",
+	NameEn:   "name_en",
+	NameCn:   "name_cn",
 }
 
 // NewSysProductTermsDao creates and returns a new DAO object for table data access.
