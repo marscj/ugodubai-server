@@ -21,13 +21,17 @@ type SysGatewayDao struct {
 // SysGatewayColumns defines and stores column names for table sys_gateway.
 type SysGatewayColumns struct {
 	GatewayId string //
-	Name      string // 名称
+	NameEn    string // 名称
+	NameCn    string // 名称
+	Content   string //
 }
 
 // sysGatewayColumns holds the columns for table sys_gateway.
 var sysGatewayColumns = SysGatewayColumns{
 	GatewayId: "gateway_id",
-	Name:      "name",
+	NameEn:    "name_en",
+	NameCn:    "name_cn",
+	Content:   "content",
 }
 
 // NewSysGatewayDao creates and returns a new DAO object for table data access.

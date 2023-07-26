@@ -12,5 +12,7 @@ import (
 type SysGateway struct {
 	g.Meta    `orm:"table:sys_gateway, do:true"`
 	GatewayId interface{} //
-	Name      interface{} // 名称
+	NameEn    interface{} // 名称
+	NameCn    interface{} // 名称
+	Content   interface{} //
 }

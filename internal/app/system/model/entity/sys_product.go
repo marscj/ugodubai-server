@@ -15,4 +15,5 @@ type SysProduct struct {
 	ContentEn     string `json:"contentEn"     description:"产品内容"`
 	ContentCn     string `json:"contentCn"     description:"产品内容"`
 	Status        int    `json:"status"        description:"状态 0.下线 1.上线"`
+	Image         string `json:"image"         description:"缩略图"`
 }

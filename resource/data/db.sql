@@ -532,13 +532,17 @@ CREATE TABLE `sys_booking_meta` (
 DROP TABLE IF EXISTS `sys_gateway`;
 CREATE TABLE `sys_gateway` (
   `gateway_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
+  `name_en` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
+  `name_cn` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
+  `content` longtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`gateway_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '支付表' ROW_FORMAT = COMPACT;
-INSERT INTO `sys_gateway` (`name`) VALUES
-('余额'),
-('信用度'),
-('银行转账');
+INSERT INTO `sys_gateway` (`name_en`, `name_cn`, `content`) VALUES
+('Banlance', '余额', ''),
+('Credit', '信用度', ''),
+('Bank Transfer', '银行转账', ''),
+('Wechat', '微信', ''),
+('Alipay', '支付宝', '');
 
 -- ----------------------------
 -- Table structure for sys_payment_tokens
@@ -571,10 +575,6 @@ CREATE TABLE `sys_payment_tokenmeta` (
   KEY `meta_key` (`meta_key`(32))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '支付meta表' ROW_FORMAT = COMPACT;
 
-INSERT INTO `sys_payment_tokenmeta` (`meta_id`, `payment_token_id`, `meta_key`, `meta_value`) VALUES
-(1, 1, 'image_url', 'google.com'),
-(2, 1, 'image_url', 'google.com');
-
 -- ----------------------------
 -- Table structure for sys_product
 -- ----------------------------
@@ -589,13 +589,14 @@ CREATE TABLE `sys_product` (
   `content_en` longtext COLLATE utf8mb4_unicode_ci COMMENT '产品内容',
   `content_cn` longtext COLLATE utf8mb4_unicode_ci COMMENT '产品内容',
   `status` TINYINT NOT NULL DEFAULT 0 COMMENT '状态 0.下线 1.上线',
+  `image` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '缩略图',
   PRIMARY KEY (`id`),
   KEY `name_en` (`name_en`),
   KEY `name_cn` (`name_cn`)
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '产品表' ROW_FORMAT = COMPACT;
 
-INSERT INTO `sys_product` (`sku`, `name_cn`, `description_cn`, `content_cn`) VALUES
-('ATT', '哈利法塔', '迪拜塔，也被称为哈利法塔，是阿联酋迪拜市的标志性建筑物。它是世界上最高的人造结构物，高828米，拥有163层。迪拜塔于2010年完工，并成为一个多功能建筑，包括豪华酒店、住宅、观光景点和办公空间。塔内设有观景台，游客可以欣赏到壮观的城市景色。迪拜塔成为迪拜市的象征之一，吸引着全球游客前来参观。', '<div><p>参观迪拜塔时需要注意以下事项：</p>
+INSERT INTO `sys_product` (`sku`, `name_cn`, `image`, `description_cn`, `content_cn`) VALUES
+('ATT', '哈利法塔', 'https://www.burjkhalifa.ae/images/gallery/burj-khalifa_02.jpg', '迪拜塔，也被称为哈利法塔，是阿联酋迪拜市的标志性建筑物。它是世界上最高的人造结构物，高828米，拥有163层。迪拜塔于2010年完工，并成为一个多功能建筑，包括豪华酒店、住宅、观光景点和办公空间。塔内设有观景台，游客可以欣赏到壮观的城市景色。迪拜塔成为迪拜市的象征之一，吸引着全球游客前来参观。', '<div><p>参观迪拜塔时需要注意以下事项：</p>
 <ol>
 <li>提前预订门票：迪拜塔是一座著名的旅游景点，门票需提前预订以确保入场。</li>
 <li>遵守规定：参观者需遵守迪拜塔的参观规定和指示，包括禁止吸烟、禁止携带食物等。</li>
@@ -645,10 +646,9 @@ CREATE TABLE `sys_product_meta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品meta表' ROW_FORMAT = COMPACT;
 
 INSERT INTO `sys_product_meta` (`meta_id`, `product_id`, `meta_key`, `meta_value`) VALUES
-(1, 1, 'taxonomy', '1'),
-(2, 1, 'taxonomy', '5'),
-(3, 1, 'taxonomy', '6'),
-(4, 1, 'idle_url', 'google.com'),
+(1, 1, 'sys_product_terms', '1'),
+(2, 1, 'sys_product_terms', '5'),
+(3, 1, 'sys_product_terms', '6'),
 (5, 1, 'gallery_url', 'google.com'),
 (6, 1, 'gallery_url', 'google.com');
 

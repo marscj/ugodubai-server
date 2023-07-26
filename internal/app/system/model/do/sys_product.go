@@ -20,4 +20,5 @@ type SysProduct struct {
 	ContentEn     interface{} // 产品内容
 	ContentCn     interface{} // 产品内容
 	Status        interface{} // 状态 0.下线 1.上线
+	Image         interface{} // 缩略图
 }
