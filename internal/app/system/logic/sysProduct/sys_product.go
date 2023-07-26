@@ -26,8 +26,6 @@ type sSysProduct struct {
 // List 产品列表
 func (s *sSysProduct) List(ctx context.Context, req *system.ProductListReq) (total interface{}, productList []*model.SysProduct, err error) {
 
-	var variation []*model.SysProduct
-
 	err = g.Try(ctx, func(ctx context.Context) {
 		m := dao.SysProduct.Ctx(ctx)
 		total, err = m.Count()
@@ -43,12 +41,13 @@ func (s *sSysProduct) List(ctx context.Context, req *system.ProductListReq) (tot
 		user := service.Context().GetLoginUser(ctx)
 
 		if user.IsAdmin == 0 {
-			err = m.Page(req.PageNum, req.PageSize).Order("id asc").WithAll().Scan(&productList)
+			err = m.Page(req.PageNum, req.PageSize).Order("product_id asc").WithAll().Scan(&productList)
 			liberr.ErrIsNil(ctx, err, "产品列表获取失败")
 		} else {
-			err = g.Model(model.SysProductVariation{}).ScanList(&variation, "Variation", "product_id:product_id")
-			// err = g.Model(model.SysProduct{}).With([]model.SysProductVariation{}).With([]model.SysProductVariationPrice{}).Where("agent_id", 1).Scan(&productList)
-			// err = m.Page(req.PageNum, req.PageSize).Order("id asc").With(model.SysProductVariation{}).With(model.SysProductVariationPrice{}).Where("agent_id", 1).Scan(&productList)
+			// var price []*model.SysProductVariationPrice
+			// g.Model(model.SysProductVariationPrice{}).Scan(&price)
+
+			err = m.Page(req.PageNum, req.PageSize).Order("product_id asc").WithAll().Scan(&productList)
 			liberr.ErrIsNil(ctx, err, "产品列表获取失败")
 		}
 	})

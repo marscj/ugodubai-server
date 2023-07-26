@@ -23,7 +23,7 @@ type SysProductVariation struct {
 
 type SysProductVariationPrice struct {
 	*entity.SysProductVariationPrice
-	Agent     *entity.SysAgent       `orm:"with:id=agent_id" json:"agent"`
+	Agent     *entity.SysAgent       `orm:"with:agent_id=agent_id" json:"agent"`
 	Attribute []*SysProductAttribute `orm:"with:attribute_id=attribute_id" json:"attribute"`
 }
 

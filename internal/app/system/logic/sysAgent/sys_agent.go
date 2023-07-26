@@ -38,7 +38,7 @@ func (s *sSysAgent) List(ctx context.Context, req *system.AgentListReq) (total i
 			req.PageSize = consts.PageSize
 		}
 
-		err = m.Page(req.PageNum, req.PageSize).Order("id asc").WithAll().Scan(&agentList)
+		err = m.Page(req.PageNum, req.PageSize).Order("agent_id asc").WithAll().Scan(&agentList)
 		liberr.ErrIsNil(ctx, err, "代理商列表获取失败")
 	})
 	return
