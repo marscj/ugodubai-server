@@ -23,13 +23,13 @@ func New() *sSysProduct {
 type sSysProduct struct {
 }
 
-// List 代理商列表
+// List 产品列表
 func (s *sSysProduct) List(ctx context.Context, req *system.ProductListReq) (total interface{}, productList []*model.SysProduct, err error) {
 
 	err = g.Try(ctx, func(ctx context.Context) {
 		m := dao.SysProduct.Ctx(ctx)
 		total, err = m.Count()
-		liberr.ErrIsNil(ctx, err, "代理商列表获取失败")
+		liberr.ErrIsNil(ctx, err, "产品列表获取失败")
 
 		if req.PageNum == 0 {
 			req.PageNum = 1
@@ -37,21 +37,28 @@ func (s *sSysProduct) List(ctx context.Context, req *system.ProductListReq) (tot
 		if req.PageSize == 0 {
 			req.PageSize = consts.PageSize
 		}
+		user := service.Context().GetLoginUser(ctx)
+		print(user.IsAdmin)
 
-		err = m.Page(req.PageNum, req.PageSize).Order("id asc").WithAll().Scan(&productList)
-		liberr.ErrIsNil(ctx, err, "代理商列表获取失败")
+		if user.IsAdmin == 1 {
+			err = m.Page(req.PageNum, req.PageSize).Order("id asc").WithAll().Scan(&productList)
+			liberr.ErrIsNil(ctx, err, "产品列表获取失败")
+		} else {
+			err = m.Page(req.PageNum, req.PageSize).Order("id asc").Scan(&productList)
+			liberr.ErrIsNil(ctx, err, "产品列表获取失败")
+		}
 	})
 	return
 }
 
-//  通过Id获取代理商信息
+//  通过Id获取产品信息
 func (s *sSysProduct) Get(ctx context.Context, id uint64) (product *model.SysProduct, err error) {
 
 	err = g.Try(ctx, func(ctx context.Context) {
 		err = dao.SysProduct.Ctx(ctx).WherePri(id).WithAll().Scan(&product)
 
 		if err != nil {
-			liberr.ErrIsNil(ctx, err, "代理商信息获取失败")
+			liberr.ErrIsNil(ctx, err, "产品信息获取失败")
 		}
 	})
 	return

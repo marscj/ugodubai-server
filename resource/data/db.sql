@@ -632,6 +632,22 @@ INSERT INTO `sys_product_terms` (`term_id`, `taxonomy`, `name_cn`, `name_en`) VA
 (6, 'tag', '必玩', 'Must Play');
 
 -- ----------------------------
+-- Table structure for sys_product_terms_lookup
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_product_terms_lookup`;
+CREATE TABLE `sys_product_terms_lookup` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `product_id` bigint(20) UNSIGNED NULL DEFAULT '0',
+  `term_id` bigint(20) UNSIGNED NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品术语表' ROW_FORMAT = COMPACT;
+
+INSERT INTO `sys_product_terms_lookup` (`product_id`, `term_id`) VALUES
+( 1, 1),
+( 1, 5),
+( 1, 6);
+
+-- ----------------------------
 -- Table structure for sys_product_meta
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_product_meta`;
@@ -647,9 +663,7 @@ CREATE TABLE `sys_product_meta` (
 
 INSERT INTO `sys_product_meta` (`meta_id`, `product_id`, `meta_key`, `meta_value`) VALUES
 (1, 1, 'gallery_url', 'google.com'),
-(2, 1, 'gallery_url', 'google.com'),
-(3, 1, 'sys_product_terms', '1'),
-(4, 1, 'sys_product_terms', '5');
+(2, 1, 'gallery_url', 'google.com');
 
 -- ----------------------------
 -- Table structure for sys_product_variation
@@ -705,9 +719,9 @@ CREATE TABLE `sys_product_variation_price` (
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '产品变体表' ROW_FORMAT = COMPACT;
 
-INSERT INTO `sys_product_variation_price` (`variation_id`, `attribute_id`, `start_date`, `end_date`, `cost_price`,`special_price`,`selling_price`) VALUES
-(1, 1, '2023-07-24', '2023-07-30', '147.00', '150.00', '155.00'),
-(1, 2, '2023-07-24', '2023-07-30', '120.00', '124.00', '147.00');
+INSERT INTO `sys_product_variation_price` (`variation_id`, `attribute_id`, `agent_id`, `start_date`, `end_date`, `cost_price`,`special_price`,`selling_price`) VALUES
+(1, 1, 1, '2023-07-24', '2023-07-30', '147.00', '150.00', '155.00'),
+(1, 2, 1, '2023-07-24', '2023-07-30', '120.00', '124.00', '147.00');
 
 
 
