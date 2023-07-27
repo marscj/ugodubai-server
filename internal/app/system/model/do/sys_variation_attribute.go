@@ -8,9 +8,9 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 )
 
-// SysProductAttribute is the golang structure of table sys_product_attribute for DAO operations like Where/Data.
-type SysProductAttribute struct {
-	g.Meta           `orm:"table:sys_product_attribute, do:true"`
+// SysVariationAttribute is the golang structure of table sys_variation_attribute for DAO operations like Where/Data.
+type SysVariationAttribute struct {
+	g.Meta           `orm:"table:sys_variation_attribute, do:true"`
 	AttributeId      interface{} //
 	AttributeKey     interface{} //
 	AttributeValueEn interface{} //

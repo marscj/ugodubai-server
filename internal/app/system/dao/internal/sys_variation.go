@@ -11,15 +11,15 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 )
 
-// SysProductVariationDao is the data access object for table sys_product_variation.
-type SysProductVariationDao struct {
-	table   string                     // table is the underlying table name of the DAO.
-	group   string                     // group is the database configuration group name of current DAO.
-	columns SysProductVariationColumns // columns contains all the column names of Table for convenient usage.
+// SysVariationDao is the data access object for table sys_variation.
+type SysVariationDao struct {
+	table   string              // table is the underlying table name of the DAO.
+	group   string              // group is the database configuration group name of current DAO.
+	columns SysVariationColumns // columns contains all the column names of Table for convenient usage.
 }
 
-// SysProductVariationColumns defines and stores column names for table sys_product_variation.
-type SysProductVariationColumns struct {
+// SysVariationColumns defines and stores column names for table sys_variation.
+type SysVariationColumns struct {
 	VariationId string //
 	ProductId   string //
 	NameEn      string // 默认名称
@@ -28,8 +28,8 @@ type SysProductVariationColumns struct {
 	Status      string // 状态 0.下线 1.上线
 }
 
-// sysProductVariationColumns holds the columns for table sys_product_variation.
-var sysProductVariationColumns = SysProductVariationColumns{
+// sysVariationColumns holds the columns for table sys_variation.
+var sysVariationColumns = SysVariationColumns{
 	VariationId: "variation_id",
 	ProductId:   "product_id",
 	NameEn:      "name_en",
@@ -38,37 +38,37 @@ var sysProductVariationColumns = SysProductVariationColumns{
 	Status:      "status",
 }
 
-// NewSysProductVariationDao creates and returns a new DAO object for table data access.
-func NewSysProductVariationDao() *SysProductVariationDao {
-	return &SysProductVariationDao{
+// NewSysVariationDao creates and returns a new DAO object for table data access.
+func NewSysVariationDao() *SysVariationDao {
+	return &SysVariationDao{
 		group:   "default",
-		table:   "sys_product_variation",
-		columns: sysProductVariationColumns,
+		table:   "sys_variation",
+		columns: sysVariationColumns,
 	}
 }
 
 // DB retrieves and returns the underlying raw database management object of current DAO.
-func (dao *SysProductVariationDao) DB() gdb.DB {
+func (dao *SysVariationDao) DB() gdb.DB {
 	return g.DB(dao.group)
 }
 
 // Table returns the table name of current dao.
-func (dao *SysProductVariationDao) Table() string {
+func (dao *SysVariationDao) Table() string {
 	return dao.table
 }
 
 // Columns returns all column names of current dao.
-func (dao *SysProductVariationDao) Columns() SysProductVariationColumns {
+func (dao *SysVariationDao) Columns() SysVariationColumns {
 	return dao.columns
 }
 
 // Group returns the configuration group name of database of current dao.
-func (dao *SysProductVariationDao) Group() string {
+func (dao *SysVariationDao) Group() string {
 	return dao.group
 }
 
 // Ctx creates and returns the Model for current DAO, It automatically sets the context for current operation.
-func (dao *SysProductVariationDao) Ctx(ctx context.Context) *gdb.Model {
+func (dao *SysVariationDao) Ctx(ctx context.Context) *gdb.Model {
 	return dao.DB().Model(dao.table).Safe().Ctx(ctx)
 }
 
@@ -78,6 +78,6 @@ func (dao *SysProductVariationDao) Ctx(ctx context.Context) *gdb.Model {
 //
 // Note that, you should not Commit or Rollback the transaction in function f
 // as it is automatically handled by this function.
-func (dao *SysProductVariationDao) Transaction(ctx context.Context, f func(ctx context.Context, tx gdb.TX) error) (err error) {
+func (dao *SysVariationDao) Transaction(ctx context.Context, f func(ctx context.Context, tx gdb.TX) error) (err error) {
 	return dao.Ctx(ctx).Transaction(ctx, f)
 }

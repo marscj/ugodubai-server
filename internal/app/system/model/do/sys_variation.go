@@ -8,9 +8,9 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 )
 
-// SysProductVariation is the golang structure of table sys_product_variation for DAO operations like Where/Data.
-type SysProductVariation struct {
-	g.Meta      `orm:"table:sys_product_variation, do:true"`
+// SysVariation is the golang structure of table sys_variation for DAO operations like Where/Data.
+type SysVariation struct {
+	g.Meta      `orm:"table:sys_variation, do:true"`
 	VariationId interface{} //
 	ProductId   interface{} //
 	NameEn      interface{} // 默认名称

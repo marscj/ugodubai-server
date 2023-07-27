@@ -431,8 +431,6 @@ CREATE TABLE `sys_user_post`  (
 -- ----------------------------
 -- 删除现有的sys_agent表
 DROP TABLE IF EXISTS `sys_agent`;
-
--- 创建sys_agent表并设置自增ID从10开始，并添加COMMENT和ROW_FORMAT
 CREATE TABLE `sys_agent` (
     `agent_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '代理商ID',
     `name` VARCHAR(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
@@ -592,7 +590,8 @@ CREATE TABLE `sys_product` (
   `image` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '缩略图',
   PRIMARY KEY (`product_id`),
   KEY `name_en` (`name_en`),
-  KEY `name_cn` (`name_cn`)
+  KEY `name_cn` (`name_cn`),
+  KEY `status` (`status`)
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '产品表' ROW_FORMAT = COMPACT;
 
 INSERT INTO `sys_product` (`sku`, `name_cn`, `image`, `description_cn`, `content_cn`) VALUES
@@ -632,17 +631,17 @@ INSERT INTO `sys_product_terms` (`term_id`, `taxonomy`, `name_cn`, `name_en`) VA
 (6, 'tag', '必玩', 'Must Play');
 
 -- ----------------------------
--- Table structure for sys_product_terms_lookup
+-- Table structure for sys_product_lookup
 -- ----------------------------
-DROP TABLE IF EXISTS `sys_product_terms_lookup`;
-CREATE TABLE `sys_product_terms_lookup` (
+DROP TABLE IF EXISTS `sys_product_lookup`;
+CREATE TABLE `sys_product_lookup` (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `product_id` bigint(20) UNSIGNED NULL DEFAULT '0',
   `term_id` bigint(20) UNSIGNED NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品术语表' ROW_FORMAT = COMPACT;
 
-INSERT INTO `sys_product_terms_lookup` (`product_id`, `term_id`) VALUES
+INSERT INTO `sys_product_lookup` (`product_id`, `term_id`) VALUES
 ( 1, 1),
 ( 1, 5),
 ( 1, 6);
@@ -666,10 +665,10 @@ INSERT INTO `sys_product_meta` (`meta_id`, `product_id`, `meta_key`, `meta_value
 (2, 1, 'gallery_url', 'google.com');
 
 -- ----------------------------
--- Table structure for sys_product_variation
+-- Table structure for sys_variation
 -- ----------------------------
-DROP TABLE IF EXISTS `sys_product_variation`;
-CREATE TABLE `sys_product_variation` (
+DROP TABLE IF EXISTS `sys_variation`;
+CREATE TABLE `sys_variation` (
   `variation_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `product_id` bigint(20) UNSIGNED NULL DEFAULT '0',
   `name_en` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '默认名称',
@@ -679,14 +678,14 @@ CREATE TABLE `sys_product_variation` (
   PRIMARY KEY (`variation_id`)
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '产品变体表' ROW_FORMAT = COMPACT;
 
-INSERT INTO `sys_product_variation` (`variation_id`, `product_id`, `name_cn`, `sku`) VALUES
-(1, 1, '124+125层普通票', '124+125');
+INSERT INTO `sys_variation` (`variation_id`, `product_id`, `name_cn`, `sku`) VALUES
+(1, 1, '124+125层普通票', '124+125 Non Prime');
 
 -- ----------------------------
--- Table structure for sys_product_attribute
+-- Table structure for sys_variation_attribute
 -- ----------------------------
-DROP TABLE IF EXISTS `sys_product_attribute`;
-CREATE TABLE `sys_product_attribute` (
+DROP TABLE IF EXISTS `sys_variation_attribute`;
+CREATE TABLE `sys_variation_attribute` (
   `attribute_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `attribute_key` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `attribute_value_en` longtext COLLATE utf8mb4_unicode_ci,
@@ -695,34 +694,45 @@ CREATE TABLE `sys_product_attribute` (
   KEY `attribute_key` (`attribute_key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品变体参数表' ROW_FORMAT = COMPACT;
 
-INSERT INTO `sys_product_attribute` (`attribute_id`, `attribute_key`, `attribute_value_cn`, `attribute_value_en`) VALUES
+INSERT INTO `sys_variation_attribute` (`attribute_id`, `attribute_key`, `attribute_value_cn`, `attribute_value_en`) VALUES
 (1, 'age', '成人', 'Aldult'),
 (2, 'age', '小孩', 'Child');
 
 -- ----------------------------
--- Table structure for sys_product_variation_price
+-- Table structure for sys_variation_price
 -- ----------------------------
-DROP TABLE IF EXISTS `sys_product_variation_price`;
-CREATE TABLE `sys_product_variation_price` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `attribute_id` bigint(20) UNSIGNED NULL DEFAULT '0',
-  `variation_id` bigint(20) UNSIGNED NULL DEFAULT '0',
-  `agent_id` bigint(20) UNSIGNED DEFAULT NULL,
+DROP TABLE IF EXISTS `sys_variation_price`;
+CREATE TABLE `sys_variation_price` (
+  `variation_price_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `start_date` DATE DEFAULT NULL,
   `end_date` DATE DEFAULT NULL,
   `cost_price` DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '成本价',
   `special_price`  DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '预付价格',
   `selling_price`  DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '销售价',
   `currency` VARCHAR(3)  NULL DEFAULT 'AED' COMMENT '货币',
-  `status` TINYINT NOT NULL DEFAULT '0' COMMENT '状态 0.下线 1.上线',
   `stock` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`variation_price_id`)
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '产品变体表' ROW_FORMAT = COMPACT;
 
-INSERT INTO `sys_product_variation_price` (`variation_id`, `attribute_id`, `agent_id`, `start_date`, `end_date`, `cost_price`,`special_price`,`selling_price`) VALUES
-(1, 1, 1, '2023-07-24', '2023-07-30', '147.00', '150.00', '155.00'),
-(1, 2, 2, '2023-07-24', '2023-07-30', '120.00', '124.00', '147.00');
+INSERT INTO `sys_variation_price` (`start_date`, `end_date`, `cost_price`,`special_price`,`selling_price`) VALUES
+('2023-07-24', '2023-07-30', '147.00', '150.00', '155.00'),
+('2023-07-24', '2023-07-30', '120.00', '124.00', '147.00');
 
+-- ----------------------------
+-- Table structure for sys_variation_lookup
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_variation_lookup`;
+CREATE TABLE `sys_variation_lookup` (
+  `variation_lookup_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `variation_id` bigint(20) UNSIGNED NULL DEFAULT '0',
+  `attribute_id` bigint(20) UNSIGNED NULL DEFAULT '0',
+  `variation_price_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `agent_id` bigint(20) UNSIGNED NULL DEFAULT '0',
+  PRIMARY KEY (`variation_lookup_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品术语表' ROW_FORMAT = COMPACT;
 
+INSERT INTO `sys_variation_lookup` (`variation_id`, `attribute_id`,`variation_price_id`, `agent_id`) VALUES
+( 1, 1, 1, 1),
+( 1, 2, 2, 1);
 
 SET FOREIGN_KEY_CHECKS = 1;

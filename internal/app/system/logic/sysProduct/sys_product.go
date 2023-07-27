@@ -41,13 +41,11 @@ func (s *sSysProduct) List(ctx context.Context, req *system.ProductListReq) (tot
 		user := service.Context().GetLoginUser(ctx)
 
 		if user.IsAdmin == 0 {
-			err = m.Page(req.PageNum, req.PageSize).Order("product_id asc").WithAll().Scan(&productList)
+			err = m.Page(req.PageNum, req.PageSize).OrderAsc("product_id").WithAll().Scan(&productList)
 			liberr.ErrIsNil(ctx, err, "产品列表获取失败")
 		} else {
-			// var price []*model.SysProductVariationPrice
-			// g.Model(model.SysProductVariationPrice{}).Scan(&price)
 
-			err = m.Page(req.PageNum, req.PageSize).Order("product_id asc").WithAll().Scan(&productList)
+			err = m.Page(req.PageNum, req.PageSize).OrderAsc("product_id").WithAll().Scan(&productList)
 			liberr.ErrIsNil(ctx, err, "产品列表获取失败")
 		}
 	})

@@ -8,9 +8,9 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 )
 
-// SysProductTermsLookup is the golang structure of table sys_product_terms_lookup for DAO operations like Where/Data.
-type SysProductTermsLookup struct {
-	g.Meta    `orm:"table:sys_product_terms_lookup, do:true"`
+// SysProductLookup is the golang structure of table sys_product_lookup for DAO operations like Where/Data.
+type SysProductLookup struct {
+	g.Meta    `orm:"table:sys_product_lookup, do:true"`
 	Id        interface{} //
 	ProductId interface{} //
 	TermId    interface{} //

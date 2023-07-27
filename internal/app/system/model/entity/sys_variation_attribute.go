@@ -4,8 +4,8 @@
 
 package entity
 
-// SysProductAttribute is the golang structure for table sys_product_attribute.
-type SysProductAttribute struct {
+// SysVariationAttribute is the golang structure for table sys_variation_attribute.
+type SysVariationAttribute struct {
 	AttributeId      uint64 `json:"attributeId"      description:""`
 	AttributeKey     string `json:"attributeKey"     description:""`
 	AttributeValueEn string `json:"attributeValueEn" description:""`
