@@ -9,14 +9,14 @@ type SysProduct struct {
 	*do.SysProduct
 	Meta       []*SysProductMeta     `orm:"with:product_id=product_id" json:"meta"`
 	Lookup     []*SysProductLookup   `orm:"with:product_id=product_id" json:"cateogrys"`
-	Variations []*SysVariationLookUp `orm:"with:product_id=product_id" json:"variations"`
+	Variations []*SysVariationLookup `orm:"with:product_id=product_id" json:"variations"`
 }
 
 type SysProductMeta struct {
 	*do.SysProductMeta
 }
 
-type SysVariationLookUp struct {
+type SysVariationLookup struct {
 	*do.SysVariationLookup
 	Variation *SysVariation          `orm:"with:variation_id=variation_id" json:"variation"`
 	Price     *SysVariationPrice     `orm:"with:variation_price_id=variation_price_id" json:"price"`

@@ -20,7 +20,7 @@ type ProductListRes struct {
 
 type ProductGetReq struct {
 	g.Meta `path:"/product/get" tags:"产品管理" method:"get" summary:"获取产品"`
-	Id     uint64 `p:"id" v:"required#产品id不能为空""`
+	Id     uint64 `p:"id" v:"required#产品id不能为空"`
 }
 
 type ProductGetRes struct {
