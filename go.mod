@@ -16,6 +16,7 @@ require (
 	github.com/mssola/user_agent v0.5.3
 	github.com/rivo/uniseg v0.4.3 // indirect
 	github.com/rogpeppe/go-internal v1.8.0 // indirect
+	github.com/shirou/gopsutil v3.21.11+incompatible
 	github.com/shirou/gopsutil/v3 v3.23.2
 	github.com/tiger1103/gfast-cache v1.0.0
 	github.com/tiger1103/gfast-token v1.0.3

@@ -7,7 +7,6 @@ import (
 	"ugodubai-server/internal/app/system/dao"
 	"ugodubai-server/internal/app/system/model"
 	"ugodubai-server/internal/app/system/model/do"
-	"ugodubai-server/internal/app/system/model/entity"
 	"ugodubai-server/internal/app/system/service"
 	"ugodubai-server/library/libUtils"
 	"ugodubai-server/library/liberr"
@@ -80,32 +79,32 @@ func (s *sOperateLog) operationLogAdd(ctx context.Context, data *model.SysOperLo
 	if data.Menu != nil {
 		menuTitle = data.Menu.Title
 	}
-	dept, err := service.SysDept().GetByDeptId(ctx, data.User.DeptId)
-	if err != nil {
-		g.Log().Error(ctx, err)
-		return
-	}
-	if dept == nil {
-		dept = &entity.SysDept{}
-	}
+	// dept, err := service.SysDept().GetByDeptId(ctx, data.User.DeptId)
+	// if err != nil {
+	// 	g.Log().Error(ctx, err)
+	// 	return
+	// }
+	// if dept == nil {
+	// 	dept = &entity.SysDept{}
+	// }
 	insertData := &do.SysOperLog{
 		Title:         menuTitle,
 		Method:        data.Url.Path,
 		RequestMethod: data.Method,
 		OperatorType:  data.OperatorType,
 		OperName:      data.User.UserName,
-		DeptName:      dept.DeptName,
-		OperIp:        data.ClientIp,
-		OperLocation:  libUtils.GetCityByIp(data.ClientIp),
-		OperTime:      gtime.Now(),
-		OperParam:     data.Params,
+		// DeptName:      dept.DeptName,
+		OperIp:       data.ClientIp,
+		OperLocation: libUtils.GetCityByIp(data.ClientIp),
+		OperTime:     gtime.Now(),
+		OperParam:    data.Params,
 	}
 	rawQuery := data.Url.RawQuery
 	if rawQuery != "" {
 		rawQuery = "?" + rawQuery
 	}
 	insertData.OperUrl = data.Url.Path + rawQuery
-	_, err = dao.SysOperLog.Ctx(ctx).Insert(insertData)
+	_, err := dao.SysOperLog.Ctx(ctx).Insert(insertData)
 	if err != nil {
 		g.Log().Error(ctx, err)
 	}
@@ -146,17 +145,17 @@ func (s *sOperateLog) List(ctx context.Context, req *system.SysOperLogListReq) (
 		listRes.List = make([]*model.SysOperLogList, len(res))
 		for k, v := range res {
 			listRes.List[k] = &model.SysOperLogList{
-				OperId:         v.OperId,
-				Title:          v.Title,
-				RequestMethod:  v.RequestMethod,
-				OperName:       v.OperName,
-				DeptName:       v.DeptName,
-				LinkedDeptName: v.LinkedDeptName,
-				OperUrl:        v.OperUrl,
-				OperIp:         v.OperIp,
-				OperLocation:   v.OperLocation,
-				OperParam:      v.OperParam,
-				OperTime:       v.OperTime,
+				OperId:        v.OperId,
+				Title:         v.Title,
+				RequestMethod: v.RequestMethod,
+				OperName:      v.OperName,
+				// DeptName:       v.DeptName,
+				// LinkedDeptName: v.LinkedDeptName,
+				OperUrl:      v.OperUrl,
+				OperIp:       v.OperIp,
+				OperLocation: v.OperLocation,
+				OperParam:    v.OperParam,
+				OperTime:     v.OperTime,
 			}
 		}
 	})

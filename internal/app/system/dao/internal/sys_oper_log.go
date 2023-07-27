@@ -27,7 +27,6 @@ type SysOperLogColumns struct {
 	RequestMethod string // 请求方式
 	OperatorType  string // 操作类别（0其它 1后台用户 2手机端用户）
 	OperName      string // 操作人员
-	DeptName      string // 部门名称
 	OperUrl       string // 请求URL
 	OperIp        string // 主机地址
 	OperLocation  string // 操作地点
@@ -45,7 +44,6 @@ var sysOperLogColumns = SysOperLogColumns{
 	RequestMethod: "request_method",
 	OperatorType:  "operator_type",
 	OperName:      "oper_name",
-	DeptName:      "dept_name",
 	OperUrl:       "oper_url",
 	OperIp:        "oper_ip",
 	OperLocation:  "oper_location",

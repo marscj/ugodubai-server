@@ -17,7 +17,6 @@ type SysOperLog struct {
 	RequestMethod string      `json:"requestMethod" description:"请求方式"`
 	OperatorType  int         `json:"operatorType"  description:"操作类别（0其它 1后台用户 2手机端用户）"`
 	OperName      string      `json:"operName"      description:"操作人员"`
-	DeptName      string      `json:"deptName"      description:"部门名称"`
 	OperUrl       string      `json:"operUrl"       description:"请求URL"`
 	OperIp        string      `json:"operIp"        description:"主机地址"`
 	OperLocation  string      `json:"operLocation"  description:"操作地点"`

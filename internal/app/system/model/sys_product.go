@@ -8,7 +8,7 @@ import (
 type SysProduct struct {
 	*do.SysProduct
 	Meta       []*SysProductMeta     `orm:"with:product_id=product_id" json:"meta"`
-	LookUp     []*SysProductLookup   `orm:"with:product_id=product_id" json:"terms"`
+	Lookup     []*SysProductLookup   `orm:"with:product_id=product_id" json:"cateogrys"`
 	Variations []*SysVariationLookUp `orm:"with:product_id=product_id" json:"variations"`
 }
 
@@ -38,5 +38,5 @@ type SysVariationAttribute struct {
 
 type SysProductLookup struct {
 	*do.SysProductLookup
-	Terms []*entity.SysProductTerms `orm:"with:term_id=term_id" json:"terms"`
+	Terms []*entity.SysProductTerms `orm:"with:term_id=term_id" json:"category"`
 }

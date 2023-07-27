@@ -275,7 +275,7 @@ CREATE TABLE `sys_oper_log`  (
   `request_method` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '请求方式',
   `operator_type` int(1) NULL DEFAULT 0 COMMENT '操作类别（0其它 1后台用户 2手机端用户）',
   `oper_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '操作人员',
-  `dept_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '部门名称',
+  -- `dept_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '部门名称',
   `oper_url` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '请求URL',
   `oper_ip` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '主机地址',
   `oper_location` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '操作地点',
@@ -618,7 +618,8 @@ CREATE TABLE `sys_product_terms` (
   `parent` bigint(20) UNSIGNED NOT NULL DEFAULT '0',
   `name_en` varchar(100) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
   `name_cn` varchar(100) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
-  PRIMARY KEY (`term_id`)
+  PRIMARY KEY (`term_id`),
+  KEY `taxonomy` (`taxonomy`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品术语表' ROW_FORMAT = COMPACT;
 
 INSERT INTO `sys_product_terms` (`term_id`, `taxonomy`, `name_cn`, `name_en`) VALUES

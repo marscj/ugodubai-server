@@ -19,7 +19,6 @@ type SysOperLog struct {
 	RequestMethod interface{} // 请求方式
 	OperatorType  interface{} // 操作类别（0其它 1后台用户 2手机端用户）
 	OperName      interface{} // 操作人员
-	DeptName      interface{} // 部门名称
 	OperUrl       interface{} // 请求URL
 	OperIp        interface{} // 主机地址
 	OperLocation  interface{} // 操作地点

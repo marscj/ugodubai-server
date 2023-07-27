@@ -12,7 +12,6 @@ import (
 type SysProduct struct {
 	g.Meta        `orm:"table:sys_product, do:true"`
 	ProductId     interface{} //
-	Sku           interface{} // SKU
 	NameEn        interface{} // 名称
 	NameCn        interface{} // 名称
 	DescriptionEn interface{} // 产品简介
