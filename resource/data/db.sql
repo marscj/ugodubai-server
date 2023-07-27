@@ -636,8 +636,8 @@ INSERT INTO `sys_product_terms` (`term_id`, `taxonomy`, `name_cn`, `name_en`) VA
 DROP TABLE IF EXISTS `sys_product_lookup`;
 CREATE TABLE `sys_product_lookup` (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `product_id` bigint(20) UNSIGNED NULL DEFAULT '0',
-  `term_id` bigint(20) UNSIGNED NULL DEFAULT '0',
+  `product_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `term_id` bigint(20) UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品术语表' ROW_FORMAT = COMPACT;
 
@@ -652,7 +652,7 @@ INSERT INTO `sys_product_lookup` (`product_id`, `term_id`) VALUES
 DROP TABLE IF EXISTS `sys_product_meta`;
 CREATE TABLE `sys_product_meta` (
   `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `product_id` bigint(20) UNSIGNED NULL DEFAULT '0',
+  `product_id` bigint(20) UNSIGNED DEFAULT NULL,
   `meta_key` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `meta_value` longtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`meta_id`),
@@ -726,11 +726,11 @@ INSERT INTO `sys_variation_price` (`start_date`, `end_date`, `cost_price`,`speci
 DROP TABLE IF EXISTS `sys_variation_lookup`;
 CREATE TABLE `sys_variation_lookup` (
   `variation_lookup_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `product_id` bigint(20) UNSIGNED NULL DEFAULT '0',
-  `variation_id` bigint(20) UNSIGNED NULL DEFAULT '0',
-  `attribute_id` bigint(20) UNSIGNED NULL DEFAULT '0',
+  `product_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `variation_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `attribute_id` bigint(20) UNSIGNED DEFAULT NULL,
   `variation_price_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `agent_id` bigint(20) UNSIGNED NULL DEFAULT '0',
+  `agent_id` bigint(20) UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`variation_lookup_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品术语表' ROW_FORMAT = COMPACT;
 
@@ -738,6 +738,6 @@ INSERT INTO `sys_variation_lookup` (`product_id`, `variation_id`, `attribute_id`
 ( 1, 1, 1, 1, 1),
 ( 1, 1, 2, 2, 1),
 ( 1, 2, 1, 3, 1),
-( 1, 2, 2, 4, 1);
+( 1, 2, 2, 4, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
