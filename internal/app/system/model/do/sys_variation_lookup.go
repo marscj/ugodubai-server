@@ -12,6 +12,7 @@ import (
 type SysVariationLookup struct {
 	g.Meta            `orm:"table:sys_variation_lookup, do:true"`
 	VariationLookupId interface{} //
+	ProductId         interface{} //
 	VariationId       interface{} //
 	AttributeId       interface{} //
 	VariationPriceId  interface{} //

@@ -44,7 +44,6 @@ func (s *sSysProduct) List(ctx context.Context, req *system.ProductListReq) (tot
 			err = m.Page(req.PageNum, req.PageSize).OrderAsc("product_id").WithAll().Scan(&productList)
 			liberr.ErrIsNil(ctx, err, "产品列表获取失败")
 		} else {
-
 			err = m.Page(req.PageNum, req.PageSize).OrderAsc("product_id").WithAll().Scan(&productList)
 			liberr.ErrIsNil(ctx, err, "产品列表获取失败")
 		}

@@ -6,33 +6,34 @@ import (
 )
 
 type SysProduct struct {
-	*entity.SysProduct
-	Meta      []*SysProductMeta   `orm:"with:product_id=product_id" json:"meta"`
-	Terms     []*SysProductLookup `orm:"with:product_id=product_id" json:"terms"`
-	Variation []*SysVariation     `orm:"with:product_id=product_id" json:"variation"`
+	*do.SysProduct
+	Meta       []*SysProductMeta     `orm:"with:product_id=product_id" json:"meta"`
+	LookUp     []*SysProductLookup   `orm:"with:product_id=product_id" json:"terms"`
+	Variations []*SysVariationLookUp `orm:"with:product_id=product_id" json:"variations"`
 }
 
 type SysProductMeta struct {
-	*entity.SysProductMeta
+	*do.SysProductMeta
+}
+
+type SysVariationLookUp struct {
+	*do.SysVariationLookup
+	Variation *SysVariation          `orm:"with:variation_id=variation_id" json:"variation"`
+	Price     *SysVariationPrice     `orm:"with:variation_price_id=variation_price_id" json:"price"`
+	Attribute *SysVariationAttribute `orm:"with:attribute_id=attribute_id" json:"attribute"`
+	Agent     *SysAgent              `orm:"with:agent_id=agent_id json:agent" `
 }
 
 type SysVariation struct {
-	*entity.SysVariation
-	Price []*SysVariationPrice `orm:"with:variation_id=variation_id" json:"price"`
+	*do.SysVariation
 }
 
 type SysVariationPrice struct {
-	*entity.SysVariationPrice
-	Agent     *entity.SysAgent         `orm:"with:agent_id=agent_id" json:"agent"`
-	Attribute []*SysVariationAttribute `orm:"with:attribute_id=attribute_id" json:"attribute"`
+	*do.SysVariationPrice
 }
 
 type SysVariationAttribute struct {
-	*entity.SysVariationAttribute
-}
-
-type SysProductTerms struct {
-	*do.SysProductTerms
+	*do.SysVariationAttribute
 }
 
 type SysProductLookup struct {

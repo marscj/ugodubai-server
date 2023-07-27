@@ -21,7 +21,6 @@ type SysVariationDao struct {
 // SysVariationColumns defines and stores column names for table sys_variation.
 type SysVariationColumns struct {
 	VariationId string //
-	ProductId   string //
 	NameEn      string // 默认名称
 	NameCn      string // 默认名称
 	Sku         string // SKU
@@ -31,7 +30,6 @@ type SysVariationColumns struct {
 // sysVariationColumns holds the columns for table sys_variation.
 var sysVariationColumns = SysVariationColumns{
 	VariationId: "variation_id",
-	ProductId:   "product_id",
 	NameEn:      "name_en",
 	NameCn:      "name_cn",
 	Sku:         "sku",

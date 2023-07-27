@@ -12,7 +12,6 @@ import (
 type SysVariation struct {
 	g.Meta      `orm:"table:sys_variation, do:true"`
 	VariationId interface{} //
-	ProductId   interface{} //
 	NameEn      interface{} // 默认名称
 	NameCn      interface{} // 默认名称
 	Sku         interface{} // SKU

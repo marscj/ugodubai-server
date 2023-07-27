@@ -21,6 +21,7 @@ type SysVariationLookupDao struct {
 // SysVariationLookupColumns defines and stores column names for table sys_variation_lookup.
 type SysVariationLookupColumns struct {
 	VariationLookupId string //
+	ProductId         string //
 	VariationId       string //
 	AttributeId       string //
 	VariationPriceId  string //
@@ -30,6 +31,7 @@ type SysVariationLookupColumns struct {
 // sysVariationLookupColumns holds the columns for table sys_variation_lookup.
 var sysVariationLookupColumns = SysVariationLookupColumns{
 	VariationLookupId: "variation_lookup_id",
+	ProductId:         "product_id",
 	VariationId:       "variation_id",
 	AttributeId:       "attribute_id",
 	VariationPriceId:  "variation_price_id",
