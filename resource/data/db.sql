@@ -668,8 +668,8 @@ INSERT INTO `sys_product_price_lookup` (`product_id`, `min_price`, `max_price`) 
 DROP TABLE IF EXISTS `sys_product_meta`;
 CREATE TABLE `sys_product_meta` (
   `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `product_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `meta_key` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `product_id` bigint(20) UNSIGNED NOT NULL,
+  `meta_key` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
   `meta_value` longtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`meta_id`),
   KEY `product_id` (`product_id`),
@@ -678,6 +678,23 @@ CREATE TABLE `sys_product_meta` (
 INSERT INTO `sys_product_meta` (`meta_id`, `product_id`, `meta_key`, `meta_value`) VALUES
 (1, 1, 'gallery_url', 'google.com'),
 (2, 1, 'gallery_url', 'google.com');
+
+-- ----------------------------
+-- Table structure for sys_product_keywords
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_product_keywords`;
+CREATE TABLE `sys_product_keywords` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `product_id` bigint(20) UNSIGNED NOT NULL,
+  `keyword` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `product_id` (`product_id`),
+  KEY `keyword` (`keyword`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='产品关键字表' ROW_FORMAT = COMPACT;
+INSERT INTO `sys_product_keywords` (`product_id`, `keyword`) VALUES
+(1, '哈利法塔'),
+(1, 'Burjkhalifa'),
+(1, 'hlft');
 
 -- ----------------------------
 -- Table structure for sys_variation
@@ -701,7 +718,7 @@ INSERT INTO `sys_variation` (`variation_id`, `sku`, `name_cn`, `name_en`) VALUES
 DROP TABLE IF EXISTS `sys_variation_attribute`;
 CREATE TABLE `sys_variation_attribute` (
   `attribute_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `attribute_key` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `attribute_key` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
   `attribute_value_en` longtext COLLATE utf8mb4_unicode_ci,
   `attribute_value_cn` longtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`attribute_id`),
@@ -722,7 +739,7 @@ CREATE TABLE `sys_variation_price` (
   `cost_price` DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '成本价',
   `special_price`  DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '预付价格',
   `selling_price`  DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '销售价',
-  `currency` VARCHAR(3)  NULL DEFAULT 'AED' COMMENT '货币',
+  `currency` VARCHAR(3) NOT NULL DEFAULT 'AED' COMMENT '货币',
   `stock` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`variation_price_id`)
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '产品变体价格表' ROW_FORMAT = COMPACT;
@@ -738,10 +755,10 @@ INSERT INTO `sys_variation_price` (`start_date`, `end_date`, `cost_price`,`speci
 DROP TABLE IF EXISTS `sys_product_lookup`;
 CREATE TABLE `sys_product_lookup` (
   `variation_lookup_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `product_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `variation_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `product_id` bigint(20) UNSIGNED NOT NULL,
+  `variation_id` bigint(20) UNSIGNED NOT NULL,
   `attribute_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `variation_price_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `variation_price_id` bigint(20) UNSIGNED NOT NULL,
   `agent_id` bigint(20) UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`variation_lookup_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品变体关联表' ROW_FORMAT = COMPACT;

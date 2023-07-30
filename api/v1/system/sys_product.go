@@ -8,7 +8,9 @@ import (
 )
 
 type ProductListReq struct {
-	g.Meta `path:"/product/list" tags:"产品管理" method:"get" summary:"产品列表"`
+	g.Meta   `path:"/product/list" tags:"产品管理" method:"get" summary:"产品列表"`
+	TermsIDs []int64 `json:"terms_ids"`
+	Keyword  string  `json:"keyword"`
 	commonApi.PageReq
 }
 

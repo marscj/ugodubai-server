@@ -9,6 +9,7 @@ import (
 	"ugodubai-server/internal/app/system/service"
 	"ugodubai-server/library/liberr"
 
+	"github.com/gogf/gf/util/gconv"
 	"github.com/gogf/gf/v2/frame/g"
 )
 
@@ -23,11 +24,57 @@ func New() *sSysProduct {
 type sSysProduct struct {
 }
 
+// 请编写一个例子
+
 // List 产品列表
 func (s *sSysProduct) List(ctx context.Context, req *system.ProductListReq) (total interface{}, productList []*model.SysProductList, err error) {
 
 	err = g.Try(ctx, func(ctx context.Context) {
-		m := dao.SysProduct.Ctx(ctx).Where("status = ?", 1)
+		m := dao.SysProduct.Ctx(ctx)
+
+		var whereStr string
+		var args []interface{}
+
+		// Keyword search
+		if req.Keyword != "" {
+			// Search for products with the keyword
+			whereStr += "`product_id` IN (SELECT `product_id` FROM `sys_product_keywords` WHERE `keyword` LIKE ?) "
+			args = append(args, "%"+req.Keyword+"%")
+		}
+
+		//获取User
+		user := service.Context().GetLoginUser(ctx)
+
+		//前端客户只能获取已上线产品
+		if user.IsAdmin == 0 {
+			m = m.Where("status = ?", 1)
+		}
+
+		//查询terms
+		var productIDs []int64
+		if len(req.TermsIDs) > 0 {
+
+			ids, err := g.Model("sys_product_lookup_terms").Fields("product_id").Where("term_id IN(?)", req.TermsIDs).Distinct().Array("product_id")
+			if err != nil {
+				liberr.ErrIsNil(ctx, err, "产品列表获取失败")
+				return
+			}
+			productIDs = append(productIDs, gconv.Int64s(ids)...)
+		}
+
+		if len(productIDs) > 0 {
+			m = m.Where("product_id IN(?)", productIDs)
+			if err != nil {
+				liberr.ErrIsNil(ctx, err, "产品列表获取失败")
+				return
+			}
+		}
+
+		//查询关键字
+		if req.Keyword != "" {
+			m = m.Where("name_cn LIKE ? OR name_en LIKE ?", "%"+req.Keyword+"%", "%"+req.Keyword+"%")
+		}
+
 		total, err = m.Count()
 		liberr.ErrIsNil(ctx, err, "产品列表获取失败")
 
@@ -40,6 +87,7 @@ func (s *sSysProduct) List(ctx context.Context, req *system.ProductListReq) (tot
 
 		err = m.Page(req.PageNum, req.PageSize).OrderAsc("order").WithAll().Scan(&productList)
 		liberr.ErrIsNil(ctx, err, "产品列表获取失败")
+
 	})
 	return
 }
