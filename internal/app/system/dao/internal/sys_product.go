@@ -29,6 +29,7 @@ type SysProductColumns struct {
 	ContentCn     string // 产品内容
 	Status        string // 状态 0.下线 1.上线
 	Image         string // 缩略图
+	Order         string // 显示顺序
 }
 
 // sysProductColumns holds the columns for table sys_product.
@@ -42,6 +43,7 @@ var sysProductColumns = SysProductColumns{
 	ContentCn:     "content_cn",
 	Status:        "status",
 	Image:         "image",
+	Order:         "order",
 }
 
 // NewSysProductDao creates and returns a new DAO object for table data access.

@@ -15,4 +15,5 @@ type SysProduct struct {
 	ContentCn     string `json:"contentCn"     description:"产品内容"`
 	Status        int    `json:"status"        description:"状态 0.下线 1.上线"`
 	Image         string `json:"image"         description:"缩略图"`
+	Order         int    `json:"order"         description:"显示顺序"`
 }

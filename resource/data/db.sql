@@ -587,6 +587,7 @@ CREATE TABLE `sys_product` (
   `content_cn` longtext COLLATE utf8mb4_unicode_ci COMMENT '产品内容',
   `status` TINYINT NOT NULL DEFAULT 0 COMMENT '状态 0.下线 1.上线',
   `image` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '缩略图',
+  `order` int(4) NULL DEFAULT 0 COMMENT '显示顺序',
   PRIMARY KEY (`product_id`),
   KEY `name_en` (`name_en`),
   KEY `name_cn` (`name_cn`),
