@@ -20,7 +20,7 @@ type AgentListRes struct {
 
 type AgentGetReq struct {
 	g.Meta `path:"/agent/get" tags:"代理商管理" method:"get" summary:"获取代理商信息"`
-	Id     uint64 `p:"id" v:"required#代理商id不能为空""`
+	Id     uint64 `p:"id" v:"required#代理商id不能为空"`
 }
 
 type AgentGetRes struct {

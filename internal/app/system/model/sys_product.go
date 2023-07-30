@@ -7,13 +7,18 @@ import (
 
 type SysProduct struct {
 	*do.SysProduct
-	Meta       []*SysProductMeta     `orm:"with:product_id=product_id" json:"meta"`
-	Lookup     []*SysProductLookup   `orm:"with:product_id=product_id" json:"lookup"`
-	Variations []*SysVariationLookup `orm:"with:product_id=product_id" json:"variations"`
+	Meta       []*SysProductMeta      `orm:"with:product_id=product_id" json:"meta"`
+	Lookup     []*SysProductLookup    `orm:"with:product_id=product_id" json:"lookup"`
+	Price      *SysProductPriceLookup `orm:"with:product_id=product_id" json:"price"`
+	Variations []*SysVariationLookup  `orm:"with:product_id=product_id" json:"variations"`
 }
 
 type SysProductMeta struct {
 	*do.SysProductMeta
+}
+
+type SysProductPriceLookup struct {
+	*do.SysProductPriceLookup
 }
 
 type SysVariationLookup struct {
