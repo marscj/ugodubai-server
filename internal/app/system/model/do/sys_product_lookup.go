@@ -10,8 +10,11 @@ import (
 
 // SysProductLookup is the golang structure of table sys_product_lookup for DAO operations like Where/Data.
 type SysProductLookup struct {
-	g.Meta    `orm:"table:sys_product_lookup, do:true"`
-	Id        interface{} //
-	ProductId interface{} //
-	TermId    interface{} //
+	g.Meta            `orm:"table:sys_product_lookup, do:true"`
+	VariationLookupId interface{} //
+	ProductId         interface{} //
+	VariationId       interface{} //
+	AttributeId       interface{} //
+	VariationPriceId  interface{} //
+	AgentId           interface{} //
 }

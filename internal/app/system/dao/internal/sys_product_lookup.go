@@ -20,16 +20,22 @@ type SysProductLookupDao struct {
 
 // SysProductLookupColumns defines and stores column names for table sys_product_lookup.
 type SysProductLookupColumns struct {
-	Id        string //
-	ProductId string //
-	TermId    string //
+	VariationLookupId string //
+	ProductId         string //
+	VariationId       string //
+	AttributeId       string //
+	VariationPriceId  string //
+	AgentId           string //
 }
 
 // sysProductLookupColumns holds the columns for table sys_product_lookup.
 var sysProductLookupColumns = SysProductLookupColumns{
-	Id:        "id",
-	ProductId: "product_id",
-	TermId:    "term_id",
+	VariationLookupId: "variation_lookup_id",
+	ProductId:         "product_id",
+	VariationId:       "variation_id",
+	AttributeId:       "attribute_id",
+	VariationPriceId:  "variation_price_id",
+	AgentId:           "agent_id",
 }
 
 // NewSysProductLookupDao creates and returns a new DAO object for table data access.

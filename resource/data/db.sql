@@ -631,17 +631,17 @@ INSERT INTO `sys_product_terms` (`term_id`, `taxonomy`, `name_cn`, `name_en`) VA
 (6, 'tag', '必玩', 'Must Play');
 
 -- ----------------------------
--- Table structure for sys_product_lookup
+-- Table structure for sys_product_lookup_terms
 -- ----------------------------
-DROP TABLE IF EXISTS `sys_product_lookup`;
-CREATE TABLE `sys_product_lookup` (
+DROP TABLE IF EXISTS `sys_product_lookup_terms`;
+CREATE TABLE `sys_product_lookup_terms` (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `product_id` bigint(20) UNSIGNED DEFAULT NULL,
   `term_id` bigint(20) UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品关联表' ROW_FORMAT = COMPACT;
 
-INSERT INTO `sys_product_lookup` (`product_id`, `term_id`) VALUES
+INSERT INTO `sys_product_lookup_terms` (`product_id`, `term_id`) VALUES
 ( 1, 1),
 ( 1, 5),
 ( 1, 6);
@@ -731,10 +731,10 @@ INSERT INTO `sys_variation_price` (`start_date`, `end_date`, `cost_price`,`speci
 ('2023-07-24', '2023-07-30', '220.00', '224.00', '247.00');
 
 -- ----------------------------
--- Table structure for sys_variation_lookup
+-- Table structure for sys_product_lookup
 -- ----------------------------
-DROP TABLE IF EXISTS `sys_variation_lookup`;
-CREATE TABLE `sys_variation_lookup` (
+DROP TABLE IF EXISTS `sys_product_lookup`;
+CREATE TABLE `sys_product_lookup` (
   `variation_lookup_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `product_id` bigint(20) UNSIGNED DEFAULT NULL,
   `variation_id` bigint(20) UNSIGNED DEFAULT NULL,
@@ -743,7 +743,7 @@ CREATE TABLE `sys_variation_lookup` (
   `agent_id` bigint(20) UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`variation_lookup_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品变体关联表' ROW_FORMAT = COMPACT;
-INSERT INTO `sys_variation_lookup` (`product_id`, `variation_id`, `attribute_id`,`variation_price_id`, `agent_id`) VALUES
+INSERT INTO `sys_product_lookup` (`product_id`, `variation_id`, `attribute_id`,`variation_price_id`, `agent_id`) VALUES
 ( 1, 1, 1, 1, 1),
 ( 1, 1, 2, 2, 1),
 ( 1, 2, 1, 3, 1),

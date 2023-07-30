@@ -25,7 +25,7 @@ type sSysProduct struct {
 }
 
 // List 产品列表
-func (s *sSysProduct) List(ctx context.Context, req *system.ProductListReq) (total interface{}, productList []*model.SysProduct, err error) {
+func (s *sSysProduct) List(ctx context.Context, req *system.ProductListReq) (total interface{}, productList []*model.SysProductList, err error) {
 
 	err = g.Try(ctx, func(ctx context.Context) {
 		m := dao.SysProduct.Ctx(ctx)
@@ -57,7 +57,7 @@ func (s *sSysProduct) List(ctx context.Context, req *system.ProductListReq) (tot
 		query := g.Model("sys_product", "p").
 			Distinct().
 			Fields("p.product_id, p.name_en, p.name_cn, p.description_en, p.description_cn, p.content_en, p.content_cn, p.status, p.image").
-			InnerJoin("sys_variation_lookup", "vp", "p.product_id = vp.product_id")
+			InnerJoin("sys_product_lookup", "vp", "p.product_id = vp.product_id")
 
 		if agentId := variables["agentId"]; agentId != nil {
 			query = query.Where("vp.agent_id = ?", agentId)
