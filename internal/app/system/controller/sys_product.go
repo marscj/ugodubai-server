@@ -17,7 +17,7 @@ type productController struct {
 func (c *productController) List(ctx context.Context, req *system.ProductListReq) (res *system.ProductListRes, err error) {
 	var (
 		total       interface{}
-		productList []*model.SysProductList
+		productList []model.SysProductList
 	)
 
 	res = new(system.ProductListRes)

@@ -2,6 +2,7 @@ package sysProduct
 
 import (
 	"context"
+	"strings"
 	"ugodubai-server/api/v1/system"
 	"ugodubai-server/internal/app/system/consts"
 	"ugodubai-server/internal/app/system/dao"
@@ -26,7 +27,7 @@ type sSysProduct struct {
 // 请编写一个例子
 
 // List 产品列表
-func (s *sSysProduct) List(ctx context.Context, req *system.ProductListReq) (total interface{}, productList []*model.SysProductList, err error) {
+func (s *sSysProduct) List(ctx context.Context, req *system.ProductListReq) (total interface{}, productList []model.SysProductList, err error) {
 
 	err = g.Try(ctx, func(ctx context.Context) {
 		var whereStr string
@@ -44,7 +45,8 @@ func (s *sSysProduct) List(ctx context.Context, req *system.ProductListReq) (tot
 			if whereStr != "" {
 				whereStr += " AND "
 			}
-			whereStr += "`product_id` IN (SELECT `product_id` FROM `sys_product_lookup_terms` WHERE `term_id` IN(?) )"
+			placeholders := strings.Trim(strings.Repeat("?,", len(req.TermsIDs)), ",")
+			whereStr += "`product_id` IN (SELECT `product_id` FROM `sys_product_lookup_terms` WHERE `term_id` IN(" + placeholders + ")) "
 			for _, id := range req.TermsIDs {
 				args = append(args, id)
 			}
