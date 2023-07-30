@@ -639,12 +639,26 @@ CREATE TABLE `sys_product_lookup` (
   `product_id` bigint(20) UNSIGNED DEFAULT NULL,
   `term_id` bigint(20) UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品术语表' ROW_FORMAT = COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品关联表' ROW_FORMAT = COMPACT;
 
 INSERT INTO `sys_product_lookup` (`product_id`, `term_id`) VALUES
 ( 1, 1),
 ( 1, 5),
 ( 1, 6);
+
+-- ----------------------------
+-- Table structure for sys_product_price_lookup
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_product_price_lookup`;
+CREATE TABLE `sys_product_price_lookup` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `product_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `min_price`  DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '最低价格',
+  `max_price`  DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '最高价格',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品价格关联' ROW_FORMAT = COMPACT;
+INSERT INTO `sys_product_price_lookup` (`product_id`, `min_price`, `max_price`) VALUES
+( 1, 147.00, 255);
 
 -- ----------------------------
 -- Table structure for sys_product_meta
@@ -659,7 +673,6 @@ CREATE TABLE `sys_product_meta` (
   KEY `product_id` (`product_id`),
   KEY `meta_key` (`meta_key`(32))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品meta表' ROW_FORMAT = COMPACT;
-
 INSERT INTO `sys_product_meta` (`meta_id`, `product_id`, `meta_key`, `meta_value`) VALUES
 (1, 1, 'gallery_url', 'google.com'),
 (2, 1, 'gallery_url', 'google.com');
@@ -676,7 +689,6 @@ CREATE TABLE `sys_variation` (
   `status` TINYINT NOT NULL DEFAULT '0' COMMENT '状态 0.下线 1.上线',
   PRIMARY KEY (`variation_id`)
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '产品变体表' ROW_FORMAT = COMPACT;
-
 INSERT INTO `sys_variation` (`variation_id`, `sku`, `name_cn`, `name_en`) VALUES
 (1, 'ATT-124+125-NonPrime', '124+125层普通票', '124+125 Non Prime'),
 (2, 'ATT-124+125-Prime', '124+125层黄金票', '124+125 Prime');
@@ -693,7 +705,6 @@ CREATE TABLE `sys_variation_attribute` (
   PRIMARY KEY (`attribute_id`),
   KEY `attribute_key` (`attribute_key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品变体参数表' ROW_FORMAT = COMPACT;
-
 INSERT INTO `sys_variation_attribute` (`attribute_id`, `attribute_key`, `attribute_value_cn`, `attribute_value_en`) VALUES
 (1, 'age', '成人', 'Aldult'),
 (2, 'age', '小孩', 'Child');
@@ -712,8 +723,7 @@ CREATE TABLE `sys_variation_price` (
   `currency` VARCHAR(3)  NULL DEFAULT 'AED' COMMENT '货币',
   `stock` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`variation_price_id`)
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '产品变体表' ROW_FORMAT = COMPACT;
-
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '产品变体价格表' ROW_FORMAT = COMPACT;
 INSERT INTO `sys_variation_price` (`start_date`, `end_date`, `cost_price`,`special_price`,`selling_price`) VALUES
 ('2023-07-24', '2023-07-30', '147.00', '150.00', '155.00'),
 ('2023-07-24', '2023-07-30', '120.00', '124.00', '147.00'),
@@ -732,8 +742,7 @@ CREATE TABLE `sys_variation_lookup` (
   `variation_price_id` bigint(20) UNSIGNED DEFAULT NULL,
   `agent_id` bigint(20) UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`variation_lookup_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品术语表' ROW_FORMAT = COMPACT;
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品变体关联表' ROW_FORMAT = COMPACT;
 INSERT INTO `sys_variation_lookup` (`product_id`, `variation_id`, `attribute_id`,`variation_price_id`, `agent_id`) VALUES
 ( 1, 1, 1, 1, 1),
 ( 1, 1, 2, 2, 1),

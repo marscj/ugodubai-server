@@ -2,6 +2,7 @@ package sysProduct
 
 import (
 	"context"
+	"fmt"
 	"ugodubai-server/api/v1/system"
 	"ugodubai-server/internal/app/system/consts"
 	"ugodubai-server/internal/app/system/dao"
@@ -46,6 +47,42 @@ func (s *sSysProduct) List(ctx context.Context, req *system.ProductListReq) (tot
 		} else {
 			err = m.Page(req.PageNum, req.PageSize).OrderAsc("product_id").WithAll().Scan(&productList)
 			liberr.ErrIsNil(ctx, err, "产品列表获取失败")
+		}
+
+		variables := g.Map{
+			"agentId": 1, // 指定 agent_id
+			// "agentId": nil, // 不指定 agent_id
+		}
+
+		query := g.Model("sys_product", "p").
+			Distinct().
+			Fields("p.product_id, p.name_en, p.name_cn, p.description_en, p.description_cn, p.content_en, p.content_cn, p.status, p.image").
+			InnerJoin("sys_variation_lookup", "vp", "p.product_id = vp.product_id")
+
+		if agentId := variables["agentId"]; agentId != nil {
+			query = query.Where("vp.agent_id = ?", agentId)
+		}
+
+		var products []*model.SysProduct
+
+		err = query.Scan(&products)
+
+		if err != nil {
+			panic(err)
+		}
+
+		// 打印查询结果
+		for _, product := range products {
+			fmt.Printf("Product ID: %d\n", product.ProductId)
+			fmt.Printf("Name (EN): %s\n", product.NameEn)
+			fmt.Printf("Name (CN): %s\n", product.NameCn)
+			fmt.Printf("Description (EN): %s\n", product.DescriptionEn)
+			fmt.Printf("Description (CN): %s\n", product.DescriptionCn)
+			fmt.Printf("Content (EN): %s\n", product.ContentEn)
+			fmt.Printf("Content (CN): %s\n", product.ContentCn)
+			fmt.Printf("Status: %d\n", product.Status)
+			fmt.Printf("Image: %s\n", product.Image)
+			fmt.Println("-----------------------")
 		}
 	})
 	return
