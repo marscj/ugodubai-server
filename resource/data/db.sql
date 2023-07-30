@@ -579,8 +579,8 @@ CREATE TABLE `sys_payment_tokenmeta` (
 DROP TABLE IF EXISTS `sys_product`;
 CREATE TABLE `sys_product` (
   `product_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name_en` VARCHAR(180) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
-  `name_cn` VARCHAR(180) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
+  `name_en` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
+  `name_cn` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
   `description_en` longtext COLLATE utf8mb4_unicode_ci  COMMENT '产品简介',
   `description_cn` longtext COLLATE utf8mb4_unicode_ci  COMMENT '产品简介',
   `content_en` longtext COLLATE utf8mb4_unicode_ci COMMENT '产品内容',
@@ -591,7 +591,8 @@ CREATE TABLE `sys_product` (
   PRIMARY KEY (`product_id`),
   KEY `name_en` (`name_en`),
   KEY `name_cn` (`name_cn`),
-  KEY `status` (`status`)
+  KEY `status` (`status`),
+  KEY `order` (`order`)
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '产品表' ROW_FORMAT = COMPACT;
 
 INSERT INTO `sys_product` (`name_cn`, `image`, `description_cn`, `content_cn`) VALUES
@@ -620,7 +621,8 @@ CREATE TABLE `sys_product_terms` (
   `name_en` varchar(100) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
   `name_cn` varchar(100) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`term_id`),
-  KEY `taxonomy` (`taxonomy`)
+  KEY `taxonomy` (`taxonomy`),
+  KEY `parent` (`parent`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品术语表' ROW_FORMAT = COMPACT;
 
 INSERT INTO `sys_product_terms` (`term_id`, `taxonomy`, `name_cn`, `name_en`) VALUES
@@ -639,7 +641,9 @@ CREATE TABLE `sys_product_lookup_terms` (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `product_id` bigint(20) UNSIGNED DEFAULT NULL,
   `term_id` bigint(20) UNSIGNED DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `product_id` (`product_id`),
+  KEY `term_id` (`term_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品关联表' ROW_FORMAT = COMPACT;
 
 INSERT INTO `sys_product_lookup_terms` (`product_id`, `term_id`) VALUES
@@ -657,7 +661,9 @@ CREATE TABLE `sys_product_price_lookup` (
   `agent_id` bigint(20) UNSIGNED DEFAULT NULL,
   `min_price`  DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '最低价格',
   `max_price`  DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '最高价格',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `product_id` (`product_id`),
+  KEY `agent_id` (`agent_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品价格关联' ROW_FORMAT = COMPACT;
 INSERT INTO `sys_product_price_lookup` (`product_id`, `min_price`, `max_price`) VALUES
 ( 1, 147.00, 255);
@@ -706,7 +712,11 @@ CREATE TABLE `sys_variation` (
   `name_cn` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '默认名称',
   `sku` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT  'SKU',
   `status` TINYINT NOT NULL DEFAULT '0' COMMENT '状态 0.下线 1.上线',
-  PRIMARY KEY (`variation_id`)
+  PRIMARY KEY (`variation_id`),
+  KEY `name_en` (`name_en`),
+  KEY `name_cn` (`name_cn`),
+  KEY `sku` (`sku`),
+  KEY `status` (`status`)
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '产品变体表' ROW_FORMAT = COMPACT;
 INSERT INTO `sys_variation` (`variation_id`, `sku`, `name_cn`, `name_en`) VALUES
 (1, 'ATT-124+125-NonPrime', '124+125层普通票', '124+125 Non Prime'),
@@ -741,7 +751,13 @@ CREATE TABLE `sys_variation_price` (
   `selling_price`  DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '销售价',
   `currency` VARCHAR(3) NOT NULL DEFAULT 'AED' COMMENT '货币',
   `stock` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`variation_price_id`)
+  PRIMARY KEY (`variation_price_id`),
+  KEY `end_date` (`end_date`),
+  KEY `start_date` (`start_date`),
+  KEY `special_price` (`special_price`),
+  KEY `selling_price` (`selling_price`),
+  KEY `currency` (`currency`),
+  KEY `stock` (`stock`)
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '产品变体价格表' ROW_FORMAT = COMPACT;
 INSERT INTO `sys_variation_price` (`start_date`, `end_date`, `cost_price`,`special_price`,`selling_price`) VALUES
 ('2023-07-24', '2023-07-30', '147.00', '150.00', '155.00'),
@@ -760,7 +776,12 @@ CREATE TABLE `sys_product_lookup` (
   `attribute_id` bigint(20) UNSIGNED DEFAULT NULL,
   `variation_price_id` bigint(20) UNSIGNED NOT NULL,
   `agent_id` bigint(20) UNSIGNED DEFAULT NULL,
-  PRIMARY KEY (`variation_lookup_id`)
+  PRIMARY KEY (`variation_lookup_id`),
+  KEY `product_id` (`product_id`),
+  KEY `variation_id` (`variation_id`),
+  KEY `attribute_id` (`attribute_id`),
+  KEY `variation_price_id` (`variation_price_id`),
+  KEY `agent_id` (`agent_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品变体关联表' ROW_FORMAT = COMPACT;
 INSERT INTO `sys_product_lookup` (`product_id`, `variation_id`, `attribute_id`,`variation_price_id`, `agent_id`) VALUES
 ( 1, 1, 1, 1, 1),
