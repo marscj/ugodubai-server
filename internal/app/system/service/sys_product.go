@@ -8,7 +8,7 @@ import (
 )
 
 type ISysProduct interface {
-	List(ctx context.Context, req *system.ProductListReq) (total interface{}, productList []model.SysProductList, err error)
+	List(ctx context.Context, req *system.ProductListReq) (total interface{}, productList []*model.SysProductList, err error)
 	Get(ctx context.Context, id uint64) (product *model.SysProduct, err error)
 }
 

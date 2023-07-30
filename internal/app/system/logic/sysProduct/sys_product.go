@@ -27,7 +27,7 @@ type sSysProduct struct {
 // 请编写一个例子
 
 // List 产品列表
-func (s *sSysProduct) List(ctx context.Context, req *system.ProductListReq) (total interface{}, productList []model.SysProductList, err error) {
+func (s *sSysProduct) List(ctx context.Context, req *system.ProductListReq) (total interface{}, productList []*model.SysProductList, err error) {
 
 	err = g.Try(ctx, func(ctx context.Context) {
 		var whereStr string

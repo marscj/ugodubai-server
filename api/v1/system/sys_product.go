@@ -17,7 +17,7 @@ type ProductListReq struct {
 
 type ProductListRes struct {
 	g.Meta   `mime:"application/json"`
-	Products []model.SysProductList `json:"product"`
+	Products []*model.SysProductList `json:"product"`
 	commonApi.ListRes
 }
 
