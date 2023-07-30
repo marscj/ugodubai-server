@@ -27,7 +27,7 @@ type sSysProduct struct {
 func (s *sSysProduct) List(ctx context.Context, req *system.ProductListReq) (total interface{}, productList []*model.SysProductList, err error) {
 
 	err = g.Try(ctx, func(ctx context.Context) {
-		m := dao.SysProduct.Ctx(ctx)
+		m := dao.SysProduct.Ctx(ctx).Where("status = ?", 1)
 		total, err = m.Count()
 		liberr.ErrIsNil(ctx, err, "产品列表获取失败")
 
@@ -38,7 +38,7 @@ func (s *sSysProduct) List(ctx context.Context, req *system.ProductListReq) (tot
 			req.PageSize = consts.PageSize
 		}
 
-		err = m.Page(req.PageNum, req.PageSize).OrderAsc("product_id").WithAll().Scan(&productList)
+		err = m.Page(req.PageNum, req.PageSize).OrderAsc("order").WithAll().Scan(&productList)
 		liberr.ErrIsNil(ctx, err, "产品列表获取失败")
 	})
 	return

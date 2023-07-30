@@ -13,6 +13,7 @@ type SysProductPriceLookup struct {
 	g.Meta    `orm:"table:sys_product_price_lookup, do:true"`
 	Id        interface{} //
 	ProductId interface{} //
+	AgentId   interface{} //
 	MinPrice  interface{} // 最低价格
 	MaxPrice  interface{} // 最高价格
 }

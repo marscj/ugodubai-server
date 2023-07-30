@@ -654,6 +654,7 @@ DROP TABLE IF EXISTS `sys_product_price_lookup`;
 CREATE TABLE `sys_product_price_lookup` (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `product_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `agent_id` bigint(20) UNSIGNED DEFAULT NULL,
   `min_price`  DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '最低价格',
   `max_price`  DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '最高价格',
   PRIMARY KEY (`id`)
