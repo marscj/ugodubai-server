@@ -93,6 +93,7 @@ func (s *sSysProduct) List(ctx context.Context, req *system.ProductListReq) (tot
 					break
 				} else if priceLookup.ProductId == product.ProductId && priceLookup.AgentId == 0 {
 					product.Price = priceLookup
+					break
 				}
 			}
 		}
