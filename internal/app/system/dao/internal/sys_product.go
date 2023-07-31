@@ -30,6 +30,7 @@ type SysProductColumns struct {
 	Status        string // 状态 0.下线 1.上线
 	Image         string // 缩略图
 	Order         string // 显示顺序
+	IsDeleted     string // 状态 0.未删除 1.已删除
 }
 
 // sysProductColumns holds the columns for table sys_product.
@@ -44,6 +45,7 @@ var sysProductColumns = SysProductColumns{
 	Status:        "status",
 	Image:         "image",
 	Order:         "order",
+	IsDeleted:     "is_deleted",
 }
 
 // NewSysProductDao creates and returns a new DAO object for table data access.

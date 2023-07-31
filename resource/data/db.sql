@@ -378,7 +378,7 @@ CREATE TABLE `sys_user`  (
   `created_at` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `updated_at` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `deleted_at` datetime NULL DEFAULT NULL COMMENT '删除时间',
-  `agent_id` bigint(20) DEFAULT NULL COMMENT '代理商ID',
+  `agent_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '代理商ID',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `user_login`(`user_name`, `deleted_at`) USING BTREE,
   UNIQUE INDEX `mobile`(`mobile`, `deleted_at`) USING BTREE,
@@ -516,7 +516,7 @@ CREATE TABLE `sys_booking` (
 DROP TABLE IF EXISTS `sys_booking_meta`;
 CREATE TABLE `sys_booking_meta` (
   `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `booking_id` bigint(20) UNSIGNED NOT NULL,
+  `booking_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `meta_key` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `meta_value` longtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`meta_id`),
@@ -550,8 +550,8 @@ CREATE TABLE `sys_payment_tokens` (
   `token_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `gateway_id` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL DEFAULT '0',
-  `agent_id` bigint(20) UNSIGNED NOT NULL DEFAULT '0',
+  `user_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
+  `agent_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `type` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_default` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`token_id`),
@@ -565,7 +565,7 @@ CREATE TABLE `sys_payment_tokens` (
 DROP TABLE IF EXISTS `sys_payment_tokenmeta`;
 CREATE TABLE `sys_payment_tokenmeta` (
   `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `payment_token_id` bigint(20) UNSIGNED NOT NULL,
+  `payment_token_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `meta_key` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `meta_value` longtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`meta_id`),
@@ -588,6 +588,7 @@ CREATE TABLE `sys_product` (
   `status` TINYINT NOT NULL DEFAULT 0 COMMENT '状态 0.下线 1.上线',
   `image` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '缩略图',
   `order` int(4) NULL DEFAULT 0 COMMENT '显示顺序',
+  `is_deleted` TINYINT NOT NULL DEFAULT 0 COMMENT '状态 0.未删除 1.已删除',
   PRIMARY KEY (`product_id`),
   KEY `name_en` (`name_en`),
   KEY `name_cn` (`name_cn`),
@@ -617,7 +618,7 @@ DROP TABLE IF EXISTS `sys_product_terms`;
 CREATE TABLE `sys_product_terms` (
   `term_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `taxonomy` varchar(32) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
-  `parent` bigint(20) UNSIGNED NOT NULL DEFAULT '0',
+  `parent` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `name_en` varchar(100) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
   `name_cn` varchar(100) COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`term_id`),
@@ -634,19 +635,19 @@ INSERT INTO `sys_product_terms` (`term_id`, `taxonomy`, `name_cn`, `name_en`) VA
 (6, 'tag', '必玩', 'Must Play');
 
 -- ----------------------------
--- Table structure for sys_product_lookup_terms
+-- Table structure for sys_product_terms_lookup
 -- ----------------------------
-DROP TABLE IF EXISTS `sys_product_lookup_terms`;
-CREATE TABLE `sys_product_lookup_terms` (
+DROP TABLE IF EXISTS `sys_product_terms_lookup`;
+CREATE TABLE `sys_product_terms_lookup` (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `product_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `term_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `product_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
+  `term_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `product_id` (`product_id`),
   KEY `term_id` (`term_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品关联表' ROW_FORMAT = COMPACT;
 
-INSERT INTO `sys_product_lookup_terms` (`product_id`, `term_id`) VALUES
+INSERT INTO `sys_product_terms_lookup` (`product_id`, `term_id`) VALUES
 ( 1, 1),
 ( 1, 5),
 ( 1, 6);
@@ -657,16 +658,17 @@ INSERT INTO `sys_product_lookup_terms` (`product_id`, `term_id`) VALUES
 DROP TABLE IF EXISTS `sys_product_price_lookup`;
 CREATE TABLE `sys_product_price_lookup` (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `product_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `agent_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `product_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
+  `agent_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `min_price`  DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '最低价格',
   `max_price`  DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '最高价格',
   PRIMARY KEY (`id`),
   KEY `product_id` (`product_id`),
   KEY `agent_id` (`agent_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品价格关联' ROW_FORMAT = COMPACT;
-INSERT INTO `sys_product_price_lookup` (`product_id`, `min_price`, `max_price`) VALUES
-( 1, 147.00, 255);
+INSERT INTO `sys_product_price_lookup` (`product_id`, `agent_id`, `min_price`, `max_price`) VALUES
+( 1, 1, 147.00, 255),
+( 1, 0, 85.00, 289);
 
 -- ----------------------------
 -- Table structure for sys_product_meta
@@ -674,7 +676,7 @@ INSERT INTO `sys_product_price_lookup` (`product_id`, `min_price`, `max_price`) 
 DROP TABLE IF EXISTS `sys_product_meta`;
 CREATE TABLE `sys_product_meta` (
   `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `product_id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `meta_key` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
   `meta_value` longtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`meta_id`),
@@ -691,7 +693,7 @@ INSERT INTO `sys_product_meta` (`meta_id`, `product_id`, `meta_key`, `meta_value
 DROP TABLE IF EXISTS `sys_product_keywords`;
 CREATE TABLE `sys_product_keywords` (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `product_id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `keyword` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `product_id` (`product_id`),
@@ -771,11 +773,11 @@ INSERT INTO `sys_variation_price` (`start_date`, `end_date`, `cost_price`,`speci
 DROP TABLE IF EXISTS `sys_product_lookup`;
 CREATE TABLE `sys_product_lookup` (
   `variation_lookup_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `product_id` bigint(20) UNSIGNED NOT NULL,
-  `variation_id` bigint(20) UNSIGNED NOT NULL,
-  `attribute_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `variation_price_id` bigint(20) UNSIGNED NOT NULL,
-  `agent_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `product_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
+  `variation_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
+  `attribute_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
+  `variation_price_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
+  `agent_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   PRIMARY KEY (`variation_lookup_id`),
   KEY `product_id` (`product_id`),
   KEY `variation_id` (`variation_id`),
@@ -787,6 +789,6 @@ INSERT INTO `sys_product_lookup` (`product_id`, `variation_id`, `attribute_id`,`
 ( 1, 1, 1, 1, 1),
 ( 1, 1, 2, 2, 1),
 ( 1, 2, 1, 3, 1),
-( 1, 2, 2, 4, NULL);
+( 1, 2, 2, 4, 0);
 
 SET FOREIGN_KEY_CHECKS = 1;

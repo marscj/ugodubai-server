@@ -31,5 +31,5 @@ type SysUser struct {
 	CreatedAt     *gtime.Time `json:"createdAt"     description:"创建时间"`
 	UpdatedAt     *gtime.Time `json:"updatedAt"     description:"更新时间"`
 	DeletedAt     *gtime.Time `json:"deletedAt"     description:"删除时间"`
-	AgentId       int64       `json:"agentId"       description:"代理商ID"`
+	AgentId       uint64      `json:"agentId"       description:"代理商ID"`
 }

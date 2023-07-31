@@ -21,4 +21,5 @@ type SysProduct struct {
 	Status        interface{} // 状态 0.下线 1.上线
 	Image         interface{} // 缩略图
 	Order         interface{} // 显示顺序
+	IsDeleted     interface{} // 状态 0.未删除 1.已删除
 }

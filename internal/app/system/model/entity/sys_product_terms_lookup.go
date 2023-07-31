@@ -4,8 +4,8 @@
 
 package entity
 
-// SysProductLookupTerms is the golang structure for table sys_product_lookup_terms.
-type SysProductLookupTerms struct {
+// SysProductTermsLookup is the golang structure for table sys_product_terms_lookup.
+type SysProductTermsLookup struct {
 	Id        uint64 `json:"id"        description:""`
 	ProductId uint64 `json:"productId" description:""`
 	TermId    uint64 `json:"termId"    description:""`
