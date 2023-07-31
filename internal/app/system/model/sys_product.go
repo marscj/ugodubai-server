@@ -16,7 +16,7 @@ type SysProductList struct {
 	DescriptionCn string                   `json:"descriptionCn" description:"产品简介"`
 	Image         string                   `json:"image"         description:"缩略图"`
 	Price         *SysProductPriceLookup   `orm:"with:product_id=product_id" json:"price"`
-	Terms         []*SysProductLookupTerms `orm:"with:product_id=product_id" json:"term"`
+	Terms         []*SysProductTermsLookup `orm:"with:product_id=product_id" json:"term"`
 }
 
 type SysProduct struct {
@@ -24,7 +24,7 @@ type SysProduct struct {
 	Price  *SysProductPriceLookup   `orm:"with:product_id=product_id" json:"price"`
 	Meta   []*SysProductMeta        `orm:"with:product_id=product_id" json:"meta"`
 	Lookup []*SysProductLookup      `orm:"with:product_id=product_id" json:"lookup"`
-	Term   []*SysProductLookupTerms `orm:"with:product_id=product_id" json:"term"`
+	Term   []*SysProductTermsLookup `orm:"with:product_id=product_id" json:"term"`
 }
 
 type SysProductMeta struct {
@@ -55,7 +55,7 @@ type SysVariationAttribute struct {
 	*do.SysVariationAttribute
 }
 
-type SysProductLookupTerms struct {
-	*do.SysProductLookupTerms
+type SysProductTermsLookup struct {
+	*do.SysProductTermsLookup
 	Terms []*entity.SysProductTerms `orm:"with:term_id=term_id" json:"terms"`
 }
