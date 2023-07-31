@@ -29,7 +29,7 @@ type SetPersonalReq struct {
 	UserEmail string `p:"userEmail" v:"required|email#邮箱不能为空|邮箱格式错误"`
 	Describe  string `p:"describe"` //签名
 	Avatar    string `p:"avatar"`   //签名
-
+	AgentId   uint64 `p:"agentId"`
 }
 
 // PersonalEditReq 修改个人

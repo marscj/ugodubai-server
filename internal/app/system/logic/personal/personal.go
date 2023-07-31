@@ -65,6 +65,7 @@ func (s *sPersonal) EditPersonal(ctx context.Context, req *system.PersonalEditRe
 				UserEmail:    req.UserEmail,
 				Describe:     req.Describe,
 				Avatar:       req.Avatar,
+				AgentId:      req.AgentId,
 			})
 			liberr.ErrIsNil(ctx, err, "修改用户信息失败")
 			user, err = service.SysUser().GetUserById(ctx, userId)

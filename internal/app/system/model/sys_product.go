@@ -1,7 +1,6 @@
 package model
 
 import (
-	"ugodubai-server/internal/app/system/model/do"
 	"ugodubai-server/internal/app/system/model/entity"
 
 	"github.com/gogf/gf/v2/frame/g"
@@ -15,12 +14,12 @@ type SysProductList struct {
 	DescriptionEn string                   `json:"descriptionEn" description:"产品简介"`
 	DescriptionCn string                   `json:"descriptionCn" description:"产品简介"`
 	Image         string                   `json:"image"         description:"缩略图"`
-	Price         *SysProductPriceLookup   `orm:"with:product_id=product_id" json:"price"`
+	Price         *SysProductPriceLookup   `json:"price"`
 	Terms         []*SysProductTermsLookup `orm:"with:product_id=product_id" json:"term"`
 }
 
 type SysProduct struct {
-	*do.SysProduct
+	*entity.SysProduct
 	Price  *SysProductPriceLookup   `orm:"with:product_id=product_id" json:"price"`
 	Meta   []*SysProductMeta        `orm:"with:product_id=product_id" json:"meta"`
 	Lookup []*SysProductLookup      `orm:"with:product_id=product_id" json:"lookup"`
@@ -28,15 +27,15 @@ type SysProduct struct {
 }
 
 type SysProductMeta struct {
-	*do.SysProductMeta
+	*entity.SysProductMeta
 }
 
 type SysProductPriceLookup struct {
-	*do.SysProductPriceLookup
+	*entity.SysProductPriceLookup
 }
 
 type SysProductLookup struct {
-	*do.SysProductLookup
+	*entity.SysProductLookup
 	Variation *SysVariation          `orm:"with:variation_id=variation_id" json:"variation"`
 	Price     *SysVariationPrice     `orm:"with:variation_price_id=variation_price_id" json:"price"`
 	Attribute *SysVariationAttribute `orm:"with:attribute_id=attribute_id" json:"attribute"`
@@ -44,18 +43,18 @@ type SysProductLookup struct {
 }
 
 type SysVariation struct {
-	*do.SysVariation
+	*entity.SysVariation
 }
 
 type SysVariationPrice struct {
-	*do.SysVariationPrice
+	*entity.SysVariationPrice
 }
 
 type SysVariationAttribute struct {
-	*do.SysVariationAttribute
+	*entity.SysVariationAttribute
 }
 
 type SysProductTermsLookup struct {
-	*do.SysProductTermsLookup
+	*entity.SysProductTermsLookup
 	Terms []*entity.SysProductTerms `orm:"with:term_id=term_id" json:"terms"`
 }

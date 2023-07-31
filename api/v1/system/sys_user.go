@@ -59,6 +59,7 @@ type SetUserReq struct {
 	Sex      int     `p:"sex"`
 	Status   uint    `p:"status"`
 	IsAdmin  int     `p:"isAdmin"` // 是否后台管理员 1 是  0   否
+	AgentId  uint64  `p:"agentId"`
 }
 
 // UserAddReq 添加用户参数

@@ -393,6 +393,7 @@ func (s *sSysUser) Add(ctx context.Context, req *system.UserAddReq) (err error) 
 				DeptId:       req.DeptId,
 				Remark:       req.Remark,
 				IsAdmin:      req.IsAdmin,
+				AgentId:      req.AgentId,
 			})
 			liberr.ErrIsNil(ctx, e, "添加用户失败")
 			e = s.addUserRole(ctx, req.RoleIds, userId)
@@ -421,6 +422,7 @@ func (s *sSysUser) Edit(ctx context.Context, req *system.UserEditReq) (err error
 				DeptId:       req.DeptId,
 				Remark:       req.Remark,
 				IsAdmin:      req.IsAdmin,
+				AgentId:      req.AgentId,
 			})
 			liberr.ErrIsNil(ctx, err, "修改用户信息失败")
 			//设置用户所属角色信息

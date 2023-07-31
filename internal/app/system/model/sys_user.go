@@ -18,7 +18,7 @@ type LoginUser struct {
 	IsAdmin      int    `orm:"is_admin"         json:"isAdmin"`      // 是否后台管理员 1 是  0   否
 	Avatar       string `orm:"avatar" json:"avatar"`                 //头像
 	DeptId       uint64 `orm:"dept_id"       json:"deptId"`          //部门id
-	AgentId      int64  `orm:"agent_id" json:"agentId"       `       //代理商ID
+	AgentId      uint64 `orm:"agent_id" json:"agentId"       `       //代理商ID
 }
 
 type SysUser struct {
