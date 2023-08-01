@@ -33,7 +33,7 @@ func (s *sSysProduct) List(ctx context.Context, req *system.ProductListReq) (tot
 		user := service.Context().GetLoginUser(ctx)
 		agentID := user.AgentId
 
-		var whereStr string
+		var whereStr string = "`is_deleted` = 0 "
 		var args []interface{}
 
 		var products []*model.SysProductList
@@ -44,8 +44,10 @@ func (s *sSysProduct) List(ctx context.Context, req *system.ProductListReq) (tot
 
 		// 关键字查询
 		if req.Keyword != nil {
-			// Search for products with the keyword
-			whereStr += "`p.product_id` IN (SELECT `product_id` FROM `sys_product_keywords` WHERE `keyword` LIKE ?) "
+			if whereStr != "" {
+				whereStr += " AND "
+			}
+			whereStr += "`product_id` IN (SELECT `product_id` FROM `sys_product_keywords` WHERE `keyword` LIKE ?) "
 			args = append(args, "%"+*req.Keyword+"%")
 		}
 
@@ -55,7 +57,7 @@ func (s *sSysProduct) List(ctx context.Context, req *system.ProductListReq) (tot
 				whereStr += " AND "
 			}
 			placeholders := strings.Trim(strings.Repeat("?,", len(req.TermsIDs)), ",")
-			whereStr += "`p.product_id` IN (SELECT `product_id` FROM `sys_product_lookup_terms` WHERE `term_id` IN(" + placeholders + ")) "
+			whereStr += "`product_id` IN (SELECT `product_id` FROM `sys_product_terms_lookup` WHERE `term_id` IN(" + placeholders + ")) "
 			for _, id := range req.TermsIDs {
 				args = append(args, id)
 			}
@@ -66,7 +68,7 @@ func (s *sSysProduct) List(ctx context.Context, req *system.ProductListReq) (tot
 			if whereStr != "" {
 				whereStr += " AND "
 			}
-			whereStr += "`p.status` = ? "
+			whereStr += "`status` = ? "
 			args = append(args, *req.Status)
 		}
 
@@ -101,6 +103,23 @@ func (s *sSysProduct) List(ctx context.Context, req *system.ProductListReq) (tot
 	})
 	return total, productList, nil
 }
+
+// func (s *sSysProduct) Get(ctx context.Context, id uint64) (product *model.SysProduct, err error) {
+
+// 	err = g.Try(ctx, func(ctx context.Context) {
+// 		query := dao.SysProduct.Ctx(ctx).
+// 			WherePri(id).
+// 			With("Lookup", func(w *gdb.Model) *gdb.Model {
+// 				return w.Where("agent_id != ?", 1)
+// 			})
+// 		err = query.Scan(&product)
+
+// 		if err != nil {
+// 			liberr.ErrIsNil(ctx, err, "产品信息获取失败")
+// 		}
+// 	})
+// 	return
+// }
 
 //  通过Id获取产品信息
 func (s *sSysProduct) Get(ctx context.Context, id uint64) (product *model.SysProduct, err error) {

@@ -13,6 +13,8 @@ import (
 type SysVariationPrice struct {
 	g.Meta           `orm:"table:sys_variation_price, do:true"`
 	VariationPriceId interface{} //
+	VariationId      interface{} //
+	AttributeId      interface{} //
 	StartDate        *gtime.Time //
 	EndDate          *gtime.Time //
 	CostPrice        interface{} // 成本价

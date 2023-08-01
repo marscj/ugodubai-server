@@ -21,6 +21,8 @@ type SysVariationPriceDao struct {
 // SysVariationPriceColumns defines and stores column names for table sys_variation_price.
 type SysVariationPriceColumns struct {
 	VariationPriceId string //
+	VariationId      string //
+	AttributeId      string //
 	StartDate        string //
 	EndDate          string //
 	CostPrice        string // 成本价
@@ -33,6 +35,8 @@ type SysVariationPriceColumns struct {
 // sysVariationPriceColumns holds the columns for table sys_variation_price.
 var sysVariationPriceColumns = SysVariationPriceColumns{
 	VariationPriceId: "variation_price_id",
+	VariationId:      "variation_id",
+	AttributeId:      "attribute_id",
 	StartDate:        "start_date",
 	EndDate:          "end_date",
 	CostPrice:        "cost_price",

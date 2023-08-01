@@ -11,6 +11,8 @@ import (
 // SysVariationPrice is the golang structure for table sys_variation_price.
 type SysVariationPrice struct {
 	VariationPriceId uint64      `json:"variationPriceId" description:""`
+	VariationId      uint64      `json:"variationId"      description:""`
+	AttributeId      uint64      `json:"attributeId"      description:""`
 	StartDate        *gtime.Time `json:"startDate"        description:""`
 	EndDate          *gtime.Time `json:"endDate"          description:""`
 	CostPrice        float64     `json:"costPrice"        description:"成本价"`

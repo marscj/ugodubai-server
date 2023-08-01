@@ -596,8 +596,8 @@ CREATE TABLE `sys_product` (
   KEY `order` (`order`)
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '产品表' ROW_FORMAT = COMPACT;
 
-INSERT INTO `sys_product` (`name_cn`, `image`, `description_cn`, `content_cn`) VALUES
-('哈利法塔', 'https://www.burjkhalifa.ae/images/gallery/burj-khalifa_02.jpg', '迪拜塔，也被称为哈利法塔，是阿联酋迪拜市的标志性建筑物。它是世界上最高的人造结构物，高828米，拥有163层。迪拜塔于2010年完工，并成为一个多功能建筑，包括豪华酒店、住宅、观光景点和办公空间。塔内设有观景台，游客可以欣赏到壮观的城市景色。迪拜塔成为迪拜市的象征之一，吸引着全球游客前来参观。', '<div><p>参观迪拜塔时需要注意以下事项：</p>
+INSERT INTO `sys_product` (`product_id`, `name_cn`, `image`, `description_cn`, `content_cn`) VALUES
+(1, '哈利法塔', 'https://www.burjkhalifa.ae/images/gallery/burj-khalifa_02.jpg', '迪拜塔，也被称为哈利法塔，是阿联酋迪拜市的标志性建筑物。它是世界上最高的人造结构物，高828米，拥有163层。迪拜塔于2010年完工，并成为一个多功能建筑，包括豪华酒店、住宅、观光景点和办公空间。塔内设有观景台，游客可以欣赏到壮观的城市景色。迪拜塔成为迪拜市的象征之一，吸引着全球游客前来参观。', '<div><p>参观迪拜塔时需要注意以下事项：</p>
 <ol>
 <li>提前预订门票：迪拜塔是一座著名的旅游景点，门票需提前预订以确保入场。</li>
 <li>遵守规定：参观者需遵守迪拜塔的参观规定和指示，包括禁止吸烟、禁止携带食物等。</li>
@@ -712,6 +712,7 @@ INSERT INTO `sys_product_keywords` (`product_id`, `keyword`) VALUES
 DROP TABLE IF EXISTS `sys_variation`;
 CREATE TABLE `sys_variation` (
   `variation_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `product_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `name_en` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '默认名称',
   `name_cn` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '默认名称',
   `sku` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT  'SKU',
@@ -722,9 +723,9 @@ CREATE TABLE `sys_variation` (
   KEY `sku` (`sku`),
   KEY `status` (`status`)
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '产品变体表' ROW_FORMAT = COMPACT;
-INSERT INTO `sys_variation` (`variation_id`, `sku`, `name_cn`, `name_en`) VALUES
-(1, 'ATT-124+125-NonPrime', '124+125层普通票', '124+125 Non Prime'),
-(2, 'ATT-124+125-Prime', '124+125层黄金票', '124+125 Prime');
+INSERT INTO `sys_variation` (`variation_id`, `product_id`, `sku`, `name_cn`, `name_en`) VALUES
+(1, 1, 'ATT-124+125-NonPrime', '124+125层普通票', '124+125 Non Prime'),
+(2, 1, 'ATT-124+125-Prime', '124+125层黄金票', '124+125 Prime');
 
 -- ----------------------------
 -- Table structure for sys_variation_attribute
@@ -748,6 +749,8 @@ INSERT INTO `sys_variation_attribute` (`attribute_id`, `attribute_key`, `attribu
 DROP TABLE IF EXISTS `sys_variation_price`;
 CREATE TABLE `sys_variation_price` (
   `variation_price_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `variation_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
+  `attribute_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `start_date` DATE DEFAULT NULL,
   `end_date` DATE DEFAULT NULL,
   `cost_price` DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '成本价',
@@ -763,11 +766,11 @@ CREATE TABLE `sys_variation_price` (
   KEY `currency` (`currency`),
   KEY `stock` (`stock`)
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '产品变体价格表' ROW_FORMAT = COMPACT;
-INSERT INTO `sys_variation_price` (`start_date`, `end_date`, `cost_price`,`special_price`,`selling_price`) VALUES
-('2023-07-24', '2023-07-30', '147.00', '150.00', '155.00'),
-('2023-07-24', '2023-07-30', '120.00', '124.00', '147.00'),
-('2023-07-24', '2023-07-30', '247.00', '250.00', '255.00'),
-('2023-07-24', '2023-07-30', '220.00', '224.00', '247.00');
+INSERT INTO `sys_variation_price` (`variation_id`, `attribute_id`, `start_date`, `end_date`, `cost_price`,`special_price`,`selling_price`) VALUES
+(1, 1, '2023-07-24', '2023-07-30', '147.00', '150.00', '155.00'),
+(1, 2, '2023-07-24', '2023-07-30', '120.00', '124.00', '147.00'),
+(2, 1, '2023-07-24', '2023-07-30', '247.00', '250.00', '255.00'),
+(2, 2, '2023-07-24', '2023-07-30', '220.00', '224.00', '247.00');
 
 -- ----------------------------
 -- Table structure for sys_product_lookup
