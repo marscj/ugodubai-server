@@ -34,5 +34,5 @@ type SysBooking struct {
 	CreatedBy     interface{} // 创建者
 	UpdatedBy     interface{} // 更新者
 	CreatedAt     *gtime.Time //
-	UpdatedAt     *gtime.Time //
+	UpdatedAt     *gtime.Time // 更新时间
 }

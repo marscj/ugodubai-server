@@ -6,6 +6,7 @@ package do
 
 import (
 	"github.com/gogf/gf/v2/frame/g"
+	"github.com/gogf/gf/v2/os/gtime"
 )
 
 // SysVariation is the golang structure of table sys_variation for DAO operations like Where/Data.
@@ -17,4 +18,5 @@ type SysVariation struct {
 	NameCn      interface{} // 默认名称
 	Sku         interface{} // SKU
 	Status      interface{} // 状态 0.下线 1.上线
+	UpdatedAt   *gtime.Time // 更新时间
 }

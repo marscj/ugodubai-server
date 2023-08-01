@@ -42,7 +42,7 @@ type SysBookingColumns struct {
 	CreatedBy     string // 创建者
 	UpdatedBy     string // 更新者
 	CreatedAt     string //
-	UpdatedAt     string //
+	UpdatedAt     string // 更新时间
 }
 
 // sysBookingColumns holds the columns for table sys_booking.

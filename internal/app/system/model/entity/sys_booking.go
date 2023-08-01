@@ -32,5 +32,5 @@ type SysBooking struct {
 	CreatedBy     uint64      `json:"createdBy"     description:"创建者"`
 	UpdatedBy     uint64      `json:"updatedBy"     description:"更新者"`
 	CreatedAt     *gtime.Time `json:"createdAt"     description:""`
-	UpdatedAt     *gtime.Time `json:"updatedAt"     description:""`
+	UpdatedAt     *gtime.Time `json:"updatedAt"     description:"更新时间"`
 }

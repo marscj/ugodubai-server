@@ -26,6 +26,7 @@ type SysVariationColumns struct {
 	NameCn      string // 默认名称
 	Sku         string // SKU
 	Status      string // 状态 0.下线 1.上线
+	UpdatedAt   string // 更新时间
 }
 
 // sysVariationColumns holds the columns for table sys_variation.
@@ -36,6 +37,7 @@ var sysVariationColumns = SysVariationColumns{
 	NameCn:      "name_cn",
 	Sku:         "sku",
 	Status:      "status",
+	UpdatedAt:   "updated_at",
 }
 
 // NewSysVariationDao creates and returns a new DAO object for table data access.

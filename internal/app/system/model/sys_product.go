@@ -20,9 +20,9 @@ type SysProductList struct {
 
 type SysProduct struct {
 	*entity.SysProduct
-	MetaData []*SysProductMeta        `orm:"with:product_id=product_id" json:"meta"`
-	Term     []*SysProductTermsLookup `orm:"with:product_id=product_id" json:"term"`
-	Lookup   []*SysProductLookup      `orm:"with:product_id=product_id" json:"lookup"`
+	MetaData  []*SysProductMeta        `orm:"with:product_id=product_id" json:"meta"`
+	Term      []*SysProductTermsLookup `orm:"with:product_id=product_id" json:"term"`
+	Variation []*SysVariation          `orm:"with:product_id=product_id" json:"variation"`
 }
 
 type SysProductMeta struct {
@@ -43,10 +43,13 @@ type SysProductLookup struct {
 
 type SysVariation struct {
 	*entity.SysVariation
+	Price []*SysVariationPrice `orm:"with:variation_id=variation_id" json:"price"`
 }
 
 type SysVariationPrice struct {
 	*entity.SysVariationPrice
+	Attribute *SysVariationAttribute `orm:"with:attribute_id=attribute_id" json:"attribute"`
+	Agent     *SysAgentList          `orm:"with:agent_id=agent_id json:agent" `
 }
 
 type SysVariationAttribute struct {

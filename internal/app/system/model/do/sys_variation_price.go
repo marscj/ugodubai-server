@@ -15,6 +15,7 @@ type SysVariationPrice struct {
 	VariationPriceId interface{} //
 	VariationId      interface{} //
 	AttributeId      interface{} //
+	AgentId          interface{} //
 	StartDate        *gtime.Time //
 	EndDate          *gtime.Time //
 	CostPrice        interface{} // 成本价
@@ -22,4 +23,5 @@ type SysVariationPrice struct {
 	SellingPrice     interface{} // 销售价
 	Currency         interface{} // 货币
 	Stock            interface{} //
+	UpdatedAt        *gtime.Time // 更新时间
 }

@@ -23,6 +23,7 @@ type SysVariationPriceColumns struct {
 	VariationPriceId string //
 	VariationId      string //
 	AttributeId      string //
+	AgentId          string //
 	StartDate        string //
 	EndDate          string //
 	CostPrice        string // 成本价
@@ -30,6 +31,7 @@ type SysVariationPriceColumns struct {
 	SellingPrice     string // 销售价
 	Currency         string // 货币
 	Stock            string //
+	UpdatedAt        string // 更新时间
 }
 
 // sysVariationPriceColumns holds the columns for table sys_variation_price.
@@ -37,6 +39,7 @@ var sysVariationPriceColumns = SysVariationPriceColumns{
 	VariationPriceId: "variation_price_id",
 	VariationId:      "variation_id",
 	AttributeId:      "attribute_id",
+	AgentId:          "agent_id",
 	StartDate:        "start_date",
 	EndDate:          "end_date",
 	CostPrice:        "cost_price",
@@ -44,6 +47,7 @@ var sysVariationPriceColumns = SysVariationPriceColumns{
 	SellingPrice:     "selling_price",
 	Currency:         "currency",
 	Stock:            "stock",
+	UpdatedAt:        "updated_at",
 }
 
 // NewSysVariationPriceDao creates and returns a new DAO object for table data access.

@@ -6,6 +6,7 @@ package do
 
 import (
 	"github.com/gogf/gf/v2/frame/g"
+	"github.com/gogf/gf/v2/os/gtime"
 )
 
 // SysProduct is the golang structure of table sys_product for DAO operations like Where/Data.
@@ -22,4 +23,5 @@ type SysProduct struct {
 	Image         interface{} // 缩略图
 	Order         interface{} // 显示顺序
 	IsDeleted     interface{} // 状态 0.未删除 1.已删除
+	UpdatedAt     *gtime.Time // 更新时间
 }

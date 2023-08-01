@@ -130,6 +130,23 @@ func (s *sSysProduct) Get(ctx context.Context, id uint64) (product *model.SysPro
 		if err != nil {
 			liberr.ErrIsNil(ctx, err, "产品信息获取失败")
 		}
+
+		// 获取登录用户
+		user := service.Context().GetLoginUser(ctx)
+		agentID := user.AgentId
+
+		// 根据Agent查询
+		if user.IsAdmin == 0 {
+			for _, variation := range product.Variation {
+				filteredPrice := make([]*model.SysVariationPrice, 0)
+				for _, price := range variation.Price {
+					if price.Agent != nil && price.Agent.AgentId == agentID {
+						filteredPrice = append(filteredPrice, price)
+					}
+				}
+				variation.Price = filteredPrice
+			}
+		}
 	})
 	return
 }
