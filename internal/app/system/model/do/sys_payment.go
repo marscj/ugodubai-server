@@ -8,14 +8,11 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 )
 
-// SysPaymentTokens is the golang structure of table sys_payment_tokens for DAO operations like Where/Data.
-type SysPaymentTokens struct {
-	g.Meta    `orm:"table:sys_payment_tokens, do:true"`
+// SysPayment is the golang structure of table sys_payment for DAO operations like Where/Data.
+type SysPayment struct {
+	g.Meta    `orm:"table:sys_payment, do:true"`
 	TokenId   interface{} //
-	GatewayId interface{} //
 	Token     interface{} //
-	UserId    interface{} //
-	AgentId   interface{} //
-	Type      interface{} //
-	IsDefault interface{} //
+	GatewayId interface{} //
+	BookingId interface{} //
 }

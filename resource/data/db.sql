@@ -486,22 +486,24 @@ CREATE TABLE `sys_booking` (
   `parent_id` bigint(20) UNSIGNED NULL DEFAULT 0 COMMENT '父',
   `related_id` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT  '关联订单ID',
   `agent_id` bigint(20) UNSIGNED NULL DEFAULT 0 COMMENT '代理商ID',
+  `supplier_id` bigint(20) UNSIGNED NULL DEFAULT 0 COMMENT '代理商ID',
   `action_date` DATETIME NULL DEFAULT NULL COMMENT '执行日期',
   `product_id` bigint(20) UNSIGNED NULL DEFAULT 0 COMMENT '产品ID',
   `variation_id` bigint(20) UNSIGNED NULL DEFAULT 0 COMMENT '变体产品',
+  `variation_price_id` bigint(20) UNSIGNED NULL DEFAULT 0 COMMENT '变体产品价格',
   `fit_number` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT  'FIT',
   `sku` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT  'SKU',
   `guest_name` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT  '客人姓名',
   `guest_contact` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '客人联系方式',
-  `product_name` VARCHAR(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT  '产品名称',
   `unit_price` DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '单价',
   `quantity` INT NOT NULL DEFAULT 1 COMMENT '数量',
   `total_price` DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '总价',
   `tax` DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '税',
   `currency` VARCHAR(3)  NULL DEFAULT 'AED' COMMENT '货币',
   `booking_status` TINYINT NOT NULL DEFAULT 1 COMMENT '订单状态 0.待核单 1.已核单出票中 2.已出票 3.取消待确认 4.已取消',
-  -- `payment_status` TINYINT NOT NULL DEFAULT 1 COMMENT '支付状态 0.等待支付 1.未支付 2.已支付 3.已退款',
-  -- `payment_method` TINYINT NOT NULL DEFAULT 1 COMMENT '支付方式 0.余额 1.信用 2.支付宝 3.微信 4.公司转账',
+  `payment_status` TINYINT NOT NULL DEFAULT 1 COMMENT '支付状态 0.等待支付 1.未支付 2.已支付 3.已退款',
+  `payment_method` TINYINT NOT NULL DEFAULT 1 COMMENT '支付方式 0.余额 1.信用 2.支付宝 3.微信 4.公司转账',
+  `supplier_status` TINYINT NOT NULL DEFAULT 1 COMMENT '提供商支付状态 1.未支付 2.已支付 3.已退款',
   `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '备注',
   `created_by` bigint(20) UNSIGNED NULL DEFAULT 0 COMMENT '创建者',
   `updated_by` bigint(20) UNSIGNED NULL DEFAULT 0 COMMENT '更新者',
@@ -543,33 +545,29 @@ INSERT INTO `sys_gateway` (`name_en`, `name_cn`, `content`) VALUES
 ('Alipay', '支付宝', '');
 
 -- ----------------------------
--- Table structure for sys_payment_tokens
+-- Table structure for sys_payment
 -- ----------------------------
-DROP TABLE IF EXISTS `sys_payment_tokens`;
-CREATE TABLE `sys_payment_tokens` (
+DROP TABLE IF EXISTS `sys_payment`;
+CREATE TABLE `sys_payment` (
   `token_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `gateway_id` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
-  `agent_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
-  `type` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `is_default` tinyint(1) NOT NULL DEFAULT '0',
+  `gateway_id` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `booking_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   PRIMARY KEY (`token_id`),
-  KEY `user_id` (`user_id`),
-  KEY `agent_id` (`agent_id`)
+  KEY `booking_id` (`booking_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '支付表' ROW_FORMAT = COMPACT;
 
 -- ----------------------------
--- Table structure for sys_payment_tokenmeta
+-- Table structure for sys_payment_meta
 -- ----------------------------
-DROP TABLE IF EXISTS `sys_payment_tokenmeta`;
-CREATE TABLE `sys_payment_tokenmeta` (
+DROP TABLE IF EXISTS `sys_payment_meta`;
+CREATE TABLE `sys_payment_meta` (
   `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `payment_token_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
+  `payment_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `meta_key` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `meta_value` longtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`meta_id`),
-  KEY `payment_token_id` (`payment_token_id`),
+  KEY `payment_id` (`payment_id`),
   KEY `meta_key` (`meta_key`(32))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '支付meta表' ROW_FORMAT = COMPACT;
 
@@ -779,29 +777,5 @@ INSERT INTO `sys_variation_price` (`variation_id`, `attribute_id`, `agent_id`, `
 (1, 2, 0, '2023-07-24', '2023-07-30', '920.00', '924.00', '947.00'),
 (2, 1, 0, '2023-07-24', '2023-07-30', '947.00', '950.00', '955.00'),
 (2, 2, 0,'2023-07-24', '2023-07-30', '920.00', '924.00', '947.00');
-
--- ----------------------------
--- Table structure for sys_product_lookup
--- ----------------------------
-DROP TABLE IF EXISTS `sys_product_lookup`;
-CREATE TABLE `sys_product_lookup` (
-  `variation_lookup_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `product_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
-  `variation_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
-  `attribute_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
-  `variation_price_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
-  `agent_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
-  PRIMARY KEY (`variation_lookup_id`),
-  KEY `product_id` (`product_id`),
-  KEY `variation_id` (`variation_id`),
-  KEY `attribute_id` (`attribute_id`),
-  KEY `variation_price_id` (`variation_price_id`),
-  KEY `agent_id` (`agent_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品变体关联表' ROW_FORMAT = COMPACT;
-INSERT INTO `sys_product_lookup` (`product_id`, `variation_id`, `attribute_id`,`variation_price_id`, `agent_id`) VALUES
-( 1, 1, 1, 1, 1),
-( 1, 1, 2, 2, 1),
-( 1, 2, 1, 3, 1),
-( 1, 2, 2, 4, 0);
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -32,14 +32,6 @@ type SysProductPriceLookup struct {
 	*entity.SysProductPriceLookup
 }
 
-type SysProductLookup struct {
-	*entity.SysProductLookup
-	Variation []*SysVariation          `orm:"with:variation_id=variation_id" json:"variation"`
-	Price     []*SysVariationPrice     `orm:"with:variation_price_id=variation_price_id" json:"price"`
-	Attribute []*SysVariationAttribute `orm:"with:attribute_id=attribute_id" json:"attribute"`
-	Agent     []*SysAgentList          `orm:"with:agent_id=agent_id json:agent" `
-}
-
 type SysVariation struct {
 	*entity.SysVariation
 	Price []*SysVariationPrice `orm:"with:variation_id=variation_id" json:"price"`
