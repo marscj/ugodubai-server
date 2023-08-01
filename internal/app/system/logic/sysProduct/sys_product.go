@@ -30,8 +30,8 @@ type sSysProduct struct {
 func (s *sSysProduct) List(ctx context.Context, req *system.ProductListReq) (total interface{}, productList []*model.SysProductList, err error) {
 	err = g.Try(ctx, func(ctx context.Context) {
 		// 获取登录用户
-		user := service.Context().GetLoginUser(ctx)
-		agentID := user.AgentId
+		// user := service.Context().GetLoginUser(ctx)
+		agentID := uint64(3) //user.AgentId
 
 		var whereStr string = "`is_deleted` = 0 "
 		var args []interface{}
@@ -89,37 +89,25 @@ func (s *sSysProduct) List(ctx context.Context, req *system.ProductListReq) (tot
 
 		// 遍历产品并从缓存中获取其价格信息
 		for _, product := range products {
+			found := false
+			defaultPrice := &model.SysProductPriceLookup{}
 			for _, priceLookup := range priceLookups {
 				if priceLookup.ProductId == product.ProductId && priceLookup.AgentId == agentID {
 					product.Price = priceLookup
-					break
-				} else if priceLookup.ProductId == product.ProductId && priceLookup.AgentId == 0 {
-					product.Price = priceLookup
-					break
+					found = true
 				}
+				if priceLookup.ProductId == product.ProductId && priceLookup.AgentId == 0 {
+					defaultPrice = priceLookup
+				}
+			}
+			if !found && defaultPrice != nil {
+				product.Price = defaultPrice
 			}
 		}
 		productList = products
 	})
 	return total, productList, nil
 }
-
-// func (s *sSysProduct) Get(ctx context.Context, id uint64) (product *model.SysProduct, err error) {
-
-// 	err = g.Try(ctx, func(ctx context.Context) {
-// 		query := dao.SysProduct.Ctx(ctx).
-// 			WherePri(id).
-// 			With("Lookup", func(w *gdb.Model) *gdb.Model {
-// 				return w.Where("agent_id != ?", 1)
-// 			})
-// 		err = query.Scan(&product)
-
-// 		if err != nil {
-// 			liberr.ErrIsNil(ctx, err, "产品信息获取失败")
-// 		}
-// 	})
-// 	return
-// }
 
 //  通过Id获取产品信息
 func (s *sSysProduct) Get(ctx context.Context, id uint64) (product *model.SysProduct, err error) {
@@ -131,22 +119,6 @@ func (s *sSysProduct) Get(ctx context.Context, id uint64) (product *model.SysPro
 			liberr.ErrIsNil(ctx, err, "产品信息获取失败")
 		}
 
-		// 获取登录用户
-		user := service.Context().GetLoginUser(ctx)
-		agentID := user.AgentId
-
-		// 根据Agent查询
-		if user.IsAdmin == 0 {
-			for _, variation := range product.Variation {
-				filteredPrice := make([]*model.SysVariationPrice, 0)
-				for _, price := range variation.Price {
-					if price.Agent != nil && price.Agent.AgentId == agentID {
-						filteredPrice = append(filteredPrice, price)
-					}
-				}
-				variation.Price = filteredPrice
-			}
-		}
 	})
 	return
 }
