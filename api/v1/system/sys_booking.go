@@ -27,3 +27,12 @@ type BookingGetRes struct {
 	g.Meta  `mime:"application/json"`
 	Booking *model.SysBooking `json:"order"`
 }
+
+type CheckOutReq struct {
+	g.Meta    `path:"/checkout" tags:"订单管理" method:"post" summary:"结算"`
+	GatewayId string `p:"gatewayId" v:"required#请选择支付方式"`
+}
+
+type CheckOutRes struct {
+	g.Meta `mime:"application/json"`
+}

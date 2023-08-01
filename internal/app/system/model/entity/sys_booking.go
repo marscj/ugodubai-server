@@ -21,8 +21,8 @@ type SysBooking struct {
 	VariationPriceId uint64      `json:"variationPriceId" description:"变体产品价格"`
 	FitNumber        string      `json:"fitNumber"        description:"FIT"`
 	Sku              string      `json:"sku"              description:"SKU"`
-	GuestName        string      `json:"guestName"        description:"客人姓名"`
-	GuestContact     string      `json:"guestContact"     description:"客人联系方式"`
+	ContactName      string      `json:"contactName"      description:"联系人姓名"`
+	ContactPhone     string      `json:"contactPhone"     description:"联系方式"`
 	UnitPrice        float64     `json:"unitPrice"        description:"单价"`
 	Quantity         int         `json:"quantity"         description:"数量"`
 	TotalPrice       float64     `json:"totalPrice"       description:"总价"`

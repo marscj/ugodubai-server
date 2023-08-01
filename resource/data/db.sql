@@ -493,8 +493,8 @@ CREATE TABLE `sys_booking` (
   `variation_price_id` bigint(20) UNSIGNED NULL DEFAULT 0 COMMENT '变体产品价格',
   `fit_number` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT  'FIT',
   `sku` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT  'SKU',
-  `guest_name` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT  '客人姓名',
-  `guest_contact` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '客人联系方式',
+  `contact_name` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT  '联系人姓名',
+  `contact_phone` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '联系方式',
   `unit_price` DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '单价',
   `quantity` INT NOT NULL DEFAULT 1 COMMENT '数量',
   `total_price` DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '总价',
@@ -531,7 +531,7 @@ CREATE TABLE `sys_booking_meta` (
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_gateway`;
 CREATE TABLE `sys_gateway` (
-  `gateway_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `gateway_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name_en` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
   `name_cn` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
   `content` longtext COLLATE utf8mb4_unicode_ci,
@@ -549,11 +549,11 @@ INSERT INTO `sys_gateway` (`name_en`, `name_cn`, `content`) VALUES
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_payment`;
 CREATE TABLE `sys_payment` (
-  `token_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `payment_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `token` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `gateway_id` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `booking_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
-  PRIMARY KEY (`token_id`),
+  PRIMARY KEY (`payment_id`),
   KEY `booking_id` (`booking_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '支付表' ROW_FORMAT = COMPACT;
 

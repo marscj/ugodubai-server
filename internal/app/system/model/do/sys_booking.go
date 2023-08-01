@@ -23,8 +23,8 @@ type SysBooking struct {
 	VariationPriceId interface{} // 变体产品价格
 	FitNumber        interface{} // FIT
 	Sku              interface{} // SKU
-	GuestName        interface{} // 客人姓名
-	GuestContact     interface{} // 客人联系方式
+	ContactName      interface{} // 联系人姓名
+	ContactPhone     interface{} // 联系方式
 	UnitPrice        interface{} // 单价
 	Quantity         interface{} // 数量
 	TotalPrice       interface{} // 总价

@@ -20,7 +20,7 @@ type SysPaymentDao struct {
 
 // SysPaymentColumns defines and stores column names for table sys_payment.
 type SysPaymentColumns struct {
-	TokenId   string //
+	PaymentId string //
 	Token     string //
 	GatewayId string //
 	BookingId string //
@@ -28,7 +28,7 @@ type SysPaymentColumns struct {
 
 // sysPaymentColumns holds the columns for table sys_payment.
 var sysPaymentColumns = SysPaymentColumns{
-	TokenId:   "token_id",
+	PaymentId: "payment_id",
 	Token:     "token",
 	GatewayId: "gateway_id",
 	BookingId: "booking_id",

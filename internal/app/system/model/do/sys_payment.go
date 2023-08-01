@@ -11,7 +11,7 @@ import (
 // SysPayment is the golang structure of table sys_payment for DAO operations like Where/Data.
 type SysPayment struct {
 	g.Meta    `orm:"table:sys_payment, do:true"`
-	TokenId   interface{} //
+	PaymentId interface{} //
 	Token     interface{} //
 	GatewayId interface{} //
 	BookingId interface{} //

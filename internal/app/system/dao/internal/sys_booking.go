@@ -31,8 +31,8 @@ type SysBookingColumns struct {
 	VariationPriceId string // 变体产品价格
 	FitNumber        string // FIT
 	Sku              string // SKU
-	GuestName        string // 客人姓名
-	GuestContact     string // 客人联系方式
+	ContactName      string // 联系人姓名
+	ContactPhone     string // 联系方式
 	UnitPrice        string // 单价
 	Quantity         string // 数量
 	TotalPrice       string // 总价
@@ -62,8 +62,8 @@ var sysBookingColumns = SysBookingColumns{
 	VariationPriceId: "variation_price_id",
 	FitNumber:        "fit_number",
 	Sku:              "sku",
-	GuestName:        "guest_name",
-	GuestContact:     "guest_contact",
+	ContactName:      "contact_name",
+	ContactPhone:     "contact_phone",
 	UnitPrice:        "unit_price",
 	Quantity:         "quantity",
 	TotalPrice:       "total_price",
