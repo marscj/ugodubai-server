@@ -22,7 +22,6 @@ type SysProductPriceLookupDao struct {
 type SysProductPriceLookupColumns struct {
 	Id        string //
 	ProductId string //
-	AgentId   string //
 	MinPrice  string // 最低价格
 	MaxPrice  string // 最高价格
 }
@@ -31,7 +30,6 @@ type SysProductPriceLookupColumns struct {
 var sysProductPriceLookupColumns = SysProductPriceLookupColumns{
 	Id:        "id",
 	ProductId: "product_id",
-	AgentId:   "agent_id",
 	MinPrice:  "min_price",
 	MaxPrice:  "max_price",
 }

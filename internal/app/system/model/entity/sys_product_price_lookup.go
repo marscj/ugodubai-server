@@ -8,7 +8,6 @@ package entity
 type SysProductPriceLookup struct {
 	Id        uint64  `json:"id"        description:""`
 	ProductId uint64  `json:"productId" description:""`
-	AgentId   uint64  `json:"agentId"   description:""`
 	MinPrice  float64 `json:"minPrice"  description:"最低价格"`
 	MaxPrice  float64 `json:"maxPrice"  description:"最高价格"`
 }

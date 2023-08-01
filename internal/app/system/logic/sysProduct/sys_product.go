@@ -29,18 +29,9 @@ type sSysProduct struct {
 // List 产品列表
 func (s *sSysProduct) List(ctx context.Context, req *system.ProductListReq) (total interface{}, productList []*model.SysProductList, err error) {
 	err = g.Try(ctx, func(ctx context.Context) {
-		// 获取登录用户
-		// user := service.Context().GetLoginUser(ctx)
-		agentID := uint64(3) //user.AgentId
 
 		var whereStr string = "`is_deleted` = 0 "
 		var args []interface{}
-
-		var products []*model.SysProductList
-		var priceLookups []*model.SysProductPriceLookup
-
-		// 获取所有的价格信息并存储在缓存中
-		priceLookups, err = s.GetAllProductPrices(ctx)
 
 		// 关键字查询
 		if req.Keyword != nil {
@@ -84,29 +75,10 @@ func (s *sSysProduct) List(ctx context.Context, req *system.ProductListReq) (tot
 			req.PageSize = consts.PageSize
 		}
 
-		err = m.Page(req.PageNum, req.PageSize).OrderAsc("order").WithAll().Scan(&products)
+		err = m.Page(req.PageNum, req.PageSize).OrderAsc("order").WithAll().Scan(&productList)
 		liberr.ErrIsNil(ctx, err, "产品列表获取失败")
-
-		// 遍历产品并从缓存中获取其价格信息
-		for _, product := range products {
-			found := false
-			defaultPrice := &model.SysProductPriceLookup{}
-			for _, priceLookup := range priceLookups {
-				if priceLookup.ProductId == product.ProductId && priceLookup.AgentId == agentID {
-					product.Price = priceLookup
-					found = true
-				}
-				if priceLookup.ProductId == product.ProductId && priceLookup.AgentId == 0 {
-					defaultPrice = priceLookup
-				}
-			}
-			if !found && defaultPrice != nil {
-				product.Price = defaultPrice
-			}
-		}
-		productList = products
 	})
-	return total, productList, nil
+	return
 }
 
 //  通过Id获取产品信息
@@ -119,6 +91,32 @@ func (s *sSysProduct) Get(ctx context.Context, id uint64) (product *model.SysPro
 			liberr.ErrIsNil(ctx, err, "产品信息获取失败")
 		}
 
+		// 获取登录用户
+		user := service.Context().GetLoginUser(ctx)
+		agentID := user.AgentId
+
+		// 根据Agent查询
+		if user.IsAdmin == 0 {
+			for _, variation := range product.Variation {
+				found := false
+				filteredPrice := make([]*model.SysVariationPrice, 0)
+				defaultPrice := make([]*model.SysVariationPrice, 0)
+
+				for _, price := range variation.Price {
+					if price.Agent != nil && price.Agent.AgentId == agentID {
+						filteredPrice = append(filteredPrice, price)
+						found = true
+					}
+					if price.Agent == nil {
+						defaultPrice = append(defaultPrice, price)
+					}
+				}
+				if !found && defaultPrice != nil {
+					filteredPrice = defaultPrice
+				}
+				variation.Price = filteredPrice
+			}
+		}
 	})
 	return
 }

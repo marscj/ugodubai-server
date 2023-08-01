@@ -660,18 +660,16 @@ DROP TABLE IF EXISTS `sys_product_price_lookup`;
 CREATE TABLE `sys_product_price_lookup` (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `product_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
-  `agent_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `min_price`  DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '最低价格',
   `max_price`  DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '最高价格',
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id`(`id`, `product_id`) USING BTREE,
-  KEY `product_id` (`product_id`),
-  KEY `agent_id` (`agent_id`)
+  KEY `product_id` (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品价格关联' ROW_FORMAT = COMPACT;
-INSERT INTO `sys_product_price_lookup` (`product_id`, `agent_id`, `min_price`, `max_price`) VALUES
-( 1, 1, 147.00, 255),
-( 1, 0, 85.00, 289),
-( 1, 2, 85.00, 289);
+INSERT INTO `sys_product_price_lookup` (`product_id`, `min_price`, `max_price`) VALUES
+( 1, 147.00, 255),
+( 1, 85.00, 289),
+( 1, 85.00, 289);
 
 -- ----------------------------
 -- Table structure for sys_product_meta
@@ -779,10 +777,10 @@ INSERT INTO `sys_variation_price` (`variation_id`, `attribute_id`, `agent_id`, `
 (1, 2, 2, '2023-07-24', '2023-07-30', '120.00', '124.00', '147.00'),
 (2, 1, 2, '2023-07-24', '2023-07-30', '247.00', '250.00', '255.00'),
 (2, 2, 2,'2023-07-24', '2023-07-30', '220.00', '224.00', '247.00'),
-(1, 1, 0, '2023-07-24', '2023-07-30', '147.00', '150.00', '155.00'),
-(1, 2, 0, '2023-07-24', '2023-07-30', '120.00', '124.00', '147.00'),
-(2, 1, 0, '2023-07-24', '2023-07-30', '247.00', '250.00', '255.00'),
-(2, 2, 0,'2023-07-24', '2023-07-30', '220.00', '224.00', '247.00');
+(1, 1, 0, '2023-07-24', '2023-07-30', '947.00', '950.00', '955.00'),
+(1, 2, 0, '2023-07-24', '2023-07-30', '920.00', '924.00', '947.00'),
+(2, 1, 0, '2023-07-24', '2023-07-30', '947.00', '950.00', '955.00'),
+(2, 2, 0,'2023-07-24', '2023-07-30', '920.00', '924.00', '947.00');
 
 -- ----------------------------
 -- Table structure for sys_product_lookup
