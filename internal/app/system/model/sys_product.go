@@ -14,8 +14,7 @@ type SysProductList struct {
 	DescriptionEn string                 `json:"descriptionEn" description:"产品简介"`
 	DescriptionCn string                 `json:"descriptionCn" description:"产品简介"`
 	Image         string                 `json:"image"         description:"缩略图"`
-	Price         *SysProductPriceLookup `json:"price"`
-	// Terms         []*SysProductTermsLookup `orm:"with:product_id=product_id" json:"term"`
+	Price         *SysProductPriceLookup `orm:"with:product_id=product_id" json:"price"`
 }
 
 type SysProduct struct {

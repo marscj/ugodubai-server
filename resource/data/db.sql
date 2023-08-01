@@ -667,9 +667,7 @@ CREATE TABLE `sys_product_price_lookup` (
   KEY `product_id` (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '产品价格关联' ROW_FORMAT = COMPACT;
 INSERT INTO `sys_product_price_lookup` (`product_id`, `min_price`, `max_price`) VALUES
-( 1, 147.00, 255),
-( 1, 85.00, 289),
-( 1, 85.00, 289);
+( 1, 147.00, 255);
 
 -- ----------------------------
 -- Table structure for sys_product_meta
