@@ -86,10 +86,7 @@ func (s *sSysProduct) Get(ctx context.Context, id uint64) (product *model.SysPro
 
 	err = g.Try(ctx, func(ctx context.Context) {
 		err = dao.SysProduct.Ctx(ctx).WherePri(id).WithAll().Scan(&product)
-
-		if err != nil {
-			liberr.ErrIsNil(ctx, err, "产品信息获取失败")
-		}
+		liberr.ErrIsNil(ctx, err, "产品信息获取失败")
 
 		// 获取登录用户
 		user := service.Context().GetLoginUser(ctx)

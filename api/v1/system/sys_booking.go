@@ -28,11 +28,18 @@ type BookingGetRes struct {
 	Booking *model.SysBooking `json:"order"`
 }
 
+// 结算
 type CheckOutReq struct {
 	g.Meta    `path:"/checkout" tags:"订单管理" method:"post" summary:"结算"`
-	GatewayId string `p:"gatewayId" v:"required#请选择支付方式"`
+	GatewayId uint64          `v:"required#请选择支付方式"`
+	Item      []*CheckOutItem `v:"required#请选择购买的产品"`
 }
 
 type CheckOutRes struct {
 	g.Meta `mime:"application/json"`
+}
+
+type CheckOutItem struct {
+	Quantity         uint   `v:"required#请输入产品数量"`
+	VariationPriceId uint64 `v:"required#请选择产品项"`
 }

@@ -496,7 +496,7 @@ CREATE TABLE `sys_booking` (
   `contact_name` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT  '联系人姓名',
   `contact_phone` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '联系方式',
   `unit_price` DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '单价',
-  `quantity` INT NOT NULL DEFAULT 1 COMMENT '数量',
+  `quantity` INT UNSIGNED NOT NULL DEFAULT 1 COMMENT '数量',
   `total_price` DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '总价',
   `tax` DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '税',
   `currency` VARCHAR(3)  NULL DEFAULT 'AED' COMMENT '货币',

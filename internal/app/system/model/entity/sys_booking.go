@@ -24,7 +24,7 @@ type SysBooking struct {
 	ContactName      string      `json:"contactName"      description:"联系人姓名"`
 	ContactPhone     string      `json:"contactPhone"     description:"联系方式"`
 	UnitPrice        float64     `json:"unitPrice"        description:"单价"`
-	Quantity         int         `json:"quantity"         description:"数量"`
+	Quantity         uint        `json:"quantity"         description:"数量"`
 	TotalPrice       float64     `json:"totalPrice"       description:"总价"`
 	Tax              float64     `json:"tax"              description:"税"`
 	Currency         string      `json:"currency"         description:"货币"`

@@ -35,3 +35,9 @@ func (c *bookingController) Get(ctx context.Context, req *system.BookingGetReq) 
 	res.Booking, err = service.SysBooking().Get(ctx, req.Id)
 	return
 }
+
+func (c *bookingController) Checkout(ctx context.Context, req *system.CheckOutReq) (res *system.CheckOutRes, err error) {
+	res = new(system.CheckOutRes)
+	res, err = service.SysBooking().Checkout(ctx, req)
+	return
+}

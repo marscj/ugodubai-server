@@ -9,6 +9,7 @@ import (
 	"ugodubai-server/internal/app/system/service"
 	"ugodubai-server/library/liberr"
 
+	"github.com/gogf/gf/os/gctx"
 	"github.com/gogf/gf/v2/frame/g"
 )
 
@@ -49,10 +50,14 @@ func (s *sSysBooking) Get(ctx context.Context, id uint64) (booking *model.SysBoo
 
 	err = g.Try(ctx, func(ctx context.Context) {
 		err = dao.SysBooking.Ctx(ctx).WherePri(id).Scan(&booking)
-
-		if err != nil {
-			liberr.ErrIsNil(ctx, err, "代理商信息获取失败")
-		}
+		liberr.ErrIsNil(ctx, err, "代理商信息获取失败")
 	})
+	return
+}
+
+func (c *sSysBooking) Checkout(ctx context.Context, req *system.CheckOutReq) (res *system.CheckOutRes, err error) {
+
+	err = g.Validator().Assoc(req).Data(req.Item).Run(gctx.New())
+
 	return
 }
