@@ -31,6 +31,7 @@ type SysVariationPriceColumns struct {
 	SellingPrice     string // 销售价
 	Currency         string // 货币
 	Stock            string //
+	Tiems            string //
 	UpdatedAt        string // 更新时间
 }
 
@@ -47,6 +48,7 @@ var sysVariationPriceColumns = SysVariationPriceColumns{
 	SellingPrice:     "selling_price",
 	Currency:         "currency",
 	Stock:            "stock",
+	Tiems:            "tiems",
 	UpdatedAt:        "updated_at",
 }
 

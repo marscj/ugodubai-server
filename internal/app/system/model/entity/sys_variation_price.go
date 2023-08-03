@@ -21,5 +21,6 @@ type SysVariationPrice struct {
 	SellingPrice     float64     `json:"sellingPrice"     description:"销售价"`
 	Currency         string      `json:"currency"         description:"货币"`
 	Stock            int         `json:"stock"            description:""`
+	Tiems            string      `json:"tiems"            description:""`
 	UpdatedAt        *gtime.Time `json:"updatedAt"        description:"更新时间"`
 }

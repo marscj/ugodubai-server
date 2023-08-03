@@ -30,23 +30,24 @@ type BookingGetRes struct {
 
 // 检查
 type PreCheckOutReq struct {
-	g.Meta `path:"/precheckout" tags:"订单管理" method:"post" summary:"结算"`
-	Item   []*model.PreCheckOutItem `v:"required#请选择购买的产品"`
+	g.Meta    `path:"/precheckout" tags:"订单管理" method:"post" summary:"结算"`
+	GatewayId uint64                         `json:"gatewayId" v:"required#请选择支付方式"`
+	Item      []*model.SysPreCheckOutItemReq `json:"items" v:"required#请选择购买的产品"`
 }
 
 type PreCheckOutRes struct {
 	g.Meta              `mime:"application/json"`
-	PreCheckOutItemItem []*model.PreCheckOutItem
-	SubTotal            string
-	SubTax              string
-	Total               string
+	PreCheckOutItemItem []*model.SysPreCheckOutItemRes `json:"preCheckOutItemItem"`
+	SubTotal            string                         `json:"subTotal"`
+	SubTax              string                         `json:"subTax"`
+	Total               string                         `json:"total"`
 }
 
 // 结算
 type CheckOutReq struct {
 	g.Meta    `path:"/checkout" tags:"订单管理" method:"post" summary:"结算"`
-	GatewayId uint64                `v:"required#请选择支付方式"`
-	Item      []*model.CheckOutItem `v:"required#请选择购买的产品"`
+	GatewayId uint64                         `v:"required#请选择支付方式"`
+	Item      []*model.SysPreCheckOutItemRes `v:"required#请选择购买的产品"`
 }
 
 type CheckOutRes struct {

@@ -41,7 +41,7 @@ type SysBookingColumns struct {
 	BookingStatus    string // 订单状态 0.待核单 1.已核单出票中 2.已出票 3.取消待确认 4.已取消
 	PaymentStatus    string // 支付状态 0.等待支付 1.未支付 2.已支付 3.已退款
 	PaymentMethod    string // 支付方式 0.余额 1.信用 2.支付宝 3.微信 4.公司转账
-	SupplierStatus   string // 提供商支付状态 1.未支付 2.已支付 3.已退款
+	SupplierStatus   string // 提供商支付状态 0.未支付 1.已支付 2.已退款
 	Remark           string // 备注
 	CreatedBy        string // 创建者
 	UpdatedBy        string // 更新者

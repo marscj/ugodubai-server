@@ -535,7 +535,6 @@ CREATE TABLE `sys_gateway` (
   `name_en` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
   `name_cn` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
   `content` longtext COLLATE utf8mb4_unicode_ci,
-  `special` 
   PRIMARY KEY (`gateway_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '支付表' ROW_FORMAT = COMPACT;
 INSERT INTO `sys_gateway` (`gateway_id`, `name_en`, `name_cn`) VALUES
@@ -756,6 +755,7 @@ CREATE TABLE `sys_variation_price` (
   `selling_price`  DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '销售价',
   `currency` VARCHAR(3) NOT NULL DEFAULT 'AED' COMMENT '货币',
   `stock` int(11) NOT NULL DEFAULT '0',
+  `tiems` VARCHAR(255) DEFAULT NULL,
   `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`variation_price_id`),
   KEY `end_date` (`end_date`),

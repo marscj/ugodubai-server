@@ -63,17 +63,15 @@ func (s *sSysBooking) Get(ctx context.Context, id uint64) (booking *model.SysBoo
 }
 
 // 检查
-func (c *sSysBooking) PreCheckout(ctx context.Context, req *system.PreCheckOutReq) (subTotal string, subTax string, Total string, items []*model.PreCheckOutItem, err error) {
+func (c *sSysBooking) PreCheckout(ctx context.Context, req *system.PreCheckOutReq) (subTotal string, subTax string, Total string, items []*model.SysPreCheckOutItemRes, err error) {
 
 	secretKey := g.Cfg().MustGet(ctx, "system.secretKey")
 	fmt.Println("Generated key:", secretKey)
-	item := &model.PreCheckOutItem{
+	item := &model.SysPreCheckOutItemRes{
 		Quantity:         1,
 		VariationPriceId: 1,
 		ActionDate:       "2020-10-10 10:10",
-		Price:            "11.20",
-		Tax:              "0",
-		Timestamp:        time.Now(),
+		Timestamp:        time.Now().UTC(),
 	}
 
 	GenerateSignature(secretKey.String(), item)
@@ -81,6 +79,7 @@ func (c *sSysBooking) PreCheckout(ctx context.Context, req *system.PreCheckOutRe
 	b := VerifySignature(secretKey.String(), item)
 
 	fmt.Println("result:", b)
+	items = append(items, item)
 	return
 }
 
@@ -100,7 +99,7 @@ func (c *sSysBooking) Checkout(ctx context.Context, req *system.CheckOutReq) (er
 }
 
 // 加密
-func GenerateSignature(secretKey string, data *model.PreCheckOutItem) error {
+func GenerateSignature(secretKey string, data *model.SysPreCheckOutItemRes) error {
 	dataBytes, err := json.Marshal(data)
 	if err != nil {
 		return err
@@ -117,7 +116,7 @@ func GenerateSignature(secretKey string, data *model.PreCheckOutItem) error {
 }
 
 // 解密 验证签名以及时间戳 < 30 分钟
-func VerifySignature(secretKey string, data *model.PreCheckOutItem) bool {
+func VerifySignature(secretKey string, data *model.SysPreCheckOutItemRes) bool {
 	signature := data.Signature // Save original signature
 	data.Signature = ""         // Clear the signature for re-generation
 
