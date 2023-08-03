@@ -41,6 +41,7 @@ type SysVariationPrice struct {
 	*entity.SysVariationPrice
 	Attribute *SysVariationAttribute `orm:"with:attribute_id=attribute_id" json:"attribute"`
 	Agent     *SysAgentList          `orm:"with:agent_id=agent_id json:agent" `
+	Time      *SysVariationTime      `orm:"with:time_id=time_id json:agent" `
 }
 
 type SysVariationAttribute struct {
@@ -50,4 +51,8 @@ type SysVariationAttribute struct {
 type SysProductTermsLookup struct {
 	*entity.SysProductTermsLookup
 	Terms []*entity.SysProductTerms `orm:"with:term_id=term_id" json:"terms"`
+}
+
+type SysVariationTime struct {
+	*entity.SysVariationTime
 }

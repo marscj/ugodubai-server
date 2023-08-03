@@ -32,6 +32,7 @@ type BookingGetRes struct {
 type PreCheckOutReq struct {
 	g.Meta    `path:"/precheckout" tags:"订单管理" method:"post" summary:"结算"`
 	GatewayId uint64                         `json:"gatewayId" v:"required#请选择支付方式"`
+	Currency  string                         `json:"currency" v:"max-length:3#最大3位"`
 	Item      []*model.SysPreCheckOutItemReq `json:"items" v:"required#请选择购买的产品"`
 }
 

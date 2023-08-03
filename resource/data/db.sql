@@ -747,6 +747,7 @@ CREATE TABLE `sys_variation_price` (
   `variation_price_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `variation_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `attribute_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
+  `time_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `agent_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `start_date` DATE DEFAULT NULL,
   `end_date` DATE DEFAULT NULL,
@@ -755,7 +756,6 @@ CREATE TABLE `sys_variation_price` (
   `selling_price`  DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '销售价',
   `currency` VARCHAR(3) NOT NULL DEFAULT 'AED' COMMENT '货币',
   `stock` int(11) NOT NULL DEFAULT '0',
-  `tiems` VARCHAR(255) DEFAULT NULL,
   `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`variation_price_id`),
   KEY `end_date` (`end_date`),
@@ -765,18 +765,28 @@ CREATE TABLE `sys_variation_price` (
   KEY `currency` (`currency`),
   KEY `stock` (`stock`)
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '产品变体价格表' ROW_FORMAT = COMPACT;
-INSERT INTO `sys_variation_price` (`variation_id`, `attribute_id`, `agent_id`, `start_date`, `end_date`, `cost_price`,`special_price`,`selling_price`) VALUES
-(1, 1, 1, '2023-07-24', '2023-07-30', '147.00', '150.00', '155.00'),
-(1, 2, 1, '2023-07-24', '2023-07-30', '120.00', '124.00', '147.00'),
-(2, 1, 1, '2023-07-24', '2023-07-30', '247.00', '250.00', '255.00'),
-(2, 2, 1,'2023-07-24', '2023-07-30', '220.00', '224.00', '247.00'),
-(1, 1, 2, '2023-07-24', '2023-07-30', '147.00', '150.00', '155.00'),
-(1, 2, 2, '2023-07-24', '2023-07-30', '120.00', '124.00', '147.00'),
-(2, 1, 2, '2023-07-24', '2023-07-30', '247.00', '250.00', '255.00'),
-(2, 2, 2,'2023-07-24', '2023-07-30', '220.00', '224.00', '247.00'),
-(1, 1, 0, '2023-07-24', '2023-07-30', '947.00', '950.00', '955.00'),
-(1, 2, 0, '2023-07-24', '2023-07-30', '920.00', '924.00', '947.00'),
-(2, 1, 0, '2023-07-24', '2023-07-30', '947.00', '950.00', '955.00'),
-(2, 2, 0,'2023-07-24', '2023-07-30', '920.00', '924.00', '947.00');
+INSERT INTO `sys_variation_price` (`variation_id`, `attribute_id`, `time_id`, `agent_id`, `start_date`, `end_date`, `cost_price`,`special_price`,`selling_price`) VALUES
+(1, 1, 0, 1, '2023-07-24', '2023-07-30', '147.00', '150.00', '155.00'),
+(1, 2, 0, 1, '2023-07-24', '2023-07-30', '120.00', '124.00', '147.00'),
+(2, 1, 1, 1, '2023-07-24', '2023-07-30', '247.00', '250.00', '255.00'),
+(2, 2, 1, 1,'2023-07-24', '2023-07-30', '220.00', '224.00', '247.00'),
+(1, 1, 0, 2, '2023-07-24', '2023-07-30', '147.00', '150.00', '155.00'),
+(1, 2, 0, 2, '2023-07-24', '2023-07-30', '120.00', '124.00', '147.00'),
+(2, 1, 1, 2, '2023-07-24', '2023-07-30', '247.00', '250.00', '255.00'),
+(2, 2, 1, 2,'2023-07-24', '2023-07-30', '220.00', '224.00', '247.00'),
+(1, 1, 0, 0, '2023-07-24', '2023-07-30', '947.00', '950.00', '955.00'),
+(1, 2, 0, 0, '2023-07-24', '2023-07-30', '920.00', '924.00', '947.00'),
+(2, 1, 1, 0, '2023-07-24', '2023-07-30', '947.00', '950.00', '955.00'),
+(2, 2, 1, 0,'2023-07-24', '2023-07-30', '920.00', '924.00', '947.00');
+
+DROP TABLE IF EXISTS `sys_variation_time`;
+CREATE TABLE `sys_variation_time` (
+  `time_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) DEFAULT NULL,
+  `time` VARCHAR(255) DEFAULT NULL,
+  PRIMARY KEY (`time_id`)
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '产品变体时间表' ROW_FORMAT = COMPACT;
+INSERT INTO `sys_variation_time` (`time_id`, `name`, `time`) VALUES
+(1, '哈利法塔黄金时间段', '15:00,15:30,16:00,16:30,17:00,17:30,18:00,18:30');
 
 SET FOREIGN_KEY_CHECKS = 1;

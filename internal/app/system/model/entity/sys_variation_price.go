@@ -13,6 +13,7 @@ type SysVariationPrice struct {
 	VariationPriceId uint64      `json:"variationPriceId" description:""`
 	VariationId      uint64      `json:"variationId"      description:""`
 	AttributeId      uint64      `json:"attributeId"      description:""`
+	TimeId           uint64      `json:"timeId"           description:""`
 	AgentId          uint64      `json:"agentId"          description:""`
 	StartDate        *gtime.Time `json:"startDate"        description:""`
 	EndDate          *gtime.Time `json:"endDate"          description:""`
@@ -21,6 +22,5 @@ type SysVariationPrice struct {
 	SellingPrice     float64     `json:"sellingPrice"     description:"销售价"`
 	Currency         string      `json:"currency"         description:"货币"`
 	Stock            int         `json:"stock"            description:""`
-	Tiems            string      `json:"tiems"            description:""`
 	UpdatedAt        *gtime.Time `json:"updatedAt"        description:"更新时间"`
 }

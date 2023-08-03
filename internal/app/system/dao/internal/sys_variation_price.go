@@ -23,6 +23,7 @@ type SysVariationPriceColumns struct {
 	VariationPriceId string //
 	VariationId      string //
 	AttributeId      string //
+	TimeId           string //
 	AgentId          string //
 	StartDate        string //
 	EndDate          string //
@@ -31,7 +32,6 @@ type SysVariationPriceColumns struct {
 	SellingPrice     string // 销售价
 	Currency         string // 货币
 	Stock            string //
-	Tiems            string //
 	UpdatedAt        string // 更新时间
 }
 
@@ -40,6 +40,7 @@ var sysVariationPriceColumns = SysVariationPriceColumns{
 	VariationPriceId: "variation_price_id",
 	VariationId:      "variation_id",
 	AttributeId:      "attribute_id",
+	TimeId:           "time_id",
 	AgentId:          "agent_id",
 	StartDate:        "start_date",
 	EndDate:          "end_date",
@@ -48,7 +49,6 @@ var sysVariationPriceColumns = SysVariationPriceColumns{
 	SellingPrice:     "selling_price",
 	Currency:         "currency",
 	Stock:            "stock",
-	Tiems:            "tiems",
 	UpdatedAt:        "updated_at",
 }
 
