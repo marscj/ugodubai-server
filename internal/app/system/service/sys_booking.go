@@ -10,7 +10,8 @@ import (
 type ISysBooking interface {
 	List(ctx context.Context, req *system.BookingListReq) (total interface{}, bookingList []*model.SysBooking, err error)
 	Get(ctx context.Context, id uint64) (booking *model.SysBooking, err error)
-	Checkout(ctx context.Context, req *system.CheckOutReq) (res *system.CheckOutRes, err error)
+	PreCheckout(ctx context.Context, req *system.PreCheckOutReq) (subTotal string, subTax string, Total string, items []*model.PreCheckOutItem, err error)
+	Checkout(ctx context.Context, req *system.CheckOutReq) (err error)
 }
 
 var localSysBooking ISysBooking

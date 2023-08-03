@@ -52,7 +52,7 @@ func (s *sSysBooking) List(ctx context.Context, req *system.BookingListReq) (tot
 	return
 }
 
-//  通过Id获取代理商信息
+// 通过Id获取代理商信息
 func (s *sSysBooking) Get(ctx context.Context, id uint64) (booking *model.SysBooking, err error) {
 
 	err = g.Try(ctx, func(ctx context.Context) {
@@ -62,20 +62,12 @@ func (s *sSysBooking) Get(ctx context.Context, id uint64) (booking *model.SysBoo
 	return
 }
 
-func (c *sSysBooking) Checkout(ctx context.Context, req *system.CheckOutReq) (res *system.CheckOutRes, err error) {
-
-	err = g.Validator().Assoc(req).Data(req.Item).Run(gctx.New())
-
-	err = g.DB().Transaction(ctx, func(ctx context.Context, tx gdb.TX) error {
-		err = g.Try(ctx, func(ctx context.Context) {
-
-		})
-		return err
-	})
+// 检查
+func (c *sSysBooking) PreCheckout(ctx context.Context, req *system.PreCheckOutReq) (subTotal string, subTax string, Total string, items []*model.PreCheckOutItem, err error) {
 
 	secretKey := g.Cfg().MustGet(ctx, "system.secretKey")
 	fmt.Println("Generated key:", secretKey)
-	item := &system.PreCheckOutItem{
+	item := &model.PreCheckOutItem{
 		Quantity:         1,
 		VariationPriceId: 1,
 		ActionDate:       "2020-10-10 10:10",
@@ -89,12 +81,26 @@ func (c *sSysBooking) Checkout(ctx context.Context, req *system.CheckOutReq) (re
 	b := VerifySignature(secretKey.String(), item)
 
 	fmt.Println("result:", b)
+	return
+}
+
+// 结算
+func (c *sSysBooking) Checkout(ctx context.Context, req *system.CheckOutReq) (err error) {
+
+	err = g.Validator().Assoc(req).Data(req.Item).Run(gctx.New())
+
+	err = g.DB().Transaction(ctx, func(ctx context.Context, tx gdb.TX) error {
+		err = g.Try(ctx, func(ctx context.Context) {
+
+		})
+		return err
+	})
 
 	return
 }
 
 // 加密
-func GenerateSignature(secretKey string, data *system.PreCheckOutItem) error {
+func GenerateSignature(secretKey string, data *model.PreCheckOutItem) error {
 	dataBytes, err := json.Marshal(data)
 	if err != nil {
 		return err
@@ -110,8 +116,8 @@ func GenerateSignature(secretKey string, data *system.PreCheckOutItem) error {
 	return nil
 }
 
-// 解密
-func VerifySignature(secretKey string, data *system.PreCheckOutItem) bool {
+// 解密 验证签名以及时间戳 < 30 分钟
+func VerifySignature(secretKey string, data *model.PreCheckOutItem) bool {
 	signature := data.Signature // Save original signature
 	data.Signature = ""         // Clear the signature for re-generation
 

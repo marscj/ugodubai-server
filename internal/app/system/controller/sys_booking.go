@@ -36,8 +36,15 @@ func (c *bookingController) Get(ctx context.Context, req *system.BookingGetReq) 
 	return
 }
 
+// 检查
+func (c *bookingController) PreCheckout(ctx context.Context, req *system.PreCheckOutReq) (res *system.PreCheckOutRes, err error) {
+	res = new(system.PreCheckOutRes)
+	res.SubTotal, res.SubTax, res.Total, res.PreCheckOutItemItem, err = service.SysBooking().PreCheckout(ctx, req)
+	return
+}
+
+// 结算
 func (c *bookingController) Checkout(ctx context.Context, req *system.CheckOutReq) (res *system.CheckOutRes, err error) {
-	res = new(system.CheckOutRes)
-	res, err = service.SysBooking().Checkout(ctx, req)
+	err = service.SysBooking().Checkout(ctx, req)
 	return
 }
