@@ -484,7 +484,7 @@ DROP TABLE IF EXISTS `sys_booking`;
 CREATE TABLE `sys_booking` ( 
   `booking_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '代理商ID',
   `parent_id` bigint(20) UNSIGNED NULL DEFAULT 0 COMMENT '父',
-  `related_id` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT  '关联订单ID',
+  `related_id` VARCHAR(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT  '关联订单ID',
   `agent_id` bigint(20) UNSIGNED NULL DEFAULT 0 COMMENT '代理商ID',
   `supplier_id` bigint(20) UNSIGNED NULL DEFAULT 0 COMMENT '代理商ID',
   `action_date` DATETIME NULL DEFAULT NULL COMMENT '执行日期',
@@ -494,16 +494,16 @@ CREATE TABLE `sys_booking` (
   `fit_number` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT  'FIT',
   `sku` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT  'SKU',
   `contact_name` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT  '联系人姓名',
-  `contact_phone` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '联系方式',
+  `contact_phone` VARCHAR(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '联系方式',
   `unit_price` DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '单价',
   `quantity` INT UNSIGNED NOT NULL DEFAULT 1 COMMENT '数量',
   `total_price` DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '总价',
   `tax` DECIMAL(10, 2) NOT NULL DEFAULT 0.0 COMMENT '税',
   `currency` VARCHAR(3)  NULL DEFAULT 'AED' COMMENT '货币',
-  `booking_status` TINYINT NOT NULL DEFAULT 1 COMMENT '订单状态 0.待核单 1.已核单出票中 2.已出票 3.取消待确认 4.已取消',
-  `payment_status` TINYINT NOT NULL DEFAULT 1 COMMENT '支付状态 0.等待支付 1.未支付 2.已支付 3.已退款',
-  `payment_method` TINYINT NOT NULL DEFAULT 1 COMMENT '支付方式 0.余额 1.信用 2.支付宝 3.微信 4.公司转账',
-  `supplier_status` TINYINT NOT NULL DEFAULT 1 COMMENT '提供商支付状态 1.未支付 2.已支付 3.已退款',
+  `booking_status` TINYINT NOT NULL DEFAULT 0 COMMENT '订单状态 0.待核单 1.已核单出票中 2.已出票 3.取消待确认 4.已取消',
+  `payment_status` TINYINT NOT NULL DEFAULT 0 COMMENT '支付状态 0.等待支付 1.未支付 2.已支付 3.已退款',
+  `payment_method` TINYINT NOT NULL DEFAULT 0 COMMENT '支付方式 0.余额 1.信用 2.支付宝 3.微信 4.公司转账',
+  `supplier_status` TINYINT NOT NULL DEFAULT 0 COMMENT '提供商支付状态 0.未支付 1.已支付 2.已退款',
   `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '备注',
   `created_by` bigint(20) UNSIGNED NULL DEFAULT 0 COMMENT '创建者',
   `updated_by` bigint(20) UNSIGNED NULL DEFAULT 0 COMMENT '更新者',
@@ -535,14 +535,15 @@ CREATE TABLE `sys_gateway` (
   `name_en` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
   `name_cn` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
   `content` longtext COLLATE utf8mb4_unicode_ci,
+  `special` 
   PRIMARY KEY (`gateway_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT = '支付表' ROW_FORMAT = COMPACT;
-INSERT INTO `sys_gateway` (`name_en`, `name_cn`, `content`) VALUES
-('Banlance', '余额', ''),
-('Credit', '信用度', ''),
-('Bank Transfer', '银行转账', ''),
-('Wechat', '微信', ''),
-('Alipay', '支付宝', '');
+INSERT INTO `sys_gateway` (`gateway_id`, `name_en`, `name_cn`) VALUES
+(1, 'Banlance', '余额'),
+(2, 'Credit', '信用度'),
+(3, 'Bank Transfer', '银行转账'),
+(4, 'Wechat', '微信'),
+(5, 'Alipay', '支付宝');
 
 -- ----------------------------
 -- Table structure for sys_payment

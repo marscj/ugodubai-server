@@ -2,6 +2,12 @@ package sysBooking
 
 import (
 	"context"
+	"crypto/hmac"
+	"crypto/sha256"
+	"encoding/hex"
+	"encoding/json"
+	"fmt"
+	"time"
 	"ugodubai-server/api/v1/system"
 	"ugodubai-server/internal/app/system/consts"
 	"ugodubai-server/internal/app/system/dao"
@@ -10,6 +16,7 @@ import (
 	"ugodubai-server/library/liberr"
 
 	"github.com/gogf/gf/os/gctx"
+	"github.com/gogf/gf/v2/database/gdb"
 	"github.com/gogf/gf/v2/frame/g"
 )
 
@@ -59,5 +66,74 @@ func (c *sSysBooking) Checkout(ctx context.Context, req *system.CheckOutReq) (re
 
 	err = g.Validator().Assoc(req).Data(req.Item).Run(gctx.New())
 
+	err = g.DB().Transaction(ctx, func(ctx context.Context, tx gdb.TX) error {
+		err = g.Try(ctx, func(ctx context.Context) {
+
+		})
+		return err
+	})
+
+	secretKey := g.Cfg().MustGet(ctx, "system.secretKey")
+	fmt.Println("Generated key:", secretKey)
+	item := &system.PreCheckOutItem{
+		Quantity:         1,
+		VariationPriceId: 1,
+		ActionDate:       "2020-10-10 10:10",
+		Price:            "11.20",
+		Tax:              "0",
+		Timestamp:        time.Now(),
+	}
+
+	GenerateSignature(secretKey.String(), item)
+
+	b := VerifySignature(secretKey.String(), item)
+
+	fmt.Println("result:", b)
+
 	return
+}
+
+// 加密
+func GenerateSignature(secretKey string, data *system.PreCheckOutItem) error {
+	dataBytes, err := json.Marshal(data)
+	if err != nil {
+		return err
+	}
+
+	h := hmac.New(sha256.New, []byte(secretKey))
+	_, err = h.Write(dataBytes)
+	if err != nil {
+		return err
+	}
+
+	data.Signature = hex.EncodeToString(h.Sum(nil))
+	return nil
+}
+
+// 解密
+func VerifySignature(secretKey string, data *system.PreCheckOutItem) bool {
+	signature := data.Signature // Save original signature
+	data.Signature = ""         // Clear the signature for re-generation
+
+	// Re-generate the signature
+	err := GenerateSignature(secretKey, data)
+	if err != nil {
+		return false
+	}
+
+	// Compare the newly generated signature with the original one
+	isEqual := (data.Signature == signature)
+	data.Signature = signature // Restore the original signature
+
+	if !isEqual {
+		return false
+	}
+
+	// Check if the timestamp is within the last 30 minutes
+	now := time.Now()
+	if now.Sub(data.Timestamp).Minutes() > 30 {
+		return false
+	}
+
+	return true
 }

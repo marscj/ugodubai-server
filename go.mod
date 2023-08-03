@@ -17,6 +17,7 @@ require (
 	github.com/rivo/uniseg v0.4.3 // indirect
 	github.com/rogpeppe/go-internal v1.8.0 // indirect
 	github.com/shirou/gopsutil v3.21.11+incompatible
+	github.com/shopspring/decimal v1.3.1 // indirect
 	github.com/stretchr/testify v1.8.2 // indirect
 	github.com/tiger1103/gfast-cache v1.0.0
 	github.com/tiger1103/gfast-token v1.0.3

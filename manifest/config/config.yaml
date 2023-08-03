@@ -67,6 +67,7 @@ redis:
 
 system:
   notCheckAuthAdminIds: [31]  #无需验证后台权限的用户id
+  secretKey: 88ebb39ffe7b51241be57e8d60c3967c0d9bd17ac1b8bdefe78582c40ad6a408 # 加盐
   dataDir: "./resource/data"
   cache:
     model: "redis"  #缓存模式 memory OR redis
