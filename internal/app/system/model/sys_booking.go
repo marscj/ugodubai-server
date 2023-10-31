@@ -14,12 +14,13 @@ type SysBooking struct {
 
 type SysVariationPriceByCheckout struct {
 	g.Meta           `orm:"table:sys_variation_price, do:true"`
-	VariationPriceId uint64      `json:"variationPriceId" description:""`
-	VariationId      uint64      `json:"variationId"      description:""`
-	AttributeId      uint64      `json:"attributeId"      description:""`
-	TimeId           uint64      `json:"timeId"           description:""`
-	StartDate        *gtime.Time `json:"startDate"        description:""`
-	EndDate          *gtime.Time `json:"endDate"          description:""`
+	VariationPriceId uint64                           `json:"variationPriceId" description:""`
+	VariationId      uint64                           `json:"variationId"      description:""`
+	AttributeId      uint64                           `json:"attributeId"      description:""`
+	Variation        *SysVariationByCheckout          `orm:"with:variation_id=variation_id" json:"variation"`
+	Attribute        *SysVariationAttributeByCheckout `orm:"with:attribute_id=attribute_id" json:"attribute"`
+	StartDate        *gtime.Time                      `json:"startDate"        description:""`
+	EndDate          *gtime.Time                      `json:"endDate"          description:""`
 }
 
 type SysVariationByCheckout struct {
@@ -54,21 +55,20 @@ type SysPreCheckOutItemReq struct {
 }
 
 type SysPreCheckOutItemRes struct {
-	Quantity         uint      `json:"quantity"`
-	VariationPriceId uint64    `json:"variationPriceId"`
-	ActionDate       string    `json:"actionDate"`
-	SubTotal         float64   `json:"subTotal"`
-	SubTax           float64   `json:"subTax"`
-	Currency         string    `json:"currency"`
-	Timestamp        time.Time `json:"timestamp"`
-	Signature        string    `json:"signature"`
+	Quantity         uint                         `json:"quantity"`
+	VariationPriceId uint64                       `json:"variationPriceId"`
+	Price            *SysVariationPriceByCheckout `json:"price"`
+	ActionDate       string                       `json:"actionDate"`
+	SubTotal         float64                      `json:"subTotal"`
+	SubTax           float64                      `json:"subTax"`
+	Currency         string                       `json:"currency"`
+	Timestamp        time.Time                    `json:"timestamp"`
+	Signature        string                       `json:"signature"`
 }
 
 type SysCheckOutItemReq struct {
 	ContactName  string `json:"contactName" v:"required|length:2,100#请输入客户姓名|客户姓名长度为2-100位"`
 	ContactPhone string `json:"contactPhone" v:"max-length:32#最大32位"`
-
-	Remark     string `json:"remark" v:"max-length:255#最大255位"`
-	RelatedId  string `json:"relatedId" v:"max-length:64#最大64位"`
-	ActionDate string `json:"actionDate" v:"required|date-format:Y-m-d H:i#请输入执行日期|请输入正确的日期，如2020-01-01 23:00"`
+	Remark       string `json:"remark" v:"max-length:255#最大255位"`
+	RelatedId    string `json:"relatedId" v:"max-length:64#最大64位"`
 }

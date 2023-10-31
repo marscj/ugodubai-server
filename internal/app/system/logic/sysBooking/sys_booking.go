@@ -6,7 +6,6 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
-	"fmt"
 	"time"
 	"ugodubai-server/api/v1/system"
 	"ugodubai-server/internal/app/system/consts"
@@ -63,23 +62,17 @@ func (s *sSysBooking) Get(ctx context.Context, id uint64) (booking *model.SysBoo
 }
 
 // 检查
-func (c *sSysBooking) PreCheckout(ctx context.Context, req *system.PreCheckOutReq) (subTotal string, subTax string, Total string, items []*model.SysPreCheckOutItemRes, err error) {
+func (c *sSysBooking) PreCheckout(ctx context.Context, req *system.PreCheckOutReq) (subTotal string, subTax string, total string, items []*model.SysPreCheckOutItemRes, err error) {
+	err = g.Try(ctx, func(ctx context.Context) {
+		var (
+			variationPrice []*model.SysVariationPriceByCheckout
+		)
+		g.Model("sys_variation_price").Where("variation_price_id IN(1,2)").WithAll().Scan(&variationPrice)
 
-	secretKey := g.Cfg().MustGet(ctx, "system.secretKey")
-	fmt.Println("Generated key:", secretKey)
-	item := &model.SysPreCheckOutItemRes{
-		Quantity:         1,
-		VariationPriceId: 1,
-		ActionDate:       "2020-10-10 10:10",
-		Timestamp:        time.Now().UTC(),
-	}
-
-	GenerateSignature(secretKey.String(), item)
-
-	b := VerifySignature(secretKey.String(), item)
-
-	fmt.Println("result:", b)
-	items = append(items, item)
+		subTotal = "1000"
+		subTax = "0.00"
+		total = "1000.00"
+	})
 	return
 }
 
@@ -97,6 +90,26 @@ func (c *sSysBooking) Checkout(ctx context.Context, req *system.CheckOutReq) (er
 
 	return
 }
+
+// func (c *sSysBooking) PreCheckout(ctx context.Context, req *system.PreCheckOutReq) (subTotal string, subTax string, Total string, items []*model.SysPreCheckOutItemRes, err error) {
+
+// 	secretKey := g.Cfg().MustGet(ctx, "system.secretKey")
+// 	fmt.Println("Generated key:", secretKey)
+// 	item := &model.SysPreCheckOutItemRes{
+// 		Quantity:         1,
+// 		VariationPriceId: 1,
+// 		ActionDate:       "2020-10-10 10:10",
+// 		Timestamp:        time.Now().UTC(),
+// 	}
+
+// 	GenerateSignature(secretKey.String(), item)
+
+// 	b := VerifySignature(secretKey.String(), item)
+
+// 	fmt.Println("result:", b)
+// 	items = append(items, item)
+// 	return
+// }
 
 // 加密
 func GenerateSignature(secretKey string, data *model.SysPreCheckOutItemRes) error {

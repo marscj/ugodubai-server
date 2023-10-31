@@ -31,9 +31,9 @@ type BookingGetRes struct {
 // 检查
 type PreCheckOutReq struct {
 	g.Meta    `path:"/precheckout" tags:"订单管理" method:"post" summary:"结算"`
-	GatewayId uint64                         `json:"gatewayId" v:"required#请选择支付方式"`
-	Currency  string                         `json:"currency" v:"max-length:3#最大3位"`
-	Item      []*model.SysPreCheckOutItemReq `json:"items" v:"required#请选择购买的产品"`
+	GatewayId uint64                         `v:"required#请选择支付方式"`
+	Currency  string                         `v:"max-length:3#最大3位"`
+	Item      []*model.SysPreCheckOutItemReq `v:"required#请选择购买的产品"`
 }
 
 type PreCheckOutRes struct {
@@ -46,9 +46,14 @@ type PreCheckOutRes struct {
 
 // 结算
 type CheckOutReq struct {
-	g.Meta    `path:"/checkout" tags:"订单管理" method:"post" summary:"结算"`
-	GatewayId uint64                         `v:"required#请选择支付方式"`
-	Item      []*model.SysPreCheckOutItemRes `v:"required#请选择购买的产品"`
+	g.Meta       `path:"/checkout" tags:"订单管理" method:"post" summary:"结算"`
+	GatewayId    uint64                         `v:"required#请选择支付方式"`
+	Currency     string                         `v:"max-length:3#最大3位"`
+	ContactName  string                         `v:"required|length:2,100#请输入客户姓名|客户姓名长度为2-100位"`
+	ContactPhone string                         `v:"max-length:32#最大32位"`
+	Remark       string                         `v:"max-length:255#最大255位"`
+	RelatedId    string                         `v:"max-length:64#最大64位"`
+	Item         []*model.SysPreCheckOutItemReq `v:"required#请选择购买的产品"`
 }
 
 type CheckOutRes struct {
